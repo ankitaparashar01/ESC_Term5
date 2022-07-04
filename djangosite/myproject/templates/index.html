@@ -12,95 +12,104 @@
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
     <title>Ascenda| Hotel Booking</title>
   </head>
   <body>
 
     <!-- Showcase -->
-    <section class="showcase">
-      <div class="container grid">
-        <div class="showcase-text">
-          <h1>
-            550,000 Hotels. <br />
-            Incredible Rewards.
-          </h1>
-          <a href="index.html" class="btn btn-outline">Read more</a>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label for="formGroupExampleInput"><b>DESTINATION OR HOTEL</b></label>
-                <input type="search" class="form-control" id="formGroupExampleInput" placeholder="Destination or Hotel">
-              
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-5">
-
-                  <div class="input-group-prepend" style="margin-right: 20px;">
-                    <div class="input-group-text">Checkin</div>
-                    <input type="date" class="form-control" id="inlineFormInputGroupUsername2" placeholder="4 June 2022">
+    <div style="background: url(../static/images/hotelhero.png) no-repeat center; background-size:cover;">
+      <section class="showcase">
+        <div class="container grid">
+          <div class="showcase-text">
+            <h1>
+              550,000 Hotels. <br />
+              Incredible Rewards.
+            </h1>
+            <a href="index.html" class="btn btn-outline">Read more</a>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <form>
+                <div class="wrapper">
+                  <p><b>DESTINATION OR HOTEL</b></p>
+                  <div class="search-input">
+                    <input type="text" placeholder="Destination or Hotel" />
+                    <div class="autocom-box"></div>
+                    <div class="search-icon" style="background-color: #E3E3E3;">
+                      <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
+                    </div>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="input-group-prepend" style="margin-left: 30px;">
-                    <div class="input-group-text">Checkout</div>
-                    <input type="date" class="form-control" id="inlineFormInputGroupUsername2" placeholder="4 June 2022">
+                <br>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="input-group-prepend" style="margin-right: 20px;">
+                      <div class="input-group-text">Checkin</div>
+                      <input type="date" class="form-control" id="inlineFormInputGroupUsername2">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group-prepend" style="margin-left: 30px;">
+                      <div class="input-group-text" class="rounded-left">Checkout</div>
+                      <input type="date" class="form-control" id="inlineFormInputGroupUsername2">
+                    </div>
                   </div>
                 </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-4">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">ROOMS</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                <br>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">ROOMS</label>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">ADULTS</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">ADULTS</label>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">CHILDREN</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">CHILDREN</label>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 
-              </div>
-              
-            <a href="hotellist.html" class="btn btn-primary">SEARCH HOTELS</a>
-          </form>
+              <a href="hotellist.html" class="btn btn-primary" style="width: 100%; background-color: #f58216; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); border-color:#f58216;">SEARCH HOTELS</a>
+            </form>
+            </div>
+  
+            
           </div>
-
           
         </div>
-        
-      </div>
-    </section>
+      </section>
+    </div>
+    
     
     {% include "footer.html" %}
     
@@ -574,7 +583,7 @@
   margin: 10px;
 }
 
-.btn {
+/* .btn {
   display: inline block;
   padding: 10px 30px;
   cursor: pointer;
@@ -582,7 +591,7 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-}
+} */
 
 .btn-outline {
   background-color: transparent;
@@ -599,12 +608,12 @@
 }
 
 /* Backgrounds & colored buttons */
-.bg-primary,
+/* .bg-primary,
 .btn-primary {
   background-color: var(--logo-color);
   color: #fff;
-}
-
+} */
+/* 
 .bg-secondary,
 .btn-secondary {
   background-color: var(--secondary-color);
@@ -621,7 +630,7 @@
 .btn-light {
   background-color: var(--light-color);
   color: #333;
-}
+} */
 
 /* Text colors */
 .text-primary {
@@ -640,14 +649,14 @@
   color: var(--light-color);
 }
 
-.bg-primary a,
-.btn-primary a,
+/* .bg-primary a,
+.btn-primary a, 
 .bg-secondary a,
 .btn-secondary a,
 .bg-dark a,
 .btn-dark a {
   color: #fff;
-}
+} */
 
 /* Text Sizes */
 .lead {
