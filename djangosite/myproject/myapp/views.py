@@ -27,11 +27,6 @@ def ascenda(request):
 # def roomlist(request):
 #     return render(request, 'roomlist.html')
 
-def confirmation(request):
-    return render(request, 'confirmation.html')
-
-
-
 def all_listings(request):
     hotels_list = ListingItem.objects.all()
     
@@ -57,3 +52,8 @@ def roomListPage(request, hotelname):
 
     return render(request, 'roomlist.html', context)
 
+def confirmation(request):
+    return render(request, 'confirmation.html')
+
+def transactionComplete(request):
+    return render(request, 'transaction-complete.html')
