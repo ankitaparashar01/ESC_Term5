@@ -1,63 +1,74 @@
-{% load static %}
-{% include "navbar.html" %}
+{% load static %} {% include "navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <title>Ascenda| Room Listings</title>
+  </head>
+  <body>
+    <br />
+    <div class="box">
+      <!-- image of hotel -->
+      <img
+        src="../static/images/hotelhero.png"
+        style="
+          width: 50%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      />
+      <h1>Four Points by Sheraton Singapore, Riverview</h1>
+      <p>
+        Primely located in Robertson Quay, right on the banks of the Singapore
+        River, enjoy easy access to downtown entertainment and nightlife.
+      </p>
+    </div>
 
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="styleshee" type="text/css" href="{% static '/css/main.css' %}">
+    <div class="blueBox">
+      <p>14/07/2022</p>
+    </div>
+  </body>
 
-    </head>
-
-    <body>
-        <h3>Room List Page</h3>
-        <img class="thumbnail2" src="{% static 'images/hotel-list-img.png' %}">
-
-        <h1>Name of listing: {{ hotelnamevar }}</h1>
-        <br><br>
-        <h6>{{ hotelnamevar.summary }}</h6>
-        <br>
-        <hr>
-        <br>
-
-        <div class=" borderforroomlistpage">
-            <div class="col-lg-4">
-                <img class="thumbnail" src="{% static 'images/hotel-list-img.png' %}">
-                <div class="box-element product">
-                    <br>
-                    <h5><strong>{{ hotelnamevar.name }}</strong></h5>
-                    <h6>{{ hotelnamevar.room_type }}</h6>
-                    <h6><strong>${{ hotelnamevar.price }}</strong> per night</h6>
-
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <!-- <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4> -->
-
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <hr>
-        <br>
-
-        {% include "footer.html" %}
-
-            <!-- js, popper.js and jQuery below: -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    </body>
-
-    <style>
-        .thumbnail2 {
-        width: 100%;
-        height: 200px;
-        -webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-        -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-        box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-        }
-    </style>
-
+  <!-- CSS -->
+  <style>
+    h1 {
+      text-align: center;
+    }
+    p {
+      text-align: center;
+    }
+    .box {
+      width: 1000px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .blueBox {
+      width: 1000px;
+      height: 50px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 5px;
+      background-color: #354191;
+      color: white;
+      padding: 12px;
+    }
+  </style>
 </html>
-

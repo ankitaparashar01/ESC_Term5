@@ -1,6 +1,4 @@
-{% load static %}
-{% include "navbar.html" %}
-
+{% load static %} {% include "navbar.html" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,158 +7,198 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
-
-    <!-- <link rel="stylesheet" href="css/utilities.css" />
-    <link rel="stylesheet" href="css/style.css" /> -->
-    <!-- Bootstrap CSS -->
-    <!-- <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-        /> -->
-    <!-- flatpickr -->
-
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <title>Ascenda| Hotel Booking</title>
   </head>
-
-  
-    <body>
-
-      <section class="hotel-showcase">
-        <div class="container grid">
-
-          <!-- mini search bar here: -->
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
           <div class="card">
             <div class="card-body">
               <form>
-                <div class="form-group">
-                  <label for="formGroupExampleInput">DESTINATION OR HOTEL</label>
-                  <input type="search" class="form-control" id="formGroupExampleInput" placeholder="Destination">
+                <div class="wrapper">
+                  <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
+                  <div class="search-input" id="searchInput">
+                    <input type="text" placeholder="Destination or Hotel" />
+                    <div class="autocom-box"></div>
+                    <div class="search-icon" style="background-color: #e3e3e3">
+                      <img
+                        src="../static/images/search-icon.png"
+                        style="
+                          width: 50px;
+                          justify-content: center;
+                          padding: 12px;
+                        "
+                      />
+                    </div>
+                  </div>
                 </div>
-                <label class="sr-only" for="inlineFormInputName2">Name</label>
-    <input type="date" class="form-control mb-2 mr-sm-2" id="inlineFormInputdate2" placeholder="3 June 2022">
-
-    <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-    <div class="input-group mb-2 mr-sm-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text">@</div>
-      </div>
-      <input type="date" class="form-control" id="inlineFormInputGroupUsername2" placeholder="4 June 2022">
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">ROOMS</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">ADULTS</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">CHILDREN</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-              <a href="#" class="btn btn-primary">SEARCH HOTELS</a>
-            </form>
+                <br />
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="calendarCheckin"><b>CHECK IN</b></label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="calendarCheckin"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="calendarCheckout"><b>CHECK OUT</b></label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="calendarCheckout"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1"
+                        ><b>ROOMS</b></label
+                      >
+                      <select
+                        class="form-control"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1"
+                        ><b>ADULTS</b></label
+                      >
+                      <select
+                        class="form-control"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1"
+                        ><b>CHILDREN</b></label
+                      >
+                      <select
+                        class="form-control"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <a
+                  href="hotellist.html"
+                  class="btn btn-primary"
+                  style="
+                    width: 100%;
+                    background-color: #f58216;
+                    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+                    border-color: #f58216;
+                  "
+                  >SEARCH HOTELS</a
+                >
+                <br />
+              </form>
             </div>
-
-            
           </div>
-
-          <!-- hotel listing cards here:  -->
-          {% for listing in listings %}
+        </div>
+        <!-- Hotel list grid -->
+        <div class="col" style="padding: 10px">
           <div class="hotel-list">
             <div class="grid">
               <div>
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <h2>{{ listing.name }}</h2>
+                <h2>Four Points by Sheraton</h2>
                 <p>
                   Singapore <br />
                   Hotel Website
                 </p>
                 <p>
                   Cheapest Room: <br />
-                  <span class="price">{{ listing.price }}</span>
+                  <span class="price">S$170</span>
                 </p>
-                <a href="{% url 'list-room-type' listing.name %}" class="btn btn-outline see-details">SEE DETAILS ></a>
+                <div
+                  style="margin-bottom: 10px; margin-right: 10px; float: right"
+                >
+                  <a
+                    href=""
+                    class="btn"
+                    style="background-color: #f58216; float: right"
+                    ><b>SEE DETAILS ></b></a
+                  >
+                </div>
               </div>
             </div>
           </div>
-          {% endfor %}
-
         </div>
-      </section>
+      </div>
+    </div>
 
-      <br/></br>
+    <script src="js/hotelSuggestions.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-      {% if listings.has_previous %}
-        <a href="?page=1">&laquo First</a>
-        <a href="?page={{ listings.previous_page_number }}">Previous</a>
-      {% endif %}
+    <script>
+      config = {
+        enableTime: true,
+        altInput: true,
+        dateFormat: "F j, Y",
+        // dateFormat: "Y-m-d",
+        // minDate: "2022-01",
+        // maxDate: "2022-12",
+        minDate: "today",
+      };
+      flatpickr("input[type=datetime-local]", {});
+    </script>
 
-      Page {{ listings.number }} of {{ listings.paginator.num_pages }}
-
-      {% if listings.has_next %}
-        <a href="?page={{ listings.next_page_number }}">Next</a>
-        <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
-
-      {% endif %}
-      <br/></br>
-
-
-
-      <script src="js/hotelSuggestions.js"></script>
-      <script src="js/script.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-      <script>
-        config = {
-          enableTime: true,
-          altInput: true,
-          dateFormat: "F j, Y",
-          // dateFormat: "Y-m-d",
-          // minDate: "2022-01",
-          // maxDate: "2022-12",
-          minDate: "today",
-        };
-        flatpickr("input[type=datetime-local]", {});
-      </script>
-    
     {% include "footer.html" %}
-    </body>
-  
-    <!--    CSS    -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+  </body>
 
-      :root {
+  <!--    CSS    -->
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+    :root {
       --primary-color: #e3f6fd;
       --secondary-color: #064266;
       --logo-color: #20285d;
@@ -169,141 +207,141 @@
       --grey: #efefef;
       --orange: #f58216;
       --error: #ff0000;
-      }
+    }
 
-      * {
+    * {
       box-sizing: border-box;
       padding: 0;
       margin: 0;
-      }
+    }
 
-      body {
+    body {
       /* font-family: "Lato", sans-serif; */
       font-family: "Poppins", sans-serif;
       color: #333;
       line-height: 1.6;
-      }
+    }
 
-      ul {
+    ul {
       list-style: none;
-      }
+    }
 
-      a {
+    a {
       text-decoration: none;
       color: #333;
-      }
+    }
 
-      h1,
-      h2 {
+    h1,
+    h2 {
       font-weight: 300;
       line-height: 1.2;
       margin: 10px 0;
-      }
+    }
 
-      p {
+    p {
       margin: 10px 0;
-      }
+    }
 
-      img {
+    img {
       width: 100%;
-      }
+    }
 
-      code,
-      pre {
+    code,
+    pre {
       background: #333;
       color: #fff;
       padding: 10px;
-      }
+    }
 
-      .hidden {
+    .hidden {
       visibility: hidden;
       height: 0;
-      }
+    }
 
-      /* Navbar */
-      .navbar {
+    /* Navbar */
+    .navbar {
       background-color: var(--logo-color);
       color: #fff;
       height: 70px;
       align-items: center;
       /* position: relative; */
       overflow: hidden;
-      }
+    }
 
-      .navbar ul {
+    .navbar ul {
       display: flex;
-      }
+    }
 
-      .navbar a {
+    .navbar a {
       color: #fff;
       padding: 10px;
       margin: 0 5px;
-      }
+    }
 
-      .navbar ul a:hover {
+    .navbar ul a:hover {
       border-bottom: 2px #fff solid;
-      }
+    }
 
-      .navbar .flex {
+    .navbar .flex {
       justify-content: space-between;
-      }
+    }
 
-      .logo {
+    .logo {
       display: flex;
       cursor: pointer;
       margin-top: 10px;
       /* position: absolute; */
-      }
+    }
 
-      /* Index Page */
+    /* Index Page */
 
-      /* Banner */
-      .showcase {
+    /* Banner */
+    .showcase {
       position: relative;
       background: url(/Ascenda/images/hotelhero.png) no-repeat center;
       background-size: cover;
       height: 680px;
       overflow: hidden;
       color: #fff;
-      }
+    }
 
-      .showcase h1 {
+    .showcase h1 {
       font-size: 60px;
       font-weight: 900;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       margin-top: 20px;
       margin-bottom: 20px;
-      }
+    }
 
-      .showcase p {
+    .showcase p {
       margin: 20px 0;
-      }
+    }
 
-      .showcase .grid {
+    .showcase .grid {
       overflow: visible;
       grid-template-columns: 55% 45%;
       gap: 30px;
-      }
+    }
 
-      .showcase-text {
+    .showcase-text {
       align-items: center;
-      }
+    }
 
-      /* Wrapper */
-      /* .wrapper {
-      margin: auto;
-      } */
+    /* Wrapper */
+    /* .wrapper {
+    margin: auto;
+    } */
 
-      .wrapper .search-input {
+    .wrapper .search-input {
       position: relative;
       background: #fff;
       width: 100%;
       border-radius: 5px;
       /* box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12); */
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-      }
+    }
 
-      .search-input input {
+    .search-input input {
       height: 55px;
       width: 100%;
       outline: none;
@@ -313,13 +351,13 @@
       font-size: 18px;
       border-width: 1px;
       /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); */
-      }
+    }
 
-      .search-input.active input {
+    .search-input.active input {
       border-radius: 5px 5px 0 0;
-      }
+    }
 
-      .search-input .search-icon {
+    .search-input .search-icon {
       height: 55px;
       width: 55px;
       line-height: 55px;
@@ -330,9 +368,9 @@
       font-size: 20px;
       color: var(--secondary-color);
       cursor: pointer;
-      }
+    }
 
-      .search-input .autocom-box {
+    .search-input .autocom-box {
       padding: 0;
       max-height: 280px;
       overflow-y: auto;
@@ -340,9 +378,9 @@
       pointer-events: none;
       position: absolute;
       z-index: 100;
-      }
+    }
 
-      .search-input.active .autocom-box {
+    .search-input.active .autocom-box {
       padding: 10px 8px;
       opacity: 1;
       pointer-events: auto;
@@ -351,9 +389,9 @@
       width: 100%;
       box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1);
       /* box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12); */
-      }
+    }
 
-      .autocom-box li {
+    .autocom-box li {
       list-style: none;
       padding: 8px 12px;
       width: 100%;
@@ -362,438 +400,87 @@
       color: black;
       /* font-family: "Poppins", sans-serif; */
       display: none;
-      }
+    }
 
-      .search-input.active .autocom-box li {
+    .search-input.active .autocom-box li {
       display: block;
-      }
+    }
 
-      .autocom-box li:hover {
+    .autocom-box li:hover {
       background: var(--grey);
-      }
+    }
 
-      /* Booking Form */
-      .booking-form {
-      position: relative;
-      top: 50px;
-      height: 400px;
-      width: 400px;
-      padding: 30px 30px;
-      margin-bottom: 30px;
-      z-index: 100;
-      justify-self: flex-end;
-      }
-
-      .booking-form p {
-      font-weight: 700;
-      /* font-family: "Poppins", sans-serif; */
-      margin: 0;
-      padding-bottom: 5px;
-      }
-
-      .calendar .grid {
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 15px;
-      margin-bottom: 20px;
-      }
-
-      .cal1 {
-      position: relative;
-      }
-
-      .cal2 {
-      position: relative;
-      }
-
-      .cal-input input {
-      height: 55px;
-      width: 100%;
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      padding: 0 0 0 20px;
-      font-size: 16px;
-      border-width: 1px;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      /* input[required]:placeholder-shown {
-      border: 1px solid;
-      border-color: var(--error);
-      } */
-      /*
-      input:not(:placeholder-shown) {
-      font-size: 1.5em;
-      } */
-
-      /* .cal-input input[type="datetime-local"]:before {
-      content: "hi";
-
-      } */
-
-      .cal-icon {
-      height: 55px;
-      width: 55px;
-      line-height: 55px;
-      position: absolute;
-      top: 31px;
-      right: 0;
-      padding-left: 10px;
-      text-align: center;
-      font-size: 20px;
-      color: var(--logo-color);
-      cursor: pointer;
-      opacity: 0.5;
-      }
-
-      .room-col .grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 25px;
-      }
-
-      .room-select {
-      height: 55px;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 18px;
-      border-width: 1px;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: background 0.3s;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: center;
-      align-items: center;
-      }
-
-      .select-clicked {
-      border: 1px #26489a solid;
-      }
-
-      .room-select:hover {
-      background: var(--grey);
-      }
-
-      .selected {
-      padding-left: 20px;
-      }
-
-      .caret {
-      width: 0;
-      height: 0;
-      margin-left: 20px;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 6px solid black;
-      transition: 0.3s;
-      }
-
-      .caret-rotate {
-      transform: rotate(180deg);
-      }
-
-      .menu {
-      list-style: none;
-      /* padding: 0.2em 0.5em; */
-      background: #fff;
-      /* border: 1px #363a43 solid; */
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 0 0 5px 5px;
-      color: #9fa5b5;
-      position: absolute;
-      width: 25%;
-      opacity: 0;
-      display: none;
-      transition: 0.1s;
-      z-index: 1000;
-      }
-
-      .menu li {
-      padding: 2px 20px;
-      margin: 0.3em 0;
-      /* border-radius: 0.5em; */
-      cursor: pointer;
-      }
-
-      .menu li:hover {
-      background: var(--logo-color);
-      }
-
-      .menu-open {
-      display: block;
-      opacity: 1;
-      }
-
-      /* Button */
-      .submit {
-      background-color: var(--orange);
-      width: 100%;
-      padding: 10px 100px;
-      /* font-family: "Poppins", sans-serif; */
-      font-weight: 600;
-      }
-
-      .see-details {
-      background-color: var(--orange);
-      width: 160px;
-      padding: 10px 20px;
-      /* font-family: "Poppins", sans-serif; */
-      font-weight: 600;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      }
-
-      .submit-payment {
-      background-color: var(--orange);
-      margin: 0;
-      width: 400px;
-      height: 40px;
-      position: absolute;
-      left: 50%;
-      padding: 7px;
-      text-align: center;
-      transform: translate(-50%, -50%);
-      border-radius: 5px;
-      font-weight: 600;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
-      }
-
-
-      /* .showcase::before,
-      .showcase::after {
-      content: "";
-      position: absolute;
-      height: 100px;
-      bottom: -70px;
-      right: 0;
-      left: 0;
-      background: #fff;
-      transform: skewY(-3deg);
-      -webkit-transform: skewY(-3deg);
-      -moz-transform: skewY(-3deg);
-      -ms-transform: skewY(-3deg);
-      } */
-
-      /* Hotel List Page */
-      .hotel-showcase {
+    /* Hotel List Page */
+    .hotel-showcase {
       position: relative;
       background: url(/Ascenda/images/hotelhero.png) no-repeat center;
       background-size: cover;
       height: 680px;
       overflow: hidden;
       color: #fff;
-      }
+    }
 
-      /* .hotel-showcase {
-      position: relative;
-      background: url(/Ascenda/images/hotelhero.png) no-repeat center;
-      background-size: cover;
-      height: 680px;
-      overflow: hidden;
-      color: #fff;
-      }
-
-      .hotel-showcase .grid {
-      overflow: visible;
-      grid-template-columns: 55% 45%;
-      gap: 30px;
-      }
-
-      .hotel-showcase h1 {
-      font-size: 60px;
-      font-weight: 900;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      }
-
-      .hotel-showcase p {
-      margin: 20px 0;
-      }
-
-      .hotel-showcase-text {
-      align-items: center;
-      } */
-
-      .hotel-list {
+    .hotel-list {
       background: #d5d6e1;
-      height: 230px;
+      height: 250px;
       /* overflow: hidden; */
       padding: 10px;
       color: black;
       width: 700px;
       border-radius: 5px;
-      }
+    }
 
-      .hotel-list .grid {
+    .hotel-list .grid {
       overflow: visible;
       grid-template-columns: 40% 60%;
       gap: 10px;
-      }
+    }
 
-      .hotel-list img {
+    .hotel-list img {
       height: 160px;
       width: auto;
-      }
+    }
 
-      .hotel-right {
+    .hotel-right {
       position: relative;
-      }
+    }
 
-      .hotel-list h2 {
+    .hotel-list h2 {
       font-size: 30px;
       font-weight: 600;
-      }
+    }
 
-      .hotel-list .price {
+    .hotel-list .price {
       font-size: 18px;
       font-weight: 600;
-      }
+    }
 
-      /* Room List Page */
-
-      .room-column {
-      display: flex;
-      flex-direction: column;
-      /* justify-content: center; */
-      width: 800px;
-      }
-
-      .room-column img {
-      width: 300px;
-      height: auto;
-      }
-
-      .room-description {
-      background: var(--logo-color);
-      display: flex;
-      color: white;
-      border-radius: 5px;
-      }
-
-      /* Footer */
-      .footer {
-      margin-top: 50px;
-      }
-
-      .footer .social a {
-      margin: 0 20px;
-      }
-
-      /* Tablets & under */
-      @media (max-width: 768px) {
-      .grid,
-      .showcase .grid,
-      .stats .grid,
-      .cli .grid,
-      .cloud .grid,
-      .features-main .grid,
-      .docs-main .grid {
-          grid-template-columns: 1fr;
-          grid-template-rows: 1fr;
-      }
-
-      .showcase {
-          height: auto;
-      }
-
-      .showcase-text {
-          text-align: center;
-          margin-top: 40px;
-          animation: slideInFromTop 1s ease-in;
-      }
-
-      .showcase-form {
-          justify-self: center;
-          margin: auto;
-          animation: slideInFromBottom 1s ease-in;
-      }
-
-      .cli .grid > *:first-child {
-          grid-column: 1;
-          grid-row: 1;
-      }
-
-      .features-head,
-      .features-sub-head,
-      .docs-head {
-          text-align: center;
-      }
-
-      .features-head img,
-      .features-sub-head img,
-      .docs-head img {
-          justify-self: center;
-      }
-
-      .features-main .grid > *:first-child,
-      .features-main .grid > *:nth-child(2) {
-          grid-column: 1;
-      }
-      }
-
-      /* Mobile */
-      @media (max-width: 500px) {
+    /* Mobile */
+    @media (max-width: 500px) {
       .navbar {
-          height: 110px;
+        height: 110px;
       }
 
       .navbar .flex {
-          flex-direction: column;
+        flex-direction: column;
       }
 
       .navbar ul {
-          padding: 10px;
-          background-color: rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
       }
-      }
+    }
 
-
-      /* payment portal */
-      .paymentBox {
-      position: relative;
-      top: 50px;
-      height: auto;
-      width: auto;
-      padding: 30px;
-      border-radius: 6px;
-      background-color: #e9ecf2;
-      margin-left: 200px;
-      margin-right: 200px;
-      justify-content: center;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
-      margin-bottom: 20px;
-      }
-
-      .paymentCenter{
-      justify-content: center;
-      margin: 100px;
-      margin-bottom: 200px;
-      /*border-radius: 10px;*/
-      }
-
-      /****************** from utilities.css ********************/
-      .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      /* overflow: auto; */
-      padding: 0 40px;
-      }
-
-      .card {
+    .card {
       background-color: #fff;
       color: #333;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       padding: 0;
       margin: 10px;
-      }
+    }
 
-      .btn {
+    .btn {
       display: inline block;
       padding: 10px 30px;
       cursor: pointer;
@@ -801,208 +488,131 @@
       color: #fff;
       border: none;
       border-radius: 5px;
-      }
+    }
 
-      .btn-outline {
+    .btn-outline {
       background-color: transparent;
       border: 1px solid #fff;
-      }
+    }
 
-      .btn:hover {
+    .btn:hover {
       transform: scale(0.98);
-      }
+    }
 
-      /* Backgrounds & colored buttons */
-      .bg-primary,
-      .btn-primary {
+    /* Backgrounds & colored buttons */
+    .bg-primary,
+    .btn-primary {
       background-color: var(--logo-color);
       color: #fff;
-      }
+    }
 
-      .bg-secondary,
-      .btn-secondary {
+    .bg-secondary,
+    .btn-secondary {
       background-color: var(--secondary-color);
       color: #fff;
-      }
+    }
 
-      .bg-dark,
-      .btn-dark {
+    .bg-dark,
+    .btn-dark {
       background-color: var(--dark-color);
       color: #fff;
-      }
+    }
 
-      .bg-light,
-      .btn-light {
+    .bg-light,
+    .btn-light {
       background-color: var(--light-color);
       color: #333;
-      }
+    }
 
-      /* Text colors */
-      .text-primary {
+    /* Text colors */
+    .text-primary {
       color: var(--primary-color);
-      }
+    }
 
-      .text-secondary {
+    .text-secondary {
       color: var(--secondary-color);
-      }
+    }
 
-      .text-dark {
+    .text-dark {
       color: var(--dark-color);
-      }
+    }
 
-      .text-light {
+    .text-light {
       color: var(--light-color);
-      }
+    }
 
-      .bg-primary a,
-      .btn-primary a,
-      .bg-secondary a,
-      .btn-secondary a,
-      .bg-dark a,
-      .btn-dark a {
+    .bg-primary a,
+    .btn-primary a,
+    .bg-secondary a,
+    .btn-secondary a,
+    .bg-dark a,
+    .btn-dark a {
       color: #fff;
-      }
+    }
 
-      /* Text Sizes */
-      .lead {
+    /* Text Sizes */
+    .lead {
       font-size: 20px;
-      }
+    }
 
-      .sm {
+    .sm {
       font-size: 1rem;
-      }
+    }
 
-      .md {
+    .md {
       font-size: 2rem;
-      }
+    }
 
-      .lg {
+    .lg {
       font-size: 3rem;
-      }
+    }
 
-      .xl {
+    .xl {
       font-size: 4rem;
-      }
+    }
 
-      .text-center {
+    .text-center {
       text-align: center;
-      }
+    }
 
-      /* Alert */
-      .alert {
+    /* Alert */
+    .alert {
       background-color: var(--light-color);
       padding: 10px 20px;
       font-weight: bold;
       margin: 15px 0;
-      }
+    }
 
-      .alert i {
+    .alert i {
       margin-right: 10px;
-      }
+    }
 
-      .alert-success {
+    .alert-success {
       background-color: var(--success-color);
       color: #fff;
-      }
+    }
 
-      .alert-error {
+    .alert-error {
       background-color: var(--error-color);
       color: #fff;
-      }
+    }
 
-      .flex {
+    .flex {
       display: flex;
       /* pertains to main */
       justify-content: center;
       /* pertains to cross between vertical and horizontal axis */
       align-items: center;
       height: 100%;
-      }
+    }
 
-      .grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       justify-content: center;
       align-items: center;
       height: 100%;
-      }
-
-      .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-      }
-
-      .row {
-      grid-template-rows: repeat(4, 1fr);
-      }
-
-      /* Margin */
-      .my-1 {
-      margin: 1rem 0;
-      }
-      .my-2 {
-      margin: 1.5rem 0;
-      }
-      .my-3 {
-      margin: 2rem 0;
-      }
-      .my-4 {
-      margin: 3rem 0;
-      }
-      .my-5 {
-      margin: 4rem 0;
-      }
-
-      .m-1 {
-      margin: 1rem;
-      }
-      .m-2 {
-      margin: 1.5rem;
-      }
-      .m-3 {
-      margin: 2rem;
-      }
-      .m-4 {
-      margin: 3rem;
-      }
-      .m-5 {
-      margin: 4rem;
-      }
-
-      /* Padding */
-      .py-1 {
-      padding: 1rem 0;
-      }
-      .py-2 {
-      padding: 1.5rem 0;
-      }
-      .py-3 {
-      padding: 2rem 0;
-      }
-      .py-4 {
-      padding: 3rem 0;
-      }
-      .py-5 {
-      padding: 4rem 0;
-      }
-
-      .p-1 {
-      padding: 1rem;
-      }
-      .p-2 {
-      padding: 1.5rem;
-      }
-      .p-3 {
-      padding: 2rem;
-      }
-      .p-4 {
-      padding: 3rem;
-      }
-      .p-5 {
-      padding: 4rem;
-      }
-
-
-    </style>
-
+    }
+  </style>
 </html>

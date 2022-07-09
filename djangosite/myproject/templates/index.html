@@ -31,12 +31,14 @@
             </h1>
             <a href="index.html" class="btn" style="background-color:#f58216;">Read more</a>
           </div>
+          
+          <!-- search input -->
           <div class="card">
             <div class="card-body">
               <form>
                 <div class="wrapper">
-                  <p><b>DESTINATION OR HOTEL</b></p>
-                  <div class="search-input">
+                  <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
+                  <div class="search-input" id="searchInput">
                     <input type="text" placeholder="Destination or Hotel" />
                     <div class="autocom-box"></div>
                     <div class="search-icon" style="background-color: #E3E3E3;">
@@ -46,16 +48,16 @@
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-5">
-                    <div class="input-group-prepend" style="margin-right: 20px;">
-                      <div class="input-group-text">Checkin</div>
-                      <input type="date" class="form-control" id="inlineFormInputGroupUsername2">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="calendarCheckin"><b>CHECK IN</b></label>
+                      <input type="date" class="form-control" id="calendarCheckin">
                     </div>
                   </div>
                   <div class="col">
-                    <div class="input-group-prepend" style="margin-left: 30px;">
-                      <div class="input-group-text" class="rounded-left">Checkout</div>
-                      <input type="date" class="form-control" id="inlineFormInputGroupUsername2">
+                    <div class="form-group">
+                      <label for="calendarCheckout"><b>CHECK OUT</b></label>
+                      <input type="date" class="form-control" id="calendarCheckout">
                     </div>
                   </div>
                 </div>
@@ -63,7 +65,7 @@
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">ROOMS</label>
+                      <label for="exampleFormControlSelect1"><b>ROOMS</b></label>
                       <select class="form-control" id="exampleFormControlSelect1">
                         <option>1</option>
                         <option>2</option>
@@ -75,7 +77,7 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">ADULTS</label>
+                      <label for="exampleFormControlSelect1"><b>ADULTS</b></label>
                       <select class="form-control" id="exampleFormControlSelect1">
                         <option>1</option>
                         <option>2</option>
@@ -87,7 +89,7 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">CHILDREN</label>
+                      <label for="exampleFormControlSelect1"><b>CHILDREN</b></label>
                       <select class="form-control" id="exampleFormControlSelect1">
                         <option>1</option>
                         <option>2</option>
@@ -100,7 +102,6 @@
                 </div>
               <br>
               <a href="hotellist.html" class="btn btn-primary" style="width: 100%; background-color: #f58216; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); border-color:#f58216;">SEARCH HOTELS</a>
-              <br>
               <br>
             </form>
             </div>
