@@ -9,5 +9,6 @@ urlpatterns = [
     path('', views.ascenda, name="ascenda"),
     path('hotellist/', views.all_listings, name="list-hotels"),
     path("roomtype/<str:hotelname>", views.roomListPage, name='list-room-type'),
-    path('confirmation/', views.confirmation, name="confirmation")
+    path('confirmation/', views.confirmation, name="confirmation"),
+    path('transaction-complete/', views.transactionComplete, name="transaction-complete")
 ]
