@@ -4,6 +4,10 @@
 <hr>
 <ul>
 <li>Download Project or Clone Repository, extract files and move inside project folder, and type the following commands.</li>
+<li>Go to djangosite/</li>
 <li>Run Command "pip install -r requirements.txt"</li>
+<li>Go to djangosite/virtenv/Scripts</li>
+<li>Run Command "activate"</li>
+<li>Go to djangosite/myproject</li>
 <li>Run Command "python manage.py runserver"</li>
 </ul>
