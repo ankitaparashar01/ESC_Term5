@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@8dzdektn0tdud3tnrir+p^ydt+76g933+j&(pi=&pa+=s4mnc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,10 +77,20 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'djongo',
+        'NAME': "sample_airbnb",
+        'CLIENT':{
+            'host': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority",
+            'username': "tho",
+            'password': "Sitis5MURF4",
+            'authSource':"admin",
+        },        
+    },
 }
 
 
