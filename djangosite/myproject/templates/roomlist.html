@@ -18,7 +18,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
-    <title>Ascenda| Room Listings</title>
+    <title>Ascenda | Room Listings</title>
   </head>
   <body>
     <br />
@@ -33,10 +33,9 @@
           margin-right: auto;
         "
       />
-      <h1>Four Points by Sheraton Singapore, Riverview</h1>
+      <h1>{{ hotelnamevar }}</h1>
       <p>
-        Primely located in Robertson Quay, right on the banks of the Singapore
-        River, enjoy easy access to downtown entertainment and nightlife.
+        {{ hotelnamevar.summary }}
       </p>
     </div>
 
@@ -79,11 +78,11 @@
             <img src="../static/images/room-list-img.png" alt="" />
           </div>
           <div class="room-right">
-            <h2>Deluxe Room, 1 King Bed, City View</h2>
+            <h2>{{ hotelnamevar.room_type }}</h2>
             <br>
-            <p>Room Size: 22 m^2</p>
-            <p>No breakfast served</p>
-            <p><b>S$ 344.45</b> per night</p>
+            <p>Room Size: 22 m^2(hardcoded)</p>
+            <p>No breakfast served(hardcoded)</p>
+            <p><b>S$${{ hotelnamevar.price }}</b> per night</p>
             <div style="margin-bottom: 10px; margin-right: 10px; float: right">
               <a
                 href="{% url 'confirmation' %}"
@@ -96,10 +95,12 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
-
+  <br/></br>
+  {% include "footer.html" %}
 </body>
 
 
