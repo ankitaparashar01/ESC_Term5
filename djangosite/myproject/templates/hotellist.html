@@ -1,4 +1,5 @@
-{% load static %} {% include "navbar.html" %}
+{% load static %} 
+{% include "navbar.html" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +22,13 @@
     />
     <title>Ascenda| Hotel Booking</title>
   </head>
+
+
   <body>
     <div class="container">
       <div class="row">
+
+        <!-- mini left search card  -->
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -139,6 +144,8 @@
             </div>
           </div>
         </div>
+
+        {% for listing in listings %}
         <!-- Hotel list grid -->
         <div class="col" style="padding: 10px">
           <div class="hotel-list">
@@ -147,30 +154,48 @@
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <h2>Four Points by Sheraton</h2>
+                <h2>{{ listing.name }}</h2>
                 <p>
                   Singapore <br />
                   Hotel Website
                 </p>
                 <p>
                   Cheapest Room: <br />
-                  <span class="price">S$170</span>
+                  <span class="price">{{ listing.price }}</span>
                 </p>
                 <div
                   style="margin-bottom: 10px; margin-right: 10px; float: right"
                 >
                   <a
-                    href="{% url 'confirmation' %}"
+                    href="{% url 'list-room-type' listing.name %}"
                     class="btn"
                     style="background-color: #f58216; float: right"
-                    ><b>SEE DETAILS ></b></a
-                  >
+                    ><b>SEE DETAILS ></b></a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {% endfor %}
+
       </div>
+
+      <br/></br>
+      {% if listings.has_previous %}
+        <a href="?page=1">&laquo First</a>
+        <a href="?page={{ listings.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      Page {{ listings.number }} of {{ listings.paginator.num_pages }}
+
+      {% if listings.has_next %}
+        <a href="?page={{ listings.next_page_number }}">Next</a>
+        <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
+
+    {% endif %} 
+    <br/></br>
+
+
     </div>
 
     <script src="js/hotelSuggestions.js"></script>
