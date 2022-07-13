@@ -71,7 +71,7 @@
    
 
     <!-- Room Card -->
-    <div class="col" style="padding: 10px;">
+    <div class="col">
       <div class="room-list">
         <div class="grid">
           <div>
@@ -83,7 +83,7 @@
             <p>Room Size: 22 m^2(hardcoded)</p>
             <p>No breakfast served(hardcoded)</p>
             <p><b>S$${{ hotelnamevar.price }}</b> per night</p>
-            <div style="margin-bottom: 10px; margin-right: 10px; float: right">
+            <div style="position: absolute; right:30px; bottom: 0px; float: right">
               <a
                 href="{% url 'confirmation' %}"
                 class="btn"
@@ -129,13 +129,14 @@
     }
     
     .blueText{
-      padding: 12px;
+      padding: 5px;
+      margin-left: 10px;
     }
 
     .room-list {
       background:white;
       /* overflow: hidden; */
-      padding: 10px;
+      padding: 5px;
       color: black;
       width: 1000px;
       height: 250px;
@@ -155,12 +156,14 @@
     .room-list img {
       height: 230px;
       padding: 5px;
-      margin-bottom: 10px;
+      margin-left: 10px;
+      /* margin-bottom: 10px; */
       width: auto;
     }
 
     .room-right {
       position: relative;
+
     }
     
     .grid {
