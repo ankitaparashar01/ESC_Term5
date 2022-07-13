@@ -145,10 +145,11 @@
           </div>
         </div>
 
-        {% for listing in listings %}
+        
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
+          {% for listing in listings %}
           <div class="hotel-list">
             <div class="grid">
               <div>
@@ -174,10 +175,11 @@
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
         
           
-        {% endfor %}
+        
 
       </div>
 
