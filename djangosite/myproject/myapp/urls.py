@@ -10,5 +10,6 @@ urlpatterns = [
     path('hotellist/', views.all_listings, name="list-hotels"),
     path("roomtype/<str:hotelname>", views.roomListPage, name='list-room-type'),
     path('confirmation/', views.confirmation, name="confirmation"),
-    path('transaction-complete/', views.transactionComplete, name="transaction-complete")
+    path('transaction-complete/', views.transactionComplete, name="transaction-complete"),
+    path('testapi/', views.testapi, name="test-api"), #temporary, will be deleted after transition is settled
 ]

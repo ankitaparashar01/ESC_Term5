@@ -3,6 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from typing import List
 from .models import *
 from django.core.paginator import Paginator
+import requests
+
 
 # Create your views here.
 # def myfunctioncall(request):
@@ -20,12 +22,6 @@ from django.core.paginator import Paginator
 
 def ascenda(request):
     return render(request, 'index.html')
-
-# def hotellist(request):
-#     return render(request, 'hotellist.html')
-
-# def roomlist(request):
-#     return render(request, 'roomlist.html')
 
 def all_listings(request):
     hotels_list = ListingItem.objects.all()
@@ -57,3 +53,12 @@ def confirmation(request):
 
 def transactionComplete(request):
     return render(request, 'transaction-complete.html')
+
+def testapi(request):
+    response = requests.get('https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M').json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
+    # UID, Name, Full name, Country code, State, LonLat
+
+    context = {'response':response}
+
+
+    return render(request,'testapi.html',context)
