@@ -55,10 +55,17 @@ def transactionComplete(request):
     return render(request, 'transaction-complete.html')
 
 def testapi(request):
-    response = requests.get('https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M').json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
-    # UID, Name, Full name, Country code, State, LonLat
-
-    context = {'response':response}
-
-
+    response1 = requests.get('https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M').json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
+    response2 = requests.get('https://hotelapi.loyalty.dev/api/hotels/diH7').json()
+    response3 = requests.get('https://hotelapi.loyalty.dev/api/hotels/diH7/price?destination_id=RsBU&checkin=2021-03-31&checkout=2021-04-01&lang=en_US&currency=SGD&partner_id=16&country_code=SG&guests=2').json()
+    response4 = requests.get('https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=RsBU&checkin=2021-03-31&checkout=2021-04-01&lang=en_US&currency=SGD&landing_page=&partner_id=16&country_code=SG&guests=2').json()
+    context = {'response1':response1,
+    'response2':response2,
+    'response3':response3,
+    'respone4':response4}
     return render(request,'testapi.html',context)
+
+# def testapi(request):
+#     response = requests.get('https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M').json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
+#     context = {'response':response}
+#     return render(request,'testapi.html',context)

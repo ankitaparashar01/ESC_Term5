@@ -10,13 +10,10 @@ class ListingItem(models.Model):
     price  = models.FloatField(db_column='price')
     summary = models.CharField(db_column='summary',max_length=200)
     
-
-    # location = models.CharField(max_length=200, null=True)
-    # price = models.FloatField() #should give cheapest room
-    # # hotel website link
-
-    def __str__(self):
-        return self.name
-    class Meta:
-        managed = False
-        db_table = 'listingsAndReviews'
+class DestinationCat(models.Model):
+    term = models.CharField(db_column='term',max_length=200)
+    uid = models.CharField(db_column='uid',max_length=200)
+    lat = models.FloatField(db_column='lat')
+    lng = models.FloatField(db_column='lng')
+    type = models.CharField(db_column='type',max_length=200)
+    state = models.CharField(db_column='state',max_length=200)
