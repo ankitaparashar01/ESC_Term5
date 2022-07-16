@@ -6,10 +6,12 @@ from .models import *
 from .forms import *
 from django.core.paginator import Paginator
 import requests
+from django.http import HttpResponseRedirect
+
 
 #---------------------FOR LANDING PAGE FORM---------------------
 def ascenda(request):
-    dest = DestinationCat.objects.all()
+    
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -19,9 +21,8 @@ def ascenda(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            # return HttpResponseRedirect('/thanks/')
-            return None
-
+            return HttpResponseRedirect('/testapi/')
+    
     # if a GET (or any other method) we'll create a blank form
     else:
         form = DestinationCreationForm()
@@ -74,14 +75,20 @@ def transactionComplete(request):
 #---------------------DATABASE MIGRATIONS---------------------
 
 #hotel search based on chosesn location
-def testapi(request):
-    # jsonDestStr = "destination_id=id=WD0M" #THIS IS HARDCODED FOR NOW --> set to Singapore
-    # jsonDestBaseStr = "https://hotelapi.loyalty.dev/api/hotels?"
-    # jsonReqestInput = jsonDestBaseStr + jsonDestStr
-    # response1 = requests.get(str(jsonReqestInput)).json() 
+def testapi(request, destId):
+    destIdVar = destId
+    # dest_list_models = DestinationCat.objects.get(uid=destIdVar)
+    dest_list_models = DestinationCat.objects.all()
+
+
+    #dyanamic JSON Api search for specific destination: 
+    jsonDestStr = str(destId)
+    jsonDestBaseStr = str("https://hotelapi.loyalty.dev/api/hotels?destination_id=")
+    jsonReqestInput = jsonDestBaseStr + jsonDestStr
+    response1 = requests.get(jsonReqestInput).json() 
     
     # DESTINATION HERE IS HARDCODED!!
-    response1 = requests.get("https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M").json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
+    # response1 = requests.get("https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M").json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
 
 
      # set up pagination below:
@@ -99,10 +106,13 @@ def testapi(request):
     # 'response3':response3,
     # 'respone4':response4
     'listings': listings,
+    # 'dest_list': dest_list,
+    'destIdVar':destIdVar,
+    'dest_list_models':dest_list_models,
     }
     return render(request,'testapi.html', context)
 
-def testapiRoomList(request, hotelName, hotelId):
+def testapiRoomList(request, hotelName, hotelId, destId):
     #dyanamic JSON Api search for specific Hotel below: 
     jsonHotelStr = str(hotelId)
     jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
