@@ -81,6 +81,7 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+
     'default': {
         'ENGINE': 'djongo',
         'NAME': "sample_airbnb",
@@ -92,6 +93,11 @@ DATABASES = {
         },        
     },
 }
+# sample_airbnb is the name of the data base
+# listings and review is a collection under the database
+# all other django files under the sample_airbnb database are django migrations
+# 'python manage.py makemigrations' will detect changes in the database 
+# 'python manage.py migrate' will create all the django files in the database 
 
 
 # Password validation
