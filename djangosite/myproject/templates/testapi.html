@@ -145,14 +145,14 @@
           </div>
         </div>
 
-        <h1>dest uid: {{ destIdVar }}</h1>
+        
 
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
+          <h1>dest uid: {{ destIdVar }}</h1>
           {% for listing in listings %}
           <div class="hotel-list">
-            
             <!-- individual hotel cards: -->
             <div class="grid">
               <div>
@@ -177,25 +177,23 @@
                 </div>
               </div>
             </div>
-            {% endfor %}
+            
 
             <!-- <h1>hotels in singapore</h1>
             {% for i in response1 %}
               {{i.id}}
             {% endfor %} -->
-<!-- 
-            <h1>THIS IS FROM RESPONSE 2</h1>
+            <!-- <h1>THIS IS FROM RESPONSE 2</h1>
             {{ response2.id }}
             {{ response2 }} -->
-            
 
           </div>
+          {% endfor %}
         </div>
       </div>
 
-      <br/></br>
+      <br></br>
 
-      <br/></br>
       {% if listings.has_previous %}
         <a href="?page=1">&laquo First</a>
         <a href="?page={{ listings.previous_page_number }}">Previous</a>
@@ -208,9 +206,10 @@
         <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
 
       {% endif %} 
+    </div>
     <br/></br>
 
-    </div>
+    
 
     <script src="js/hotelSuggestions.js"></script>
     <script src="js/script.js"></script>
