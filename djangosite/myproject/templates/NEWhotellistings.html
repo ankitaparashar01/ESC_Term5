@@ -145,14 +145,13 @@
           </div>
         </div>
 
-        <h1>dest uid: {{ destIdVar }}</h1>
 
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
-          {% for listing in listings %}
           <div class="hotel-list">
-            
+            {% for listing in listings %}
+
             <!-- individual hotel cards: -->
             <div class="grid">
               <div>
@@ -179,21 +178,13 @@
             </div>
             {% endfor %}
 
-            <!-- <h1>hotels in singapore</h1>
-            {% for i in response1 %}
-              {{i.id}}
-            {% endfor %} -->
-<!-- 
-            <h1>THIS IS FROM RESPONSE 2</h1>
-            {{ response2.id }}
-            {{ response2 }} -->
-            
-
           </div>
         </div>
       </div>
 
       <br/></br>
+      
+      <!-- pagination below: -->
 
       <br/></br>
       {% if listings.has_previous %}
