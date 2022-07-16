@@ -4,6 +4,7 @@ from mongoengine import Document, fields
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class ListingItem(models.Model):
     name = models.CharField(db_column='name',max_length=200)
     room_type = models.CharField(db_column='room_type',max_length=200)
