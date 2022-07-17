@@ -146,45 +146,48 @@
         </div>
 
         
+
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
-
           {% for listing in listings %}
           <div class="hotel-list">
+            <!-- individual hotel cards: -->
             <div class="grid">
               <div>
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <h2>{{ listing.name }}</h2>
+                <h2>{{listing.name}}</h2>
                 <p>
-                  Singapore <br />
+                  Singapore {{ dest_list_models.term }} <br />
                   Hotel Website
                 </p>
                 <p>
                   Cheapest Room: <br />
-                  <span class="price">{{ listing.price }}</span>
+                  <span class="price">$ price placeholder</span>
                 </p>
                 <div style="position: absolute; bottom: 6px; right: 5px; margin-bottom: 10px; margin-right: 10px; float: right">
                   <a
-                    href="{% url 'list-room-type' listing.name %}"
+                    href="{% url 'room-list-test-api' destIdVar listing.name listing.id %}" 
                     class="btn"
                     style="background-color: #f58216; float: right;"
                     ><b>SEE DETAILS ></b></a>
                 </div>
               </div>
             </div>
+            
+
           </div>
           {% endfor %}
         </div>
-        
-          
-        
-
       </div>
 
       <br/></br>
+      
+      <!-- pagination below: -->
+      <br></br>
+
       {% if listings.has_previous %}
         <a href="?page=1">&laquo First</a>
         <a href="?page={{ listings.previous_page_number }}">Previous</a>
@@ -196,11 +199,11 @@
         <a href="?page={{ listings.next_page_number }}">Next</a>
         <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
 
-    {% endif %} 
+      {% endif %} 
+    </div>
     <br/></br>
 
-
-    </div>
+    
 
     <script src="js/hotelSuggestions.js"></script>
     <script src="js/script.js"></script>
@@ -218,7 +221,6 @@
       };
       flatpickr("input[type=datetime-local]", {});
     </script>
-
 
     {% include "footer.html" %}
   </body>
