@@ -90,8 +90,9 @@ def transactionComplete(request):
 #hotel search based on chosesn location
 def testapi(request, destId):
     destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
-    # dest_list_models = DestinationCat.objects.get(uid=destIdVar)
-    dest_list_models = DestinationCat.objects.all()
+    
+    # accessing destinations.json from mongodb via models.py
+    destObj = DestinationCat.objects.get(uid=destIdVar)
 
     #dyanamic JSON Api search for specific destination: 
     jsonDestStr = str(destId)
@@ -114,7 +115,7 @@ def testapi(request, destId):
     'listings': listings,
     # 'dest_list': dest_list,
     'destIdVar':destIdVar,
-    'dest_list_models':dest_list_models,
+    'destObj':destObj,
     'response1HotelPrices':response1HotelPrices,
     }
 
@@ -122,7 +123,7 @@ def testapi(request, destId):
 
 def testapiRoomList(request, hotelName, hotelId, destId):
     destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
-
+    
     #dyanamic JSON Api search for specific Hotel below: 
     jsonHotelStr = str(hotelId)
     jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
@@ -143,6 +144,8 @@ def testapiRoomList(request, hotelName, hotelId, destId):
     'destIdVar':destIdVar,
     'response2TypeOfRooms':response2TypeOfRooms,
     'typeOfRoomsJsonStr':typeOfRoomsJsonStr,
+    'jsonHotelStr':jsonHotelStr,
+    'destIdVar':destIdVar,
     }
 
     return render(request,'roomlisttestapi.html', context)
