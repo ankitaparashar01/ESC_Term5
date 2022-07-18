@@ -33,6 +33,8 @@
           margin-right: auto;
         "
       />
+      <h1>test api string: {{typeOfRoomsJsonStr}}</h1>
+
       <h1>{{ response2.name }}</h1>
       <p>
         {{ response2.description }}
@@ -72,20 +74,21 @@
 
     <!-- Room Card -->
     <div class="col">
+      {% for roomInstance in response2TypeOfRooms.rooms %}
       <div class="room-list">
         <div class="grid">
           <div>
             <img src="../static/images/room-list-img.png" alt="" />
           </div>
           <div class="room-right">
-            <h2>ROOM TYPE PLACEHODLER:</h2>
+            <h2>ROOM TYPE PLACEHODLER: {{ roomInstance.roomNormalizedDescription }}</h2>
             <br>
             <p>ROOM SIZE PLACEHOLDER: Room Size: 22 m^2(hardcoded)</p>
             <p>No breakfast served(hardcoded)</p>
             <p><b>S$$</b> per night</p>
             <div style="position: absolute; right:30px; bottom: 0px; float: right">
               <a
-                href="{% url 'confirmation' %}"
+                href="{% url 'confirmation' destIdVar response2.name response2.id  %}"
                 class="btn"
                 style="background-color: #f58216; float: right; color: white; font-size: larger;"
               ><b>Book Now</b></a
@@ -94,6 +97,7 @@
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
 
   </div>

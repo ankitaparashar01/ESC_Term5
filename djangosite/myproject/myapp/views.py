@@ -37,7 +37,7 @@ def all_listings(request):
     hotels_list = ListingItem.objects.all()
     
     # set up pagination below:
-    p = Paginator(ListingItem.objects.all(), 3)
+    p = Paginator(ListingItem.objects.all(), 7)
     page = request.GET.get('page')
     listings = p.get_page(page)
 
@@ -64,8 +64,21 @@ def roomListPage(request, hotelname):
 
 #---------------------FOR CONFIRMATION AND PAYMENT---------------------
 
-def confirmation(request):
-    return render(request, 'confirmation.html')
+def confirmation(request, hotelName, hotelId, destId):
+    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
+    
+    #dyanamic JSON Api search for specific Hotel below: 
+    jsonHotelStr = str(hotelId)
+    jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
+    jsonReqestInput = jsonHotelRoomBaseStr + jsonHotelStr
+    response3HotelInstance = requests.get(jsonReqestInput).json()
+
+    context = {'response3HotelInstance':response3HotelInstance,
+    'destIdVar':destIdVar,
+    } 
+
+    return render(request, 'confirmation.html', context)
+
 
 def transactionComplete(request):
     return render(request, 'transaction-complete.html')
@@ -85,12 +98,15 @@ def testapi(request, destId):
     jsonDestBaseStr = str("https://hotelapi.loyalty.dev/api/hotels?destination_id=")
     jsonReqestInput = jsonDestBaseStr + jsonDestStr
     response1 = requests.get(jsonReqestInput).json() 
-    
-    # DESTINATION HERE IS HARDCODED!!
-    # response1 = requests.get("https://hotelapi.loyalty.dev/api/hotels?destination_id=WD0M").json() # from Mock Static Data endpoints -> Static information of hotels belonging to a destination
 
+    # obtaining price for each hotel card
+    jsonRequestInputHotelPrices = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
+    response1HotelPrices = requests.get(jsonRequestInputHotelPrices).json()
+
+    # find specific hotel price
+    
      # set up pagination below:
-    p = Paginator(response1, 3)
+    p = Paginator(response1, 7) #specify number of cards per page here
     page = request.GET.get('page',1)
     listings = p.get_page(page)
 
@@ -99,21 +115,67 @@ def testapi(request, destId):
     # 'dest_list': dest_list,
     'destIdVar':destIdVar,
     'dest_list_models':dest_list_models,
+    'response1HotelPrices':response1HotelPrices,
     }
 
     return render(request,'NEWhotellistings.html', context)
 
 def testapiRoomList(request, hotelName, hotelId, destId):
+    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
+
     #dyanamic JSON Api search for specific Hotel below: 
     jsonHotelStr = str(hotelId)
     jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
     jsonReqestInput = jsonHotelRoomBaseStr + jsonHotelStr
     response2 = requests.get(jsonReqestInput).json() 
 
+    # available room types generation:
+    checkin = "2022-08-20"
+    checkout = "2022-08-22"
+    guests = "2"
+    # typeOfRoomsJsonStr = str("https://hotelapi.loyalty.dev/api/hotels/diH7/price?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
+    typeOfRoomsJsonStr = getRoomsHotelInstanceJSON (hotelId, destIdVar, checkin, checkout, guests)
+    response2TypeOfRooms = requests.get(typeOfRoomsJsonStr).json() 
+
+
     context = {'response2':response2,
     # 'hotelnamevar' : hotelnamevar,
+    'destIdVar':destIdVar,
+    'response2TypeOfRooms':response2TypeOfRooms,
+    'typeOfRoomsJsonStr':typeOfRoomsJsonStr,
     }
 
     return render(request,'roomlisttestapi.html', context)
 
+# ---------------------Helper functions---------------------
+def getRoomsHotelInstanceJSON (hotelId, destId, checkin, checkout, guests):
+    # deafault values
+    langStr = "en_US"
+    currencyStr = "SGD"
+    country_code= "SG"
+ 
+    jsonHotelInstanceRoomAvailBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
+    # jsonReqestInputHotelPrice = str("https://hotelapi.loyalty.dev/api/hotels/diH7/prices?destination_id={}&checkin={}&checkout={}&lang={}&currency={}&country_code={}&guests={}&partner_id={}").format(destId, checkin, checkout,langStr, currencyStr, country_code, guests, partner_id)
+    jsonReqestInputHotelPrice = str(jsonHotelInstanceRoomAvailBaseStr + hotelId + "/price?destination_id=" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1")
 
+    return jsonReqestInputHotelPrice
+
+
+def getHotelPriceJSON(destId, checkin, checkout, guests):
+    # example of url for reference, we will be using the format of the FIRST one:
+    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
+    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&landing_page=&partner_id=16&country_code=SG&guests=2"
+    
+    destId = str(destId)
+    checkin = str(checkin)
+    checkout = str(checkout)
+    guests = str(guests)
+    
+    # deafault values
+    langStr = "en_US"
+    currencyStr = "SGD"
+    country_code= "SG"
+
+    jsonHotelListingsPriceBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=")
+    jsonRequestHotelListingsPrice = jsonHotelListingsPriceBaseStr + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1"
+    return jsonRequestHotelListingsPrice
