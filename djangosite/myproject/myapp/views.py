@@ -158,7 +158,6 @@ def getRoomsHotelInstanceJSON (hotelId, destId, checkin, checkout, guests):
     country_code= "SG"
  
     jsonHotelInstanceRoomAvailBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
-    # jsonReqestInputHotelPrice = str("https://hotelapi.loyalty.dev/api/hotels/diH7/prices?destination_id={}&checkin={}&checkout={}&lang={}&currency={}&country_code={}&guests={}&partner_id={}").format(destId, checkin, checkout,langStr, currencyStr, country_code, guests, partner_id)
     jsonReqestInputHotelPrice = str(jsonHotelInstanceRoomAvailBaseStr + hotelId + "/price?destination_id=" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1")
 
     return jsonReqestInputHotelPrice
