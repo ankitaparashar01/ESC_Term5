@@ -141,8 +141,8 @@ def ajax2(request):
     my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
     dbname = my_client['ESC']
     collection_name = dbname[ref]
-    if collection_name.find({}) is None:
-        return HttpResponse("success")
-    else:
+    if len(list(collection_name.find({}))) == 0:
         return HttpResponse("fail")
+    else:
+        return HttpResponse("success")
 
