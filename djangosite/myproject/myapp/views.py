@@ -5,8 +5,11 @@ from typing import List
 from .models import *
 from .forms import *
 from django.core.paginator import Paginator
-import requests
-from django.http import HttpResponseRedirect
+import pymongo
+from django.conf import settings
+from .checkvalue import *
+from .en_decryption import *
+import json
 
 
 #---------------------FOR LANDING PAGE FORM---------------------
@@ -60,124 +63,92 @@ def roomListPage(request, hotelname):
 
     return render(request, 'roomlist.html', context)
 
+def confirmation(request):
 
-
-#---------------------FOR CONFIRMATION AND PAYMENT---------------------
-
-def confirmation(request, hotelName, hotelId, destId):
-    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
-    
-    #dyanamic JSON Api search for specific Hotel below: 
-    jsonHotelStr = str(hotelId)
-    jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
-    jsonReqestInput = jsonHotelRoomBaseStr + jsonHotelStr
-    response3HotelInstance = requests.get(jsonReqestInput).json()
-
-    context = {'response3HotelInstance':response3HotelInstance,
-    'destIdVar':destIdVar,
-    } 
-
-    return render(request, 'confirmation.html', context)
+    return render(request, 'confirmation.html')
 
 
 def transactionComplete(request):
-    return render(request, 'transaction-complete.html')
+    msg = reference_number.decode('utf-8')
+    return render(request, 'transaction-complete.html',{"msg": msg})
+    #return HttpResponse("success")
 
 
+def check(request):
 
-#---------------------DATABASE MIGRATIONS---------------------
+    return render(request, "checkorder.html")
 
-#hotel search based on chosesn location
-def testapi(request, destId):
-    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
+def display(request):
+    #fetch the data
+    key = bytes(ref,'utf-8')
+
+    my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+    dbname = my_client['ESC']
+    collection_name = dbname[ref]
+    order_details = list(collection_name.find({}))
+    doc = order_details[0]
+    doc.pop("_id")
+    for k,v in doc.items():
+        if k != 'CardNumber':
+            doc[k] = decryption(v,key)
+
+
+    #decrypt
+    #for k, v in doc.items():
+     #   if k != 'CardNumber':
+      #      doc[k] = decryption(v, key)
+    #
+    #render in the html file 
+    return render(request, 'display.html',doc)
+    #取回数据 generate form
     
-    # accessing destinations.json from mongodb via models.py
-    destObj = DestinationCat.objects.get(uid=destIdVar)
 
-    #dyanamic JSON Api search for specific destination: 
-    jsonDestStr = str(destId)
-    jsonDestBaseStr = str("https://hotelapi.loyalty.dev/api/hotels?destination_id=")
-    jsonReqestInput = jsonDestBaseStr + jsonDestStr
-    response1 = requests.get(jsonReqestInput).json() 
+def ajax(request):
+    global reference_number
+    to_check = {}
+    empty_check = True
+    for i in request.GET.items():
+        to_check[i[0]] = i[1]
+        if check_not_empty(i[1]) == False:
+            empty_check = False
+    phonenumber = to_check['CountryCode'] + to_check['PhoneNumber']
+    #check validity
+    if (check_title(to_check['Title']) 
+        and check_cvv(to_check["CVV"]) 
+        and check_expire(to_check['ExpireYear'], to_check['ExpireMonth']) 
+        and check_phonenumber(phonenumber)
+        and check_cardnumber(to_check['CardNumber'])
+        and empty_check):
+        #generating key
+        
+        reference_number = generating_key()
+        #encrypt data
+        for k, v in to_check.items():
+            if k != 'CardNumber':
+                to_check[k] = encryption(v, reference_number)
+            else:
+                to_check['CardNumber'] = mask(v)
+        #push to database
+        my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+        dbname = my_client['ESC']
+        collection_name = dbname[reference_number.decode('utf-8')]
+        collection_name.insert_one(to_check)
+        
+        return HttpResponse("success")
 
-    # obtaining price for each hotel card
-    jsonRequestInputHotelPrices = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
-    response1HotelPrices = requests.get(jsonRequestInputHotelPrices).json()
+    else:
+        return HttpResponse("failure")
 
-    # find specific hotel price
-    
-     # set up pagination below:
-    p = Paginator(response1, 7) #specify number of cards per page here
-    page = request.GET.get('page',1)
-    listings = p.get_page(page)
+    #每个人都是一个collection，对应的reference number，需要的时候直接去取对应的collection'
 
-    context = {'response1':response1,
-    'listings': listings,
-    # 'dest_list': dest_list,
-    'destIdVar':destIdVar,
-    'destObj':destObj,
-    'response1HotelPrices':response1HotelPrices,
-    }
+def ajax2(request):
+    global ref
+    ref = request.GET['ID']
+    my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+    dbname = my_client['ESC']
+    collection_name = dbname[ref]
+    if len(list(collection_name.find({}))) == 0:
+        return HttpResponse("fail")
+    else:
+        return HttpResponse("success")
 
-    return render(request,'NEWhotellistings.html', context)
-
-def testapiRoomList(request, hotelName, hotelId, destId):
-    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
-    
-    #dyanamic JSON Api search for specific Hotel below: 
-    jsonHotelStr = str(hotelId)
-    jsonHotelRoomBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
-    jsonReqestInput = jsonHotelRoomBaseStr + jsonHotelStr
-    response2 = requests.get(jsonReqestInput).json() 
-
-    # available room types generation:
-    checkin = "2022-08-20"
-    checkout = "2022-08-22"
-    guests = "2"
-    # typeOfRoomsJsonStr = str("https://hotelapi.loyalty.dev/api/hotels/diH7/price?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
-    typeOfRoomsJsonStr = getRoomsHotelInstanceJSON (hotelId, destIdVar, checkin, checkout, guests)
-    response2TypeOfRooms = requests.get(typeOfRoomsJsonStr).json() 
-
-
-    context = {'response2':response2,
-    # 'hotelnamevar' : hotelnamevar,
-    'destIdVar':destIdVar,
-    'response2TypeOfRooms':response2TypeOfRooms,
-    'typeOfRoomsJsonStr':typeOfRoomsJsonStr,
-    'jsonHotelStr':jsonHotelStr,
-    'destIdVar':destIdVar,
-    }
-
-    return render(request,'roomlisttestapi.html', context)
-
-# ---------------------Helper functions---------------------
-def getRoomsHotelInstanceJSON (hotelId, destId, checkin, checkout, guests):
-    # deafault values
-    langStr = "en_US"
-    currencyStr = "SGD"
-    country_code= "SG"
- 
-    jsonHotelInstanceRoomAvailBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
-    jsonReqestInputHotelPrice = str(jsonHotelInstanceRoomAvailBaseStr + hotelId + "/price?destination_id=" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1")
-
-    return jsonReqestInputHotelPrice
-
-
-def getHotelPriceJSON(destId, checkin, checkout, guests):
-    # example of url for reference, we will be using the format of the FIRST one:
-    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
-    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&landing_page=&partner_id=16&country_code=SG&guests=2"
-    
-    destId = str(destId)
-    checkin = str(checkin)
-    checkout = str(checkout)
-    guests = str(guests)
-    
-    # deafault values
-    langStr = "en_US"
-    currencyStr = "SGD"
-    country_code= "SG"
-
-    jsonHotelListingsPriceBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=")
-    jsonRequestHotelListingsPrice = jsonHotelListingsPriceBaseStr + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1"
-    return jsonRequestHotelListingsPrice
