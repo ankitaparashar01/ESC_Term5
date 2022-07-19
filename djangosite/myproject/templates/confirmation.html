@@ -37,7 +37,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputTitle">Title</label>
-            <select id="inputTitle" class="form-control">
+            <select name="titleInput" id="inputTitle" class="form-control">
               <option selected>Choose...</option>
               <option value="Mr. ">Mr.</option>
               <option value="Ms. ">Ms.</option>
@@ -47,6 +47,7 @@
           <div class="col">
             <label for="inputFirstName">First Name</label>
             <input
+              name= "firstNameInput"
               type="text"
               class="form-control"
               id="inputFirstName"
@@ -56,6 +57,7 @@
           <div class="col">
             <label for="inputLastName">Last Name</label>
             <input
+              name="lastNameInput"
               type="text"
               class="form-control"
               id="inputLastName"
@@ -69,6 +71,7 @@
         <div class="col-3">
           <label for="inputCountryCode">Country Code</label>
           <input
+            name="countryCodeInput"
             type="text"
             class="form-control"
             id="inputCountryCode"
@@ -78,6 +81,7 @@
         <div class="col">
           <label for="inputPhoneNumber">Phone Number</label>
           <input
+            name="phoneNumberInput"
             type="text"
             class="form-control"
             id="inputPhoneNumber"
@@ -88,7 +92,7 @@
       <br />
       <div class="form-group">
         <label for="inputMessage">Message to Hotel (optional)</label>
-        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
+        <textarea name="messageInput" class="form-control" id="inputMessage" rows="3"></textarea>
       </div>
     </div>
 
@@ -101,6 +105,7 @@
           <div class="col-5">
             <label for="inputCardNumber">Card Number</label>
             <input
+              name="cardNumberInput"
               type="text"
               class="form-control"
               id="inputCardNumber"
@@ -110,6 +115,7 @@
           <div class="col">
             <label for="inputNameOnCard">Name On Card</label>
             <input
+              name="nameCardInput"
               type="text"
               class="form-control"
               id="inputNameOnCard"
@@ -121,7 +127,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputMonthExpiryDate">Expiry Month</label>
-            <select id="inputMonthExpiryDate" class="form-control">
+            <select name="expiryMonthInput" id="inputMonthExpiryDate" class="form-control">
               <option selected>Month</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -139,7 +145,7 @@
           </div>
           <div class="col-2">
             <label for="inputYearExpiryDate">Expiry Year</label>
-            <select id="inputYearExpiryDate" class="form-control">
+            <select name="expiryYearInput" id="inputYearExpiryDate" class="form-control">
               <option selected>Year</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
@@ -156,7 +162,7 @@
           </div>
           <div class="col-3" style="margin-left: 87px">
             <label for="inputCVV">CVV / CVC</label>
-            <input type="text" class="form-control" id="inputCVV" />
+            <input name="CVVInput" type="text" class="form-control" id="inputCVV" />
           </div>
           <div class="col">
             <img
@@ -171,6 +177,7 @@
 
     <div class="paymentCenter">
       <a
+        name="submitButton"
         href="{% url 'transaction-complete' %}"
         class="submit-payment"
         style="color: white"

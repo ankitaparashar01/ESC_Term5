@@ -36,7 +36,7 @@
                 <div class="wrapper">
                   <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
                   <div class="search-input" id="searchInput">
-                    <input type="text" placeholder="Destination or Hotel" />
+                    <input type="text" name="destinationInput" placeholder="Destination or Hotel" />
                     <div class="autocom-box"></div>
                     <div class="search-icon" style="background-color: #e3e3e3">
                       <img
@@ -56,6 +56,7 @@
                     <div class="form-group">
                       <label for="calendarCheckin"><b>CHECK IN</b></label>
                       <input
+                        name="checkinInput"
                         type="date"
                         class="form-control"
                         id="calendarCheckin"
@@ -66,6 +67,7 @@
                     <div class="form-group">
                       <label for="calendarCheckout"><b>CHECK OUT</b></label>
                       <input
+                        name="checkoutInput"
                         type="date"
                         class="form-control"
                         id="calendarCheckout"
@@ -81,6 +83,7 @@
                         ><b>ROOMS</b></label
                       >
                       <select
+                        name="roomInput"
                         class="form-control"
                         id="exampleFormControlSelect1"
                       >
@@ -98,6 +101,7 @@
                         ><b>ADULTS</b></label
                       >
                       <select
+                        name="adultInput"
                         class="form-control"
                         id="exampleFormControlSelect1"
                       >
@@ -115,6 +119,7 @@
                         ><b>CHILDREN</b></label
                       >
                       <select
+                        name="childrenInput"
                         class="form-control"
                         id="exampleFormControlSelect1"
                       >
@@ -131,6 +136,7 @@
                 <a
                   href="{% url 'list-hotels' %}"
                   class="btn btn-primary"
+                  name="submitButton"
                   style="
                     width: 100%;
                     background-color: #f58216;
@@ -146,29 +152,29 @@
         </div>
 
         
-
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
+
           {% for listing in listings %}
           <div class="hotel-list">
-            <!-- individual hotel cards: -->
             <div class="grid">
               <div>
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <h2>{{listing.name}}</h2>
+                <h2>{{ listing.name }}</h2>
                 <p>
-                  Singapore {{ dest_list_models.term }} <br />
+                  Singapore <br />
                   Hotel Website
                 </p>
                 <p>
                   Cheapest Room: <br />
-                  <span class="price">$ price placeholder</span>
+                  <span class="price">{{ listing.price }}</span>
                 </p>
                 <div style="position: absolute; bottom: 6px; right: 5px; margin-bottom: 10px; margin-right: 10px; float: right">
                   <a
+                    name="seeDetailsButton"
                     href="{% url 'room-list-test-api' destIdVar listing.name listing.id %}" 
                     class="btn"
                     style="background-color: #f58216; float: right;"
@@ -176,18 +182,16 @@
                 </div>
               </div>
             </div>
-            
-
           </div>
           {% endfor %}
         </div>
+        
+          
+        
+
       </div>
 
       <br/></br>
-      
-      <!-- pagination below: -->
-      <br></br>
-
       {% if listings.has_previous %}
         <a href="?page=1">&laquo First</a>
         <a href="?page={{ listings.previous_page_number }}">Previous</a>
@@ -199,11 +203,11 @@
         <a href="?page={{ listings.next_page_number }}">Next</a>
         <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
 
-      {% endif %} 
-    </div>
+    {% endif %} 
     <br/></br>
 
-    
+
+    </div>
 
     <script src="js/hotelSuggestions.js"></script>
     <script src="js/script.js"></script>
@@ -221,6 +225,7 @@
       };
       flatpickr("input[type=datetime-local]", {});
     </script>
+
 
     {% include "footer.html" %}
   </body>

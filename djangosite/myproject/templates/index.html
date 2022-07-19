@@ -39,7 +39,7 @@
                 <div class="wrapper">
                   <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
                   <div class="search-input" id="searchInput">
-                    <input type="text" placeholder="Destination or Hotel" />
+                    <input type="text" name= "destinationInput" placeholder="Destination or Hotel" />
                     <div class="autocom-box"></div>
                     <div class="search-icon" style="background-color: #E3E3E3;">
                       <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
@@ -51,13 +51,13 @@
                   <div class="col">
                     <div class="form-group">
                       <label for="calendarCheckin"><b>CHECK IN</b></label>
-                      <input type="date" class="form-control" id="calendarCheckin">
+                      <input type="date" name="checkinInput" class="form-control" id="calendarCheckin">
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
                       <label for="calendarCheckout"><b>CHECK OUT</b></label>
-                      <input type="date" class="form-control" id="calendarCheckout">
+                      <input type="date" name= "checkoutInput" class="form-control" id="calendarCheckout">
                     </div>
                   </div>
                 </div>
@@ -65,8 +65,8 @@
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1"><b>ROOMS</b></label>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <label for="room"><b>ROOMS</b></label>
+                      <select class="form-control" name="roomInput" id="room">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -77,8 +77,8 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1"><b>ADULTS</b></label>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <label for="adult"><b>ADULTS</b></label>
+                      <select class="form-control" name="adultInput" id="adult">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -89,8 +89,8 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1"><b>CHILDREN</b></label>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <label for="children"><b>CHILDREN</b></label>
+                      <select class="form-control" name="childrenInput" id="children">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -101,7 +101,7 @@
                   </div>
                 </div>
               <br>
-              <a href="{% url 'list-hotels' %}" class="btn btn-primary" style="width: 100%; background-color: #f58216; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); border-color:#f58216;">SEARCH HOTELS</a>
+              <a href="{% url 'list-hotels' %}" class="btn btn-primary" name= "submitButton" style="width: 100%; background-color: #f58216; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); border-color:#f58216;">SEARCH HOTELS</a>
               <br>
             </form>
             </div>
@@ -114,12 +114,12 @@
     </div>
     
     <!-- TESTING DESTINATION FORM, WILL DELETE -->
-    <form action="/testapi/" method="post">
+    <!-- <form action="/testapi/" method="post">
       {% csrf_token %}
       <label for="your_name">Destination UID: </label>
       <input id="your_name" type="text" name="your_name" value="">
       <input type="submit" value="OK">
-    </form>
+    </form> -->
 
 
     
