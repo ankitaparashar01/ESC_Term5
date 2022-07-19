@@ -1,0 +1,40 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <title>Check order</title>
+
+</head>
+
+<body>
+<h1>Please type in your Reference ID</h1>
+
+<input type="text" id="referenceID" placeholder="Reference">
+
+
+<button  type="button" class = "btn btn-primary" id="submit" onclick="clickthis();">Submit</button>
+<script src="{% static 'js/jquery.js' %}" ></script>
+<script type = "text/javascript">
+    function clickthis(){
+        var ref = $("#referenceID").val(); 
+        console.log(ref);
+        $.ajax({
+            url:'/ajax2/',
+            type:"get",
+            data:{
+                ID:ref
+            },
+            success: function(res){
+                if(res == "success"){
+                    window.location.href = "http://127.0.0.1:8000/display-order/";
+                }
+            }
+
+        })
+    }
+</script>   
+
+</body>
+
+</html>
