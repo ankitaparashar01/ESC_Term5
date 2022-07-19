@@ -76,28 +76,26 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': "esc_proj",
+#         'HOST': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority",
+#         # 'HOST': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/?retryWrites=true&w=majority",
+#         'USER': "tho",
+#         'PASSWORD': "Sitis5MURF4",
+#         },        
+#     }
 
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': "sample_airbnb",
-        'CLIENT':{
-            'host': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority",
-            'username': "tho",
-            'password': "Sitis5MURF4",
-            'authSource':"admin",
-        },        
-    },
+        'NAME': 'esc_proj2',
+        'CLIENT': {
+           'host': 'mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority',
+        }
+    }
 }
-# sample_airbnb is the name of the data base
-# listings and review is a collection under the database
-# all other django files under the sample_airbnb database are django migrations
-# 'python manage.py makemigrations' will detect changes in the database 
-# 'python manage.py migrate' will create all the django files in the database 
 
 
 # Password validation

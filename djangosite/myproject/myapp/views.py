@@ -89,7 +89,7 @@ def transactionComplete(request):
 
 #hotel search based on chosesn location
 def testapi(request, destId):
-    destIdVar = destId # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
+    destIdVar = str(destId) # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
     
     # accessing destinations.json from mongodb via models.py
     destObj = DestinationCat.objects.get(uid=destIdVar)
