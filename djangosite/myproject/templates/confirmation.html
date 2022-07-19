@@ -1,4 +1,5 @@
-{% load static %} {% include "navbar.html" %}
+{% load static %} 
+{% include "navbar.html" %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +16,7 @@
     <title>Payment Portal</title>
   </head>
   <body>
+    <script src="{% static 'js/jquery.js' %}" ></script>
     <!-- Confirmation-->
     <div class="paymentBox">
       <h1><b>Reservation Confirmation</b></h1>
@@ -121,7 +123,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputMonthExpiryDate">Expiry Month</label>
-            <select id="inputMonthExpiryDate" class="form-control">
+            <select id="inputMonthExpiryMonth" class="form-control">
               <option selected>Month</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -139,7 +141,7 @@
           </div>
           <div class="col-2">
             <label for="inputYearExpiryDate">Expiry Year</label>
-            <select id="inputYearExpiryDate" class="form-control">
+            <select id="inputYearExpiryYear" class="form-control">
               <option selected>Year</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
@@ -160,7 +162,7 @@
           </div>
           <div class="col">
             <img
-              src="../static/images/cvv.png"
+              src="{% static 'images/images/cvv.png' %}"
               style="height: 80px; width: auto; margin-left: 50px"
             />
           </div>
@@ -170,15 +172,64 @@
     </div>
 
     <div class="paymentCenter">
-      <a
-        href="{% url 'transaction-complete' %}"
-        class="submit-payment"
-        style="color: white"
-        ><b>Confirm Booking</b></a
-      >
+      <button  type="button" class = "btn btn-primary" id="submit" onclick="clickMe();">Confirm Booking</button>
     </div>
 
+      <script type="text/javascript">
+        function clickMe(){
+          var cardnumber = $("#inputCardNumber").val();
+          var title = $("#inputTitle").val();
+          var firstname = $("#inputFirstName").val();
+          var lastname = $("#inputLastName").val();
+          var countrycode = $("#inputCountryCode").val();
+          var phonenumber = $("#inputPhoneNumber").val();
+          var message = $("#inputMessage").val();
+          var name_on_card = $("#inputNameOnCard").val();
+          var expire_month = $("#inputMonthExpiryMonth").val();
+          var expire_year = $("#inputYearExpiryYear").val();
+          var cvv = $("#inputCVV").val();
+          
+
+          $.ajax({
+            url:'/ajax/',
+            type:"get",
+            data: {
+              Title: title,
+              FirstName: firstname,
+              LastName: lastname,
+              CountryCode: countrycode,
+              PhoneNumber: phonenumber, 
+              Message: message,
+              CardNumber : cardnumber,
+              NameOnCard: name_on_card,
+              ExpireYear: expire_year,
+              ExpireMonth: expire_month,
+              CVV: cvv
+
+            },
+            success: function(res){
+              if(res == "success"){
+                alert("payment success")
+                window.location.href = "http://127.0.0.1:8000/transaction-complete/";
+              }
+              else if(res == "failure"){{
+                  alert("invalid input")
+                  window.location.href = "http://127.0.0.1:8000/confirmation/";
+                }
+
+              }
+            }
+
+          })
+        }
+        
+
+      </script>
+
+
+
     {% include "footer.html" %}
+
   </body>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
@@ -346,10 +397,13 @@
     }
 
     .paymentCenter {
+      
       justify-content: center;
       margin: 100px;
       margin-bottom: 200px;
+      margin-left: 850px;
       /*border-radius: 10px;*/
     }
+
   </style>
 </html>
