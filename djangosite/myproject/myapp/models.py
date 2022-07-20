@@ -27,3 +27,12 @@ class DestinationCat(models.Model):
     lng = models.FloatField(db_column='lng')
     type = models.CharField(db_column='type',max_length=200)
     state = models.CharField(db_column='state',max_length=200)
+
+    def airport_or_city(self):
+        # return boolean if not airport or city
+        if self.type == "city" or self.type =="airport":
+            return True
+        else:
+            return False
+
+    

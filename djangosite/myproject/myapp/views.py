@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
@@ -92,7 +93,7 @@ def testapi(request, destId):
     destIdVar = str(destId) # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
     
     # accessing destinations.json from mongodb via models.py
-    destObj = DestinationCat.objects.get(uid=destIdVar)
+    destObj = DestinationCat.objects.filter(uid=destIdVar)
 
     #dyanamic JSON Api search for specific destination: 
     jsonDestStr = str(destId)
