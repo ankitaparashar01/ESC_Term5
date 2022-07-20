@@ -88,7 +88,7 @@ def test_hotellist_select():
     time.sleep(2)
     see_details_btn.click()
 
-    time.sleep(3)
+    time.sleep(4)
     driver.quit()
     
 def test_confirmation_page():
@@ -147,6 +147,6 @@ def test_confirmation_page():
 
 # main
 test_front_page()
-# test_hotellist_card()
+test_hotellist_card()
 test_hotellist_select()
 test_confirmation_page()
