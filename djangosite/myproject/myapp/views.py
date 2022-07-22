@@ -7,6 +7,9 @@ from .forms import *
 from django.core.paginator import Paginator
 import requests
 from django.http import HttpResponseRedirect
+from .helper import *
+import json
+from operator import itemgetter
 
 
 #---------------------FOR LANDING PAGE FORM---------------------
@@ -89,34 +92,38 @@ def transactionComplete(request):
 
 #hotel search based on chosesn location
 def testapi(request, destId):
-    destIdVar = str(destId) # access in HTML using --> <h1>dest uid: {{ destIdVar }}</h1>
+    # temporarily hardcoded:
+    checkin = "2022-08-20"
+    checkout = "2022-08-22"
+    guests = "2"
+
+    #generate hotel cards using API 1: 
+    # strAPI1 = getAllHotelsPricesWDest(destId, checkin, checkout, guests)
+    strAPI1 = str("https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
+
+    api1Response = requests.get(strAPI1).json()
+    # json_data = json.loads(api1Response.text)
+
+    # api1Response = str(api1Response).replace("\'", "\"")
+
+    # Details for each hotel card using API 3:
+    # strAPI3 = getSingleHotelRoomTypes(hotelId, destId, checkin, checkout, guests)
+    # api3Response = requests.get(strAPI3).json()
+    api1Response = json.dumps(api1Response)
+    api1Obj = Api1.from_json(api1Response) # create hotel cards from api1Obj.hotels
     
-    # accessing destinations.json from mongodb via models.py
-    destObj = DestinationCat.objects.get(uid=destIdVar)
 
-    #dyanamic JSON Api search for specific destination: 
-    jsonDestStr = str(destId)
-    jsonDestBaseStr = str("https://hotelapi.loyalty.dev/api/hotels?destination_id=")
-    jsonReqestInput = jsonDestBaseStr + jsonDestStr
-    response1 = requests.get(jsonReqestInput).json() 
-
-    # obtaining price for each hotel card
-    jsonRequestInputHotelPrices = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
-    response1HotelPrices = requests.get(jsonRequestInputHotelPrices).json()
-
-    # find specific hotel price
     
      # set up pagination below:
-    p = Paginator(response1, 7) #specify number of cards per page here
-    page = request.GET.get('page',1)
-    listings = p.get_page(page)
+    # p = Paginator(api1Obj, 7) #specify number of cards per page here
+    # page = request.GET.get('page',1)
+    # listings = p.get_page(page)
 
-    context = {'response1':response1,
-    'listings': listings,
-    # 'dest_list': dest_list,
-    'destIdVar':destIdVar,
-    'destObj':destObj,
-    'response1HotelPrices':response1HotelPrices,
+    context = {
+    # 'listings': listings,
+    # 'api1Obj':api1Obj,
+    'api1Response':api1Response,
+    'api1Obj':api1Obj,
     }
 
     return render(request,'NEWhotellistings.html', context)
@@ -134,8 +141,8 @@ def testapiRoomList(request, hotelName, hotelId, destId):
     checkin = "2022-08-20"
     checkout = "2022-08-22"
     guests = "2"
-    # typeOfRoomsJsonStr = str("https://hotelapi.loyalty.dev/api/hotels/diH7/price?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
-    typeOfRoomsJsonStr = getRoomsHotelInstanceJSON (hotelId, destIdVar, checkin, checkout, guests)
+    typeOfRoomsJsonStr = str("https://hotelapi.loyalty.dev/api/hotels/diH7/price?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
+    # typeOfRoomsJsonStr = getRoomsHotelInstanceJSON(hotelId, destIdVar, checkin, checkout, guests)
     response2TypeOfRooms = requests.get(typeOfRoomsJsonStr).json() 
 
 
@@ -150,34 +157,48 @@ def testapiRoomList(request, hotelName, hotelId, destId):
 
     return render(request,'roomlisttestapi.html', context)
 
-# ---------------------Helper functions---------------------
-def getRoomsHotelInstanceJSON (hotelId, destId, checkin, checkout, guests):
-    # deafault values
-    langStr = "en_US"
-    currencyStr = "SGD"
-    country_code= "SG"
- 
-    jsonHotelInstanceRoomAvailBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/")
-    jsonReqestInputHotelPrice = str(jsonHotelInstanceRoomAvailBaseStr + hotelId + "/price?destination_id=" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1")
 
-    return jsonReqestInputHotelPrice
+# ------------------------------------------- API Classes -------------------------------------------
+class Api1:
+    def __init__(self, searchCompleted, completed, status, currency, hotels):
+        self.searchCompleted = searchCompleted
+        self.completed = completed
+        self.status = status 
+        self.currency = currency 
+        self.hotels = hotels #this is a list with dict elements
 
+    @classmethod
+    def from_json(cls, json_string):
+        json_dict = json.loads(json_string)
+        return cls(**json_dict)
 
-def getHotelPriceJSON(destId, checkin, checkout, guests):
-    # example of url for reference, we will be using the format of the FIRST one:
-    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1" 
-    # JSONStr = "https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&landing_page=&partner_id=16&country_code=SG&guests=2"
-    
-    destId = str(destId)
-    checkin = str(checkin)
-    checkout = str(checkout)
-    guests = str(guests)
-    
-    # deafault values
-    langStr = "en_US"
-    currencyStr = "SGD"
-    country_code= "SG"
+    def getTotalHotels(self):
+        return len(self.hotels)
 
-    jsonHotelListingsPriceBaseStr = str("https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=")
-    jsonRequestHotelListingsPrice = jsonHotelListingsPriceBaseStr + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1"
-    return jsonRequestHotelListingsPrice
+    def get_hotel_dict_from_hotels(self, hotelId):
+        # e.g. hotelId = "h3z1"
+        hotelIdList = list(map(itemgetter('id'), self.hotels)) # generate list of HotelIds
+        index = hotelIdList.index(hotelId) # obtain index of a specific HotelId from that list
+        hotelJSON = str(self.hotels[index])
+        hotelJSON = hotelJSON.replace("\'", "\"") # JSON requires "
+        return hotelJSON
+
+class HotelApi1:
+    def __init__(self, id, searchRank, price_type, max_cash_payment, coverted_max_cash_payment, points, bonuses, lowest_price, price, converted_price, lowest_converted_price, market_rates):
+        self.id = id 
+        self.searchRank=searchRank
+        self.price_type = price_type
+        self.max_cash_payment=max_cash_payment
+        self.coverted_max_cash_payment = coverted_max_cash_payment
+        self.points=points 
+        self.bonuses =bonuses 
+        self.lowest_price = lowest_price 
+        self.price = price
+        self.converted_price=converted_price
+        self.lowest_converted_price=lowest_converted_price 
+        self.market_rates = market_rates
+
+    @classmethod
+    def from_json(cls, json_string):
+        json_dict = json.loads(json_string)
+        return cls(**json_dict)

@@ -147,11 +147,12 @@
 
         <!-- <h3>{{ destIdVar }}</h3>
         <h3>{{ destObj.term }}</h3> -->
+        <h4>{{ api1Obj.name }}</h4>
 
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
-          {% for listing in listings %}
+          <!-- {% for listing in listings %} -->
           <div class="hotel-list">
             <!-- individual hotel cards: -->
             <div class="grid">
@@ -159,9 +160,9 @@
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <h2>{{listing.name}}</h2>
+                <!-- <h2>{{listing.name}}</h2> -->
                 <p>
-                  Singapore {{ dest_list_models.term }} <br />
+                  <!-- Singapore {{ dest_list_models.term }} <br /> -->
                   Hotel Website
                 </p>
                 <p>
@@ -180,7 +181,7 @@
             
 
           </div>
-          {% endfor %}
+          <!-- {% endfor %} -->
         </div>
       </div>
 
@@ -189,7 +190,7 @@
       <!-- pagination below: -->
       <br></br>
 
-      {% if listings.has_previous %}
+      <!-- {% if listings.has_previous %}
         <a href="?page=1">&laquo First</a>
         <a href="?page={{ listings.previous_page_number }}">Previous</a>
       {% endif %}
@@ -200,7 +201,7 @@
         <a href="?page={{ listings.next_page_number }}">Next</a>
         <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
 
-      {% endif %} 
+      {% endif %}  -->
     </div>
     <br/></br>
 
