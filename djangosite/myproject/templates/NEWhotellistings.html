@@ -20,7 +20,38 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
+    <!-- <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet" /> -->
+    <!-- <script src="https://use.fontawesome.com/58932e0ddd.js"></script> -->
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <title>Ascenda | Hotel Booking</title>
+    <style>
+      .stars-outer {
+        position: relative;
+        display: inline-block;
+      }
+
+      .fa-solid.fa-star::before {
+        color: orange;
+      }
+      /* .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+      }
+      .stars-outer::before {
+        content: "";
+        font-weight: 900;
+        color: black;
+      }
+      .stars-inner::before {
+        content: "";
+        font-weight: 900;
+        color: #f8ce0b;
+      }   */
+    </style>
   </head>
 
 
@@ -157,17 +188,25 @@
               <div>
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
-              <div class="hotel-right">
+              <div class="hotel-right hotel1">
                 <h2>{{listing.name}}</h2>
                 <p>
                   Singapore {{ dest_list_models.term }} <br />
                   Hotel Website
                 </p>
-                <p>
-                  Cheapest Room: <br />
-                  <span class="price">$ price placeholder</span>
-                </p>
-                <div style="position: absolute; bottom: 6px; right: 5px; margin-bottom: 10px; margin-right: 10px; float: right">
+                <div class="stars-outer">
+                  <!-- <div class="stars-inner"></div> -->
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div style="position: absolute; top: 0; right: 5px; margin-top: 50px; margin-right: 10px; float: right">
+                  <p>
+                    Cheapest Room: <br />
+                    <span class="price">$ price placeholder</span>
+                  </p>
                   <a
                     href="{% url 'room-list-test-api' destIdVar listing.name listing.id %}" 
                     class="btn"
@@ -208,6 +247,25 @@
     <script src="js/hotelSuggestions.js"></script>
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+      const ratings = {
+        hotel1: 3.1,
+      }
+      const starsTotal = 5;
+
+      document.addEventListener('DOMContentLoaded', getRatings);
+
+      function getRatings(){
+      //   for (let rating in ratings){
+      //     const starPercentage = (ratings[rating]/starsTotal) * 100;
+      //     const startPercentageRounded = `${Math.round(starPercentage/10)*10}%`
+      //   }
+      //   document.querySelector(`.${rating}.stars-outer.fa-solid.fa-star`).style.width = startPercentageRounded;
+      // }
+      console.log("ran");
+      }
+    </script>
 
     <script>
       config = {
