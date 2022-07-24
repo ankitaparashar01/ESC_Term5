@@ -19,13 +19,13 @@
     <div class="paymentBox">
       <h1><b>Reservation Confirmation</b></h1>
       <br />
-      <p><b>Hotel Name: </b>{{ response3HotelInstance.name }}</p>
+      <p><b>Hotel Name: </b>{{ hotelName }}</p>
       <p><b>Room 1:</b> (HC) Deluxe Room, 1 King Bed, City View</p>
-      <p><b>Room 2:</b> (HC) Superior Room, 1 King Bed, City View</p>
+      <p><b>Room KEY:</b> {{ roomKey }}</p>
       <p><b>Guests:</b> (HC) 5 Adults, 2 Children</p>
-      <p><b>Checkin:</b> (HC) 12/06/2022</p>
-      <p><b>Checkout:</b> (HC) 15/06/2022</p>
-      <p><b>Room Rate HC(3 nights, 2 rooms): </b> S$(HC)2129.70</p>
+      <p><b>Check In:</b> {{ checkin }}</p>
+      <p><b>Check Out:</b> {{ checkout }}</p>
+      <p><b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}</p>
       <p><b>Tax:</b> S$(HC)106.5</p>
       <p><b>Total:</b> S$(HC)2236.2</p>
     </div>

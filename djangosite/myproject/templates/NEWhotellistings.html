@@ -28,6 +28,7 @@
     <div class="container-fluid" style="width:87%;">
       <div class="row no-gutters">
 
+
         <!-- mini left search card  -->
         <div class="col-4">
           <div class="card">
@@ -129,7 +130,7 @@
                 </div>
                 <br />
                 <a
-                  href="{% url 'list-hotels' %}"
+                  href=""
                   class="btn btn-primary"
                   style="
                     width: 100%;
@@ -145,14 +146,12 @@
           </div>
         </div>
 
-        <!-- <h3>{{ destIdVar }}</h3>
-        <h3>{{ destObj.term }}</h3> -->
-        <h4>{{ api1Obj.name }}</h4>
+
 
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
-          <!-- {% for listing in listings %} -->
+          {% for hotelCard in api1Obj.hotels %}
           <div class="hotel-list">
             <!-- individual hotel cards: -->
             <div class="grid">
@@ -160,18 +159,18 @@
                 <img src="../static/images/hotel-list-img.png" alt="" />
               </div>
               <div class="hotel-right">
-                <!-- <h2>{{listing.name}}</h2> -->
+                <h2>{{hotelCard.id}}</h2>
                 <p>
                   <!-- Singapore {{ dest_list_models.term }} <br /> -->
                   Hotel Website
                 </p>
                 <p>
                   Cheapest Room: <br />
-                  <span class="price">$ </span>
+                  <span class="price">${{hotelCard.lowest_price}} </span>
                 </p>
                 <div style="position: absolute; bottom: 6px; right: 5px; margin-bottom: 10px; margin-right: 10px; float: right">
                   <a
-                    href="{% url 'room-list-test-api' destIdVar listing.name listing.id %}" 
+                    href="{% url 'room-list-test-api' destId hotelCard.id hotelCard.id %}" 
                     class="btn"
                     style="background-color: #f58216; float: right;"
                     ><b>SEE DETAILS ></b></a>
@@ -181,7 +180,7 @@
             
 
           </div>
-          <!-- {% endfor %} -->
+          {% endfor %}
         </div>
       </div>
 

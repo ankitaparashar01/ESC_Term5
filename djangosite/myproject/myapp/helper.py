@@ -27,26 +27,21 @@ def getSingleHotelRoomTypes(hotelId, destId, checkin, checkout, guests):
     country_code= "SG"
 
     baseJSONStr = "https://hotelapi.loyalty.dev/api/hotels/"
-    getSingleHotelRoomTypesJSON = baseJSONStr  + hotelId + "/price?destination_id" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1"
+    getSingleHotelRoomTypesJSON = baseJSONStr  + hotelId + "/price?destination_id=" + destId + "&checkin=" + checkin + "&checkout=" + checkout + "&lang=" + langStr + "&currency=" + currencyStr + "&country_code=" + country_code + "&guests=" + guests + "&partner_id=1"
     
     return str(getSingleHotelRoomTypesJSON)
 
 # -------------------------- API 3 --------------------------
-def getAllHotelsPricesWDest(hotelId):
+def getHotelCardWHotelID(hotelId):
     # reference = "https://hotelapi.loyalty.dev/api/hotels/diH7"
     
-    # default values
-    langStr = "en_US"
-    currencyStr = "SGD"
-    country_code= "SG"
-
     baseJSONStr = "https://hotelapi.loyalty.dev/api/hotels/"
-    getAllHotelsPricesWDestJSON = baseJSONStr + hotelId
+    getHotelCardWHotelIDJSON = baseJSONStr + hotelId
 
-    return str(getAllHotelsPricesWDestJSON)
+    return str(getHotelCardWHotelIDJSON)
 
 # -------------------------- API 4 --------------------------
-def getSingleHotelCardWHotelID(destID):
+def getSingleHotelCardWHotelID(destId):
     #reference = "https://hotelapi.loyalty.dev/api/hotels?destination_id=RsBU"
     
     # default values
@@ -55,6 +50,6 @@ def getSingleHotelCardWHotelID(destID):
     country_code= "SG"
 
     baseJSONStr = "https://hotelapi.loyalty.dev/api/hotels?destination_id="
-    getSingleHotelCardWHotelIDJSON = baseJSONStr + destID
+    getSingleHotelCardWHotelIDJSON = baseJSONStr + destId
 
     return str(getSingleHotelCardWHotelIDJSON)
