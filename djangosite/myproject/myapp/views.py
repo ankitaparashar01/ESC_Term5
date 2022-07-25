@@ -23,36 +23,6 @@ def ascenda(request):
     return render(request, 'index.html', context)
 
 
-#---------------------FOR HOTEL LISTING SEARCH RESULTS---------------------
-def all_listings(request):
-    hotels_list = ListingItem.objects.all()
-    
-    # set up pagination below:
-    p = Paginator(ListingItem.objects.all(), 7)
-    page = request.GET.get('page')
-    listings = p.get_page(page)
-
-    context = {'hotels_list': hotels_list,
-    'listings': listings}
-
-    return render(request, 'hotellist.html', context)
-
-
-#---------------------FOR ROOM TYPE PAGE---------------------
-def roomListPage(request, hotelname):
-    # if(ListingItem.objects.filter(name=hotelname)): #url matches the hotelname
-    #     hotelname = ListingItem.objects.all()
-    #     context = {'hotelname' : hotelname}
-    # else:
-    #     # messages.error(request, "No such product found")
-    #     return redirect('listings')
-    hotelnamevar = ListingItem.objects.get(name=hotelname)
-    context = {'hotelnamevar' : hotelnamevar}
-
-    return render(request, 'roomlist.html', context)
-
-
-
 #---------------------FOR CONFIRMATION AND PAYMENT---------------------
 
 def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
@@ -101,30 +71,30 @@ def hotelCards(request, destId):
     #generate hotel cards using API 1: 
     strAPI1 = getAllHotelsPricesWDest(destId, checkin, checkout, guests)
     # strAPI1 = str("https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=WD0M&checkin=2022-08-20&checkout=2022-08-22&lang=en_US&currency=SGD&country_code=SG&guests=2&partner_id=1")
-
     api1Response = requests.get(strAPI1).json()
-
-    # Details for each hotel card using API 3:
-    # strAPI3 = getSingleHotelRoomTypes(hotelId, destId, checkin, checkout, guests)
-    # api3Response = requests.get(strAPI3).json()
-    
     api1Response = json.dumps(api1Response)
     api1Obj = Api1.from_json(api1Response) # create hotel cards from api1Obj.hotels
     
-     # set up pagination below:
-    # p = Paginator(api1Obj, 7) #specify number of cards per page here
-    # page = request.GET.get('page',1)
-    # listings = p.get_page(page)
+    
+    
+    # set up pagination below:
+    p = Paginator(api1Obj.hotels, 7) #specify number of cards per page here
+    page_number = request.GET.get('page',1)
+    page_obj = p.get_page(page_number)
+
+    if request.htmx:
+        template_name = "partials/hotelcardelement.html"
+    else:
+        template_name = "NEWhotellistings.html"
 
     context = {
-    # 'listings': listings,
-    # 'api1Obj':api1Obj,
+    'page_obj': page_obj,
     'api1Response': api1Response,
     'api1Obj': api1Obj,
     'destId': destId,
     }
 
-    return render(request,'NEWhotellistings.html', context)
+    return render(request, template_name, context)
 
 def RoomList(request, destId, hotelName, hotelId):
     # hardcoded values:
@@ -179,6 +149,11 @@ class Api1:
         hotelJSON = str(self.hotels[index])
         hotelJSON = hotelJSON.replace("\'", "\"") # JSON requires "
         return hotelJSON
+    
+    def get_hotel_index(self, hotelId):
+        hotelIdList = list(map(itemgetter('id'), self.hotels)) # generate list of HotelIds
+        index = hotelIdList.index(hotelId)
+        return index
 
 class HotelApi1:
     def __init__(self, id, searchRank, price_type, max_cash_payment, coverted_max_cash_payment, points, bonuses, lowest_price, price, converted_price, lowest_converted_price, market_rates):
@@ -310,3 +285,9 @@ class Api3:
     def from_json(cls, json_string):
         json_dict = json.loads(json_string)
         return cls(**json_dict)
+
+class HotelCard:
+    def __init__(self, hotelId, lowest_price, hotelName):
+        self.hotelId = hotelId
+        self.lowest_price = lowest_price
+        self.hotelName = hotelName
