@@ -79,7 +79,7 @@ def hotelCards(request, destId):
     
     # set up pagination below:
     p = Paginator(api1Obj.hotels, 7) #specify number of cards per page here
-    page_number = request.GET.get('page',1)
+    page_number = request.GET.get('page')
     page_obj = p.get_page(page_number)
 
     if request.htmx:
