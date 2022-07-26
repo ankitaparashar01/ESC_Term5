@@ -4,7 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.ascenda, name="ascenda"),
-    path('hotellist/', views.all_listings, name="list-hotels"),
+    path('hotellist/', views.all_listings, name="list-hotels"), 
+    # hotellist does not work dont use it 
     path("roomtype/<str:hotelname>", views.roomListPage, name='list-room-type'),
     path('confirmation/', views.confirmation, name="confirmation"),
     path('transaction-complete/', views.transactionComplete, name="transaction-complete"),
