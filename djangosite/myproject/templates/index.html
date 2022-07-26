@@ -17,6 +17,7 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <title>Ascenda | Hotel Booking</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
   </head>
   <body>
 
@@ -31,24 +32,34 @@
             </h1>
             <a href="{% url 'ascenda' %}" class="btn" style="background-color:#f58216;">Read more</a>
           </div>
+          
+          <!-- search input -->
           {% include "myform.html" %}
+          
         </div>
       </section>
     </div>
     
-    <!-- TESTING DESTINATION FORM, WILL DELETE -->
-    <!-- <form action="/testapi/" method="post">
-      {% csrf_token %}
-      <label for="your_name">Destination UID: </label>
-      <input id="your_name" type="text" name="your_name" value="">
-      <input type="submit" value="OK">
-    </form> -->
+    <div style="display: flex; justify-content: center;">
+      <div id="map" style="width:50%; height: 500px; border-radius: 10px; border: 1px solid orange"></div>
+    </div>
 
-
-    
     {% include "footer.html" %}
     
-   
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1Ijoic2h5YXduIiwiYSI6ImNsNXZ6cnpvZTBmMjAzYmwzZ3IyNWdhMXIifQ.7u9BRFY4SU5hERtjuNyJeg';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [13.01805, 43.84352], // [lng, lat]
+        zoom: 17,
+      });
+      var marker = new mapboxgl.Marker()
+        .setLngLat([13.01805, 43.84352])
+        .addTo(map);
+    </script>
+    
   </body>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
@@ -554,13 +565,11 @@
         background-color: var(--secondary-color);
         color: #fff;
       }
-
       .bg-dark,
       .btn-dark {
         background-color: var(--dark-color);
         color: #fff;
       }
-
       .bg-light,
       .btn-light {
         background-color: var(--light-color);
