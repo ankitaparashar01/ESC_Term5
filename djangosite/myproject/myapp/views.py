@@ -50,6 +50,33 @@ def ascenda(request):
     }
     return render(request, 'index.html', context)
 
+#---------------------FOR FORM SUBMISSION RESULTS---------------------
+def submitmyform(request):
+    mydictionary = {
+        "var1" : request.POST['destinationorhotel'],
+        "var2" : request.POST['calendarCheckin'],
+        "var3" : request.POST['calendarCheckout'],
+        "var4" : request.POST['roomsnumber'],
+        "var5" : request.POST['adultsnumber'],
+        "var6" : request.POST['childrennumber'],
+        "method" : request.method
+    }
+    return JsonResponse(mydictionary)
+    
+
+
+# def myform2(request):
+#     if request.method == "POST":
+#         pass
+#     elif request.method == "GET":
+#         form = SearchHotelForm()
+#         mydictionary = {
+#             "form" :form 
+#         }
+#         return render(request, 'myform2.html', context=mydictionary)
+        
+
+
 
 #---------------------FOR HOTEL LISTING SEARCH RESULTS---------------------
 def all_listings(request):
