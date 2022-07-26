@@ -108,6 +108,7 @@ def RoomList(request, destId, hotelName, hotelId):
     api2Response = requests.get(strAPI2).json()
     api2Response = json.dumps(api2Response)
     api2Obj = Api2.from_json(api2Response) # create room cards from api1Obj.rooms
+    roomNamesList = api2Obj.get_present_room_names_list()
 
     # Using API 3 to generate info about the hotel:
     strAPI3 = getHotelCardWHotelID(hotelId)
@@ -120,6 +121,7 @@ def RoomList(request, destId, hotelName, hotelId):
     'hotelId':hotelId,
     'api2Obj':api2Obj,
     'api3Obj': api3Obj,
+    'roomNamesList':roomNamesList,
     }
 
     return render(request,'roomlisttestapi.html', context)
@@ -196,6 +198,21 @@ class Api2:
     
     def getTotalRooms(self):
         return len(self.rooms)
+
+    def get_diff_room_types_list(self):
+        typeList = list(map(itemgetter('type'), self.rooms))
+        typeList = list(set(typeList))
+        return typeList
+
+    def get_present_room_names_list(self):
+        roomNameList = list(map(itemgetter('roomNormalizedDescription'), self.rooms))
+        roomNameList = list(set(roomNameList))
+        return roomNameList
+
+    def get_list_of_room_keys(self):
+        keyList = list(map(itemgetter('key'), self.rooms))
+        keyList = list(set(keyList))
+        return keyList
 
     def get_room_dict_from_hotels(self, roomKey, roomType):
         # This method returns a specific room dict from api 3

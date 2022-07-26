@@ -17,5 +17,13 @@ def render_name_api3(hotelId):
 
     # need to obtain: name, address, address1, rating, 
     return "{}".format(hotelName)
-
 register.filter('render_name_api3', render_name_api3)
+
+def breakfast_avail_bool(breakfastStr):
+    if breakfastStr == "hotel_detail_breakfast_included":
+        setBreakfastStr = "Breakfast Included"
+    elif breakfastStr == "hotel_detail_room_only":
+        setBreakfastStr = "Room Only"
+
+    return setBreakfastStr
+register.filter('breakfast_avail_bool', breakfast_avail_bool)
