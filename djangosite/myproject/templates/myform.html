@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="card">
+        <div class="card-body">
+          <form method="post" action="{% url 'submitmyform' %}">
+            {% csrf_token %}
+            <div class="wrapper">
+              <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
+              <div class="search-input" >
+                <input type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
+                <div class="autocom-box"></div>
+                <div class="search-icon" style="background-color: #E3E3E3;">
+                  <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="calendarCheckin"><b>CHECK IN</b></label>
+                  <input type="date" class="form-control" id="calendarCheckin" name="calendarCheckin" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="calendarCheckout"><b>CHECK OUT</b></label>
+                  <input type="date" class="form-control" id="calendarCheckout" name="calendarCheckout" required>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>ROOMS</b></label>
+                  <select class="form-control" id="roomsnumber" name="roomsnumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>ADULTS</b></label>
+                  <select class="form-control" id="adultsnumber" name="adultsnumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>CHILDREN</b></label>
+                  <select class="form-control" id="childrennumber" name="childrennumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          <br>
+          <div class = "form-group">
+            <button type="submit" class="btn btn-warning">SEARCH HOTELS</button>
+          </div>
+          <!-- <a href="{% url 'list-hotels' %}" class="btn btn-primary" style="width: 100%; background-color: #f58216; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); border-color:#f58216;">SEARCH HOTELS</a> -->
+          <br>
+        </form>
+        </div>
+
+        
+      </div>
+    </body>
+</html>
