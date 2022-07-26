@@ -113,12 +113,23 @@
         </div>
       </section>
     </div>
-
-
     
     {% include "footer.html" %}
     
-   
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1Ijoic2h5YXduIiwiYSI6ImNsNXZ6cnpvZTBmMjAzYmwzZ3IyNWdhMXIifQ.7u9BRFY4SU5hERtjuNyJeg';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [13.01805, 43.84352], // [lng, lat]
+        zoom: 17,
+      });
+      var marker = new mapboxgl.Marker()
+        .setLngLat([13.01805, 43.84352])
+        .addTo(map);
+    </script>
+    
   </body>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
