@@ -119,6 +119,36 @@ def transactionComplete(request):
 
 
 #---------------------DATABASE MIGRATIONS---------------------
+# def featureOne(request):
+#     if request.method=="POST":
+#         destinationorhotel = request.POST['destinationorhotel'],
+#         calendarCheckin = request.POST['calendarCheckin'],
+#         calendarCheckout = request.POST['calendarCheckout'],
+#         roomsnumber = request.POST['roomsnumber'],
+#         adultsnumber = request.POST['adultsnumber'],
+#         childrennumber = request.POST['childrennumber'],
+
+#     HotelSearch.objects.filter(destinationorhotel=destinationorhotel).update(calendarCheckin=calendarCheckin,calendarCheckout=calendarCheckout,roomsnumber=roomsnumber,adultsnumber=adultsnumber,childrennumber=childrennumber)
+#     global Qdestinationorhotel, QcalendarCheckin, QcalendarCheckout, Qroomsnumber, Qadultsnumber, Qchildrennumber
+#     def Qdestinationorhotel():
+#         return destinationorhotel
+#     def QcalendarCheckin():
+#         return calendarCheckin
+#     def QcalendarCheckout():
+#         return calendarCheckout
+#     def Qroomsnumber():
+#         return roomsnumber
+#     def Qadultsnumber():
+#         return adultsnumber
+#     def Qchildrennumber():
+#         return childrennumber
+
+#     destinationorhotel_entry = HotelSearch.objects.filter(destinationorhotel=destinationorhotel).first()
+#     dest_id = destinationorhotel_entry.uid
+#     def Qdest_id():
+#         return dest_id
+
+#     return render(request, 'index.html')
 
 #hotel search based on chosesn location
 def testapi(request, destId):
@@ -146,7 +176,6 @@ def testapi(request, destId):
     'destIdVar':destIdVar,
     'dest_list_models':dest_list_models,
     }
-
     return render(request,'NEWhotellistings.html', context)
 
 def testapiRoomList(request, hotelName, hotelId, destId):
