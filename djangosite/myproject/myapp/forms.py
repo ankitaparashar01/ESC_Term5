@@ -13,30 +13,68 @@ class DestinationCreationForm(forms.ModelForm):
 # to ankita, you can add the form thingy below here! 
 # i will eventually delete DestinationCreationForm but for now im still using it
 # :>
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class SearchHotelForm(forms.ModelForm):
     destination = forms.CharField(widget=forms.TextInput(
         attrs={
             "placeholder": "Destination or Hotel",
             "class": "form-control"
         }))
-    checkin_date = forms.DateField(widget=forms.DateInput(
-        attrs={
-            "class": "form-control"
-        }))
-
-    checkout_date = forms.DateField(widget=forms.DateInput(
+    checkin_date = forms.DateField(widget=DateInput(
         attrs={
             "class": "form-control"
         }
-    ))
+    )
+        
+        # attrs={
+        #     "class": "form-control",
+        #     "id": "calendarCheckin",
+        #     "name": "calendarCheckin"
+        # }
+        # )
+        )
+
+    checkout_date = forms.DateField(widget=DateInput(
+        attrs={
+            "class": "form-control"
+        }
+    )
+        # attrs={
+        #     "class": "form-control",
+        #     "id": "calendarCheckin",
+        #     "name": "calendarCheckin"
+        # }
+    )
     rooms = forms.ChoiceField(widget=forms.Select(
-        choices=[0,1,2,3,4,5]
+        attrs={
+            "class": "form-control"
+        },
+        # attrs={
+        #     "class": "form-control",
+        #     "id": "roomsnumber",
+        #     "name": "roomsnumber"
+        # }
+        choices=[('1',1),('2',2),('3',3),('4',4),('5',5)]
     ))
     adults = forms.ChoiceField(widget=forms.Select(
-        choices=[0,1,2,3,4,5]
+        attrs={
+            "class": "form-control"
+        },
+        # attrs={
+        #     "class": "form-control",
+        #     "id": "roomsnumber",
+        #     "name": "roomsnumber"
+        # }
+        
+        choices=[('1',1),('2',2),('3',3),('4',4),('5',5)]
     ))
     children = forms.ChoiceField(widget=forms.Select(
-        choices=[0,1,2,3,4,5]
+        attrs={
+            "class": "form-control"
+        },
+        choices=[('1',1),('2',2),('3',3),('4',4),('5',5)]
     ))
 
     class Meta:
