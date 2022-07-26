@@ -20,6 +20,7 @@ def render_name_api3(hotelId):
 register.filter('render_name_api3', render_name_api3)
 
 def breakfast_avail_bool(breakfastStr):
+    setBreakfastStr =""
     if breakfastStr == "hotel_detail_breakfast_included":
         setBreakfastStr = "Breakfast Included"
     elif breakfastStr == "hotel_detail_room_only":

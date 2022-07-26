@@ -27,7 +27,7 @@
     <div class="box">
       <!-- image of hotel -->
       <img
-        src="../static/images/hotel-list-img.png"
+        src="{{ api3Obj.cloudflare_image_url }}"
         style="
           width: 50%;
           display: block;
@@ -104,9 +104,12 @@
                   <div class="room-right">
                     <h2>{{roomListing.roomAdditionalInfo.breakfastInfo|breakfast_avail_bool}}</h2>
                     <br>
-                    <p>ROOM SIZE PLACEHOLDER: Room Size: 22 m^2(hardcoded)</p>
+                    <p>(room type): {{roomListing.roomNormalizedDescription}}</p>
+                    <p>Description: {{roomListing.description}}</p>
+                    <!-- <p>Amenities: {{roomListing.amenities}}</p> -->
                     
-                    <p><b>S$$</b>{{roomListing.price}} per night</p>
+                    
+                    <p><b>S$${{roomListing.price}}</b> per night</p>
                     <div style="position: absolute; right:30px; bottom: 0px; float: right">
                       <a
                         href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type %}"

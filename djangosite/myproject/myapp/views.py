@@ -40,6 +40,7 @@ def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
 
     # Using RoomsApi2 to obtain specific room info based on "key":
     chosenRoomJSON = api2Obj.get_room_dict_from_hotels(roomKey, roomType)
+    
     chosenRoomObj = RoomsApi2.from_json(chosenRoomJSON)
 
     context = {'destId':destId,
@@ -114,6 +115,8 @@ def RoomList(request, destId, hotelName, hotelId):
     strAPI3 = getHotelCardWHotelID(hotelId)
     # strAPI3 = "https://hotelapi.loyalty.dev/api/hotels/diH7"
     api3Response = requests.get(strAPI3).json()
+    api3Response.pop('hires_image_index', None) # 'hires_image_index' is removed should it exist. else, do nothing
+
     api3Response = json.dumps(api3Response)
     api3Obj = Api3.from_json(api3Response) # create room cards from api1Obj.rooms
 
@@ -221,6 +224,7 @@ class Api2:
         index = RoomIdList.index(roomType) # obtain index of a specific "key" from that list
         roomJSON = str(self.rooms[index])
         roomJSON = ast.literal_eval(roomJSON)
+        roomJSON.pop('long_description', None) # remove 'long_description' key since some hotels may not have it and cause the code to break
 
         # --- clean JSON ---
         # change True to "True" 
@@ -238,11 +242,12 @@ class Api2:
 
         # roomJSON = roomJSON.replace("\'", "\"") # JSON requires "
         roomJSON = json.dumps(roomJSON)
+        
         return roomJSON
 
 class RoomsApi2:
     def __init__(self, key,roomNormalizedDescription,roomDescription, type, free_cancellation,
-    roomAdditionalInfo, description, long_description, images, amenities, price_type, max_cash_payment, coverted_max_cash_payment,
+    roomAdditionalInfo, description, images, amenities, price_type, max_cash_payment, coverted_max_cash_payment,
      points,bonuses, lowest_price, price, converted_price, lowest_converted_price, chargeableRate,
      market_rates):
      self.key = key
@@ -265,7 +270,7 @@ class RoomsApi2:
      self.lowest_converted_price=lowest_converted_price
      self.chargeableRate=chargeableRate
      self.market_rates=market_rates # list of dictionaries
-     self.long_description = long_description
+    #  self.long_description = long_description
 
     @classmethod
     def from_json(cls, json_string):
@@ -274,8 +279,8 @@ class RoomsApi2:
 
 class Api3:
     def __init__(self, id, imageCount, latitude,longitude, name, address,address1,rating, trustyou,
-     categories, amenities_ratings, description, amenities, original_metadata, image_details,
-     hires_image_index,number_of_images, default_image_index, imgix_url, cloudflare_image_url):
+     categories, amenities_ratings, description, amenities, original_metadata, image_details
+     ,number_of_images, default_image_index, imgix_url, cloudflare_image_url):
 
         self.id = id
         self.imageCount = imageCount
@@ -292,7 +297,7 @@ class Api3:
         self.amenities = amenities
         self.original_metadata = original_metadata
         self.image_details = image_details
-        self.hires_image_index = hires_image_index
+        # self.hires_image_index = hires_image_index
         self.number_of_images = number_of_images
         self.default_image_index = default_image_index
         self.imgix_url = imgix_url # String
