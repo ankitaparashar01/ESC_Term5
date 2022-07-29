@@ -12,6 +12,8 @@ from .helper import *
 import json
 from operator import itemgetter
 import ast
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 
 
 
@@ -22,6 +24,20 @@ def ascenda(request):
     }
     return render(request, 'index.html', context)
 
+
+#---------------------FOR FORM SUBMISSION RESULTS---------------------
+def submitmyform(request):
+    mydictionary = {
+        "var1" : request.POST['destinationorhotel'],
+        "var2" : request.POST['calendarCheckin'],
+        "var3" : request.POST['calendarCheckout'],
+        "var4" : request.POST['roomsnumber'],
+        "var5" : request.POST['adultsnumber'],
+        "var6" : request.POST['childrennumber'],
+        "method" : request.method
+    }
+    return JsonResponse(mydictionary)
+    
 
 #---------------------FOR CONFIRMATION AND PAYMENT---------------------
 

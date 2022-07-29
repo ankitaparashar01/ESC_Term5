@@ -27,3 +27,12 @@ class DestinationCat(models.Model):
     lng = models.FloatField(db_column='lng')
     type = models.CharField(db_column='type',max_length=200)
     state = models.CharField(db_column='state',max_length=200)
+
+class HotelSearch(models.Model):
+    destinationorhotel = models.CharField(max_length=300, blank=True, default="-")
+    uid = models.CharField(max_length=250, blank=True)
+    calendarCheckin = models.DateField(blank=True)
+    calendarCheckout = models.DateField(blank=True)
+    roomsnumber = models.PositiveIntegerField(blank=True)
+    adultsnumber = models.PositiveIntegerField(blank=True)
+    childrennumber = models.PositiveIntegerField(blank=True)
