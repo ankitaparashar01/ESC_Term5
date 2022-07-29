@@ -15,7 +15,7 @@ import ast
 
 
 
-#---------------------FOR LANDING PAGE FORM---------------------
+#------------------------------------- FOR LANDING PAGE FORM -------------------------------------
 def ascenda(request):
     
     context = {
@@ -23,8 +23,7 @@ def ascenda(request):
     return render(request, 'index.html', context)
 
 
-#---------------------FOR CONFIRMATION AND PAYMENT---------------------
-
+#-------------------------------------FOR CONFIRMATION AND PAYMENT-------------------------------------
 def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
     # hardcoded values:
     checkin = "2022-08-20"
@@ -54,12 +53,14 @@ def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
     'chosenRoomObj':chosenRoomObj,
     } 
     return render(request, 'confirmation.html', context)
+    
 
-
+#-------------------------------------FOR TRANSACTION COMPLETE-------------------------------------
 def transactionComplete(request):
     return render(request, 'transaction-complete.html')
 
 
+#-------------------------------------FOR HOTEL CARDS-------------------------------------
 #hotel search based on chosesn location
 def hotelCards(request, destId):
     destId = str(destId)
@@ -97,6 +98,9 @@ def hotelCards(request, destId):
 
     return render(request, template_name, context)
 
+
+
+#-------------------------------------FOR ROOM CARDS -------------------------------------
 def RoomList(request, destId, hotelName, hotelId):
     # hardcoded values:
     checkin = "2022-08-20"
@@ -120,11 +124,14 @@ def RoomList(request, destId, hotelName, hotelId):
     api3Response = json.dumps(api3Response)
     api3Obj = Api3.from_json(api3Response) # create room cards from api1Obj.rooms
 
+    # totalRooms = api2Obj.getTotalRooms()
+
     context = {'destId':destId,
     'hotelId':hotelId,
     'api2Obj':api2Obj,
     'api3Obj': api3Obj,
     'roomNamesList':roomNamesList,
+    # 'totalRooms':totalRooms,
     }
 
     return render(request,'roomlisttestapi.html', context)
