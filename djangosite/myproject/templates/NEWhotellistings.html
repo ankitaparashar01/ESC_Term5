@@ -31,6 +31,7 @@
       <div class="row no-gutters">
 
 
+        
         <!-- mini left search card  -->
         <div class="col-4">
           {% include "myform.html" %}
@@ -41,6 +42,14 @@
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
+          
+          <!-- Uncomment below to check search form inputs!! : -->
+          <!-- <p>destId: {{destId}}</p>
+          <p>guests: {{guests}}</p>
+          <p>checkin: {{checkin}}</p>
+          <p>checkout: {{checkout}}</p>
+          <p>rooms: {{rooms}}</p> -->
+
           {% include 'partials/hotelcardelement.html' %}
         </div>
       </div>

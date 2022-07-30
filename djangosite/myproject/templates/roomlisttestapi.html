@@ -112,7 +112,7 @@
                     <p><b>S$${{roomListing.price}}</b> per night</p>
                     <div style="position: absolute; right:30px; bottom: 0px; float: right">
                       <a
-                        href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type %}"
+                        href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type checkin checkout guests %}"
                         class="btn"
                         style="background-color: #f58216; float: right; color: white; font-size: larger;"
                       ><b>Book Now</b></a

@@ -19,12 +19,12 @@
     <div class="card">
         <div class="card-body">
           <!-- "/test-api/" for action in other code -->
-          <form method="post" action="{% url 'submitmyform' %}">
-            {% csrf_token %}
+          <form method="get" action="{% url 'hotel-cards' %}">
+            
             <div class="wrapper">
               <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
               <div class="search-input" >
-                <input type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
+                <input type="text" placeholder="Destination or Hotel" id="destId" name="destId" required/>
                 <div class="autocom-box"></div>
                 <div class="search-icon" style="background-color: #E3E3E3;">
                   <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
@@ -35,14 +35,14 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="calendarCheckin"><b>CHECK IN</b></label>
-                  <input type="date" class="form-control" id="calendarCheckin" name="calendarCheckin" required>
+                  <label for="checkin"><b>CHECK IN</b></label>
+                  <input type="date" class="form-control" id="checkin" name="checkin" required>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="calendarCheckout"><b>CHECK OUT</b></label>
-                  <input type="date" class="form-control" id="calendarCheckout" name="calendarCheckout" required>
+                  <label for="checkout"><b>CHECK OUT</b></label>
+                  <input type="date" class="form-control" id="checkout" name="checkout" required>
                 </div>
               </div>
             </div>
@@ -87,7 +87,12 @@
             </div>
           <br>
           <div class = "form-group">
-            <button type="submit" class="btn btn-warning">SEARCH HOTELS</button>
+            
+            <button type="submit" class="btn btn-warning">
+              
+                SEARCH HOTELS
+              
+            </button>
           </div>
           <br>
         </form>
@@ -97,3 +102,4 @@
       </div>
     </body>
 </html>
+

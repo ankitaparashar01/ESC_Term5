@@ -42,16 +42,22 @@ def ascenda(request):
 
 #---------------------FOR FORM SUBMISSION RESULTS---------------------
 def submitmyform(request):
-    mydictionary = {
-        "var1" : request.POST['destinationorhotel'],
-        "var2" : request.POST['calendarCheckin'],
-        "var3" : request.POST['calendarCheckout'],
-        "var4" : request.POST['roomsnumber'],
-        "var5" : request.POST['adultsnumber'],
-        "var6" : request.POST['childrennumber'],
-        "method" : request.method
+    
+    formSearchInputsDict = {
+        "destinationorhotel" : request.GET['destId'],
+        "checkin" : request.GET['checkin'],
+        "checkout" : request.GET['checkout'],
+        "roomsnumber" : request.GET['roomsnumber'],
+        "adultsnumber" : request.GET['adultsnumber'],
+        "childrennumber" : request.GET['childrennumber'],
+        # "method" : request.method
     }
-    return JsonResponse(mydictionary)
+
+    context = {
+        'formSearchInputsDict':formSearchInputsDict,
+    }
+
+    return render(request, 'submitmyformtest.html', context)
     
 
 
@@ -66,44 +72,12 @@ def submitmyform(request):
 #         return render(request, 'myform2.html', context=mydictionary)
         
 
-
-
-#---------------------FOR HOTEL LISTING SEARCH RESULTS---------------------
-def all_listings(request):
-    hotels_list = ListingItem.objects.all()
-    
-    # set up pagination below:
-    p = Paginator(ListingItem.objects.all(), 3)
-    page = request.GET.get('page')
-    listings = p.get_page(page)
-
-    context = {'hotels_list': hotels_list,
-    'listings': listings}
-
-    return render(request, 'hotellist.html', context)
-
-
-#---------------------FOR ROOM TYPE PAGE---------------------
-def roomListPage(request, hotelname):
-    # if(ListingItem.objects.filter(name=hotelname)): #url matches the hotelname
-    #     hotelname = ListingItem.objects.all()
-    #     context = {'hotelname' : hotelname}
-    # else:
-    #     # messages.error(request, "No such product found")
-    #     return redirect('listings')
-    hotelnamevar = ListingItem.objects.get(name=hotelname)
-    context = {'hotelnamevar' : hotelnamevar}
-
-    return render(request, 'roomlist.html', context)
-
-
-
 #-------------------------------------FOR CONFIRMATION AND PAYMENT-------------------------------------
-def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
-    # hardcoded values:
-    checkin = "2022-08-20"
-    checkout = "2022-08-22"
-    guests = "2"
+def confirmation(request, destId, hotelName, hotelId, roomKey, roomType, checkin, checkout, guests):
+    # # hardcoded values:
+    # checkin = "2022-08-20"
+    # checkout = "2022-08-22"
+    # guests = "2"
 
     # Using API 2 to obtain rooms info:
     strAPI2 = getSingleHotelRoomTypes(hotelId, destId, checkin, checkout, guests)
@@ -168,13 +142,29 @@ def featureOne(request):
 
 #-------------------------------------FOR HOTEL CARDS-------------------------------------
 #hotel search based on chosesn location
-def hotelCards(request, destId):
-    destId = str(destId)
+def hotelCards(request, destId=None):
+    
+    formSearchInputsDict = {
+        "destinationorhotel" : request.GET['destId'],
+        "checkin" : request.GET['checkin'],
+        "checkout" : request.GET['checkout'],
+        "roomsnumber" : request.GET['roomsnumber'],
+        "adultsnumber" : request.GET['adultsnumber'],
+        "childrennumber" : request.GET['childrennumber'],
+    }
+    
+    
+    destId = formSearchInputsDict["destinationorhotel"]
+    guests = str(int(formSearchInputsDict["adultsnumber"]) + int(formSearchInputsDict["childrennumber"]))
+    checkin = formSearchInputsDict["checkin"]
+    checkout = formSearchInputsDict["checkout"]
+    rooms = formSearchInputsDict["roomsnumber"]
+
     
     # temporarily hardcoded:
-    checkin = "2022-08-20"
-    checkout = "2022-08-22"
-    guests = "2"
+    # checkin = "2022-08-20"
+    # checkout = "2022-08-22"
+    # guests = "2"
 
     #generate hotel cards using API 1: 
     strAPI1 = getAllHotelsPricesWDest(destId, checkin, checkout, guests)
@@ -200,6 +190,11 @@ def hotelCards(request, destId):
     'api1Response': api1Response,
     'api1Obj': api1Obj,
     'destId': destId,
+    'guests':guests,
+    'checkin':checkin,
+    'checkout':checkout,
+    'rooms':rooms,
+    'formSearchInputsDict':formSearchInputsDict,
     }
 
     return render(request, template_name, context)
@@ -207,11 +202,11 @@ def hotelCards(request, destId):
 
 
 #-------------------------------------FOR ROOM CARDS -------------------------------------
-def RoomList(request, destId, hotelName, hotelId):
-    # hardcoded values:
-    checkin = "2022-08-20"
-    checkout = "2022-08-22"
-    guests = "2"
+def RoomList(request, destId, hotelName, hotelId, checkin, checkout, guests):
+    # # hardcoded values:
+    # checkin = "2022-08-20"
+    # checkout = "2022-08-22"
+    # guests = "2"
     
     # Using API 2 to generate room cards:
     strAPI2 = getSingleHotelRoomTypes(hotelId, destId, checkin, checkout, guests)
@@ -237,6 +232,10 @@ def RoomList(request, destId, hotelName, hotelId):
     'api2Obj':api2Obj,
     'api3Obj': api3Obj,
     'roomNamesList':roomNamesList,
+    'checkin':checkin,
+    'checkout':checkout,
+    'guests':guests,
+
     # 'totalRooms':totalRooms,
     }
 
