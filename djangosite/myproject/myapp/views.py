@@ -13,6 +13,10 @@ from .helper import *
 import json
 from operator import itemgetter
 import ast
+import pymongo
+from django.conf import settings
+from .checkvalue import *
+from .en_decryption import *
 
 
 
@@ -131,7 +135,88 @@ def confirmation(request, destId, hotelName, hotelId, roomKey, roomType):
 
 #-------------------------------------FOR TRANSACTION COMPLETE-------------------------------------
 def transactionComplete(request):
-    return render(request, 'transaction-complete.html')
+    msg = reference_number.decode('utf-8')
+    return render(request, 'transaction-complete.html',{"msg": msg})
+
+def ajax(request):
+    global reference_number
+    to_check = {}
+    empty_check = True
+    for i in request.GET.items():
+        to_check[i[0]] = i[1]
+        if check_not_empty(i[1]) == False:
+            empty_check = False
+    phonenumber = to_check['CountryCode'] + to_check['PhoneNumber']
+    print(to_check)
+    #check validity
+    if (check_title(to_check['Title']) 
+        and check_cvv(to_check["CVV"]) 
+        and check_expire(to_check['ExpireYear'], to_check['ExpireMonth']) 
+        and check_phonenumber(phonenumber)
+        and check_cardnumber(to_check['CardNumber'])
+        and empty_check):
+        #generating key
+        
+        reference_number = generating_key()
+        #encrypt data
+        for k, v in to_check.items():
+            if k != 'CardNumber':
+                to_check[k] = encryption(v, reference_number)
+            else:
+                to_check['CardNumber'] = mask(v)
+        #push to database
+        my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+        dbname = my_client['ESC']
+        collection_name = dbname[reference_number.decode('utf-8')]
+        collection_name.insert_one(to_check)
+        
+        return HttpResponse("success")
+
+    else:
+        return HttpResponse("failure")
+
+    #每个人都是一个collection，对应的reference number，需要的时候直接去取对应的collection'
+
+def ajax2(request):
+    global ref
+    ref = request.GET['ID']
+    my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+    dbname = my_client['ESC']
+    collection_name = dbname[ref]
+    if len(list(collection_name.find({}))) == 0:
+        return HttpResponse("fail")
+    else:
+        return HttpResponse("success")
+
+#---------------------CHECK ORDER-----------------------      
+def check(request):
+    return render(request, "checkorder.html")
+
+
+def display(request):
+    #fetch the data
+    key = bytes(ref,'utf-8')
+
+    my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
+    dbname = my_client['ESC']
+    collection_name = dbname[ref]
+    order_details = list(collection_name.find({}))
+    doc = order_details[0]
+    doc.pop("_id")
+    for k,v in doc.items():
+        if k != 'CardNumber':
+            doc[k] = decryption(v,key)
+
+
+    #decrypt
+    #for k, v in doc.items():
+     #   if k != 'CardNumber':
+      #      doc[k] = decryption(v, key)
+    #
+    #render in the html file 
+    return render(request, 'display.html',doc)
+    #取回数据 generate form
+
 
 
 #---------------------HOTEL SEARCH FILTERING-----------------------
