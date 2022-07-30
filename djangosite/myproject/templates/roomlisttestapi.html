@@ -1,5 +1,5 @@
 {% load static %} 
-{%load app_tags %}
+{% load app_tags %}
 {% include "navbar.html" %}
 <!DOCTYPE html>
 <html lang="en">
@@ -43,11 +43,11 @@
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide">
+            <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide" style="height: 500px; width: auto; object-fit: cover;">
           </div>
           {% for imageURL in api3Obj.id|list_image_details_api3 %}
           <div class="carousel-item">
-            <img class="d-block w-100" src="{{imageURL}}" alt="Second slide">
+            <img class="d-block w-100" src="{{imageURL}}" alt="Second slide" style="height: 500px; width: auto; object-fit: contain;">
           </div>
           {% endfor %}
         </div>
@@ -107,7 +107,7 @@
       </div>
       {% for roomName in roomNamesList %}
       <div class="roomBox">
-        <h2 style="margin-left:20px; align-items:center; padding:10px;">{{roomName}}</h2>
+        <h2 style="margin-left:20px; align-items:center; padding:11px;">{{roomName}}</h2>
       </div>
     </div>
     
@@ -122,11 +122,13 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide" style="width: auto; height: 50%; object-fit: contain;">
+                      <!-- <img class="d-block w-100" src="{{roomListing.images.0.values}}" alt="First slide" style="width: auto; height: 100%; object-fit: contain;"> -->
+                      <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide" style="width: auto; height: 100%; object-fit: cover;">
                     </div>
                     {% for image in roomListing.images %}
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="{{image}}" alt="Second slide" style="width: auto; height: 50%; object-fit: contain;">
+                      <!-- <img class="d-block w-100" src="{roomListing.images[1]}" alt="Second slide" style="width: auto; height: 50%; object-fit: contain;"> -->
+                      <img class="d-block w-100" src="{{image}}" alt="Second slide" style="width: auto; height: 50%; object-fit: cover;">
                     </div>
                     {% endfor %}
                   </div>
@@ -218,10 +220,11 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 40px;
       border-radius: 5px;
       background-color: #23295B;
       color: white;
-      padding:8px;
+      /* line-height: 60px; */
       /* padding: 12px; */
     }
 
@@ -242,11 +245,13 @@
       /* overflow: hidden; */
       padding: 5px;
       color: black;
-      width: 770px;
-      height: 250px;
+      width: 1200px;
+      height: auto;
       display: block;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 16px;
+      margin-top: 10px;
       border-radius: 5px;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
     }
@@ -257,23 +262,17 @@
       gap: 10px;
     }
 
-    /* .room-list img {
-      height: 230px;
-      padding: 5px;
-      margin-left: 10px;
-      margin-bottom: 10px; 
-      width: auto;
-    } */
-
     .room-right {
       position: relative;
 
     }
 
-    .room-image{
-      width: auto;
+    .room-list img {
       height: 250px;
-      align-items: center;
+      padding: 15px;
+      margin-left: 5px;
+      margin-bottom: 5px; 
+      width: auto;
     }
     
     .grid {
