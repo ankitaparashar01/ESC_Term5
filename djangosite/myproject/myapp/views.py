@@ -238,7 +238,7 @@ def featureOne(request):
 def hotelCards(request, destId=None):
     
     formSearchInputsDict = {
-        "destinationorhotel" : request.GET['destId'],
+        "destinationorhotel" : request.GET['destinationorhotel'],
         "checkin" : request.GET['checkin'],
         "checkout" : request.GET['checkout'],
         "roomsnumber" : request.GET['roomsnumber'],
@@ -247,7 +247,9 @@ def hotelCards(request, destId=None):
     }
     
     
-    destId = formSearchInputsDict["destinationorhotel"]
+    destinationOrHotel = formSearchInputsDict["destinationorhotel"]
+    # print(destinationOrHotel)
+    destId = str(convertTermToDestId(destinationOrHotel))
     guests = str(int(formSearchInputsDict["adultsnumber"]) + int(formSearchInputsDict["childrennumber"]))
     checkin = formSearchInputsDict["checkin"]
     checkout = formSearchInputsDict["checkout"]

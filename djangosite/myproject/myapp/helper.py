@@ -1,3 +1,6 @@
+from .models import DestinationCat
+
+
 # # Default values
 # checkin = "2022-08-20"
 # checkout = "2022-08-22"
@@ -53,3 +56,15 @@ def getSingleHotelCardWHotelID(destId):
     getSingleHotelCardWHotelIDJSON = baseJSONStr + destId
 
     return str(getSingleHotelCardWHotelIDJSON)
+
+
+# -------------------------- Convert dest.json 'term' into destId --------------------------
+def convertTermToDestId(destinationOrHotel):
+    # destId=Singapore+Science+Centre%2C+Singapore
+    searchInputObj = DestinationCat.objects.get(term=destinationOrHotel)
+    # print(searchInputObj)
+    destId = searchInputObj.uid
+
+    #  hotelnamevar = ListingItem.objects.get(name=hotelname)
+
+    return destId
