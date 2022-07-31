@@ -39,9 +39,17 @@ def ascenda(request):
 
     #     return super().form_valid(form)
 
-    
+    if 'term' in request.GET:
+        qs = DestinationCat.objects.filter(term__istartswith=request.GET.get('term'))
+        destinationOrHotel = list()
+        for product in qs:
+            destinationOrHotel.append(product.term)
+        # titles = [product.title for product in qs]
+        return JsonResponse(destinationOrHotel, safe=False)
+
     context = {
     }
+
     return render(request, 'index.html', context)
 
 #---------------------FOR FORM SUBMISSION RESULTS---------------------
