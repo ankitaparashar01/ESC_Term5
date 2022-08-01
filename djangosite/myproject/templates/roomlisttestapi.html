@@ -172,7 +172,8 @@
     </div>
     
     <div style="display: flex; justify-content: center;">
-      <div id="map" style="width:50%; height: 500px; border-radius: 10px; border: 1px solid orange"></div>
+      <div id="map" style="width:50%; height: 500px; border-radius: 10px; border: 1px solid orange">
+      </div>
     </div>
 
   <br/></br>
@@ -183,16 +184,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
-    <script>
+    <script type="text/javascript">
       mapboxgl.accessToken = 'pk.eyJ1Ijoic2h5YXduIiwiYSI6ImNsNXZ6cnpvZTBmMjAzYmwzZ3IyNWdhMXIifQ.7u9BRFY4SU5hERtjuNyJeg';
+      var lng = "{{api3Obj.longitude}}";
+      var lat = "{{api3Obj.latitude}}";
       var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [13.01805, 43.84352], // [lng, lat]
+        center: [lng, lat], // [lng, lat]
         zoom: 17,
       });
       var marker = new mapboxgl.Marker()
-        .setLngLat([13.01805, 43.84352])
+        .setLngLat([lng, lat])
         .addTo(map);
     </script>
 </body>
