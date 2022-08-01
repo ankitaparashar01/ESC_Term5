@@ -91,12 +91,15 @@
       flatpickr("input[type=datetime-local]", {});
     </script>
 
-    <script>
+    <script type="text/javascript">
       //for loading screen
       var myVar;
       function loadFunction() {
-        myVar = setTimeout(showPage, 2000);
+        var apiLoaded = "{{ api1Obj.completed }}"
+        while (apiLoaded == "false") {
+          myVar = setTimeout(showPage, 500);
       }
+    }
 
       function showPage() {
         document.getElementById("loader").style.display = "none";
