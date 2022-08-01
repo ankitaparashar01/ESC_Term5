@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Payment Portal</title>
+        <link rel="stylesheet" href="./style_copy.css"/>
+        <script src="./jquery.js"></script>
+        <title>Payment Portal</title>
+    </head>
+    <body>
+            <!-- Navbar -->
+    <div class="navbar">
+        <div class="navitem container flex">
+            <h1>Payment Portal</h1>
+        </div>
+    </div>
+
+    <div class="paymentBox">
+        <div class="row">
+            <div class="wrapper">
+                <div class="paymentParent">
+                    <p>Name on Card</p>
+                    <div class="enterCreditCardName creditCardName">
+                        <input id="name" text="text" placeholder="John Doe">
+                    </div>
+                </div>
+                <div class="paymentParent">
+                    <p>Card Number<p>
+                        <div class="enterCreditCardNo creditCardNo">
+                            <input id = "cardno" type="text" placeholder="Card number" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paymentParent">
+                    <p>CCV</p>
+                    <div class="enterCCV ccv">
+                        <input id = "ccv" type="text" placeholder="CCV"/>
+                    </div>
+                </div>
+                
+                <div class="paymentParent">
+                    <p>Month</p>
+                    <div class="enterExpiryDateMonth expiryMonth">
+                        <input id = "month" type="text" placeholder="Month">
+                    </div>
+                    <p>Year</p>
+                    <div class="enterExpiryDateYear expiryYear">
+                        <input id ="year" type="text" placeholder="Year">
+                    </div>
+                </div>
+                <button class="submitCard" type="button", id="submit">Submit</button>
+
+
+                
+            </div>
+        </div>
+        
+        </div>
+
+    </body>
+    <script>
+        $(function(){
+            $("#submit").click(function(){
+                var ccv = $("#ccv").val();
+                var name =$("#name").val();
+                var cardNO = $("#cardno").val();
+                var year = $("#year").val();
+                var month = $("#month").val();
+                encodedname = window.btoa(name);
+                encodedNO = window.btoa(cardNO);
+                encodedccv = window.btoa(ccv);
+                encodedmonth = window.btoa(month);
+                encodedyear = window.btoa(year);
+                var data_to_send = {
+                    Uername:encodedname,
+                    Card_Number: encodedNO,
+                    CCV: encodedccv,
+                    Expired_Year: encodedyear,
+                    Expired_Month: encodedmonth
+                }
+                console.log(data_to_send);
+
+                $.ajax({
+                    url:"http://localhost:3000/payment",
+                    type: "GET",
+                    async: true,
+                    data:data_to_send,
+                    //dataType: "json",
+                    contentType:"application/x-www-form-urlencoded",
+                    success: function(res){
+                        console.log(res);
+                        if(res.msg =="success"){
+                            alert("payment success")
+                            window.location.href = "finish.html";
+                        }
+                    },
+                    error: function(xhr,status,error){
+                        console.log((xhr));
+                        console.log(status);
+                        console.log(error);
+                    },
+                    complete: function(){
+                        console.log("finished");
+                    }
+                })
+
+            })
+
+        })
+
+    </script>
+</html>
