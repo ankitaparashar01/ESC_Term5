@@ -1,0 +1,419 @@
+{% load static %} {% include "navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Payment Portal</title>
+  </head>
+  <body>
+    <script src="{% static 'js/jquery.js' %}" ></script>
+    <!-- Confirmation-->
+    <div class="paymentBox">
+      <h1><b>Reservation Confirmation</b></h1>
+      <br />
+      <p id="hotelname"><b>Hotel Name: </b>{{ hotelName }}</p>
+      <p id="room"><b>Room 1:</b> (HC) Deluxe Room, 1 King Bed, City View</p>
+      <p id="roomkey"><b>Room KEY:</b> {{ roomKey }}</p>
+      <p id="guest"><b>Guests:</b> (HC) 5 Adults, 2 Children</p>
+      <p id="checkin"><b>Check In:</b> {{ checkin }}</p>
+      <p id="checkout"><b>Check Out:</b> {{ checkout }}</p>
+      <p id="roomrate"><b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}</p>
+      <p id="tax"><b>Tax:</b> S$(HC)106.5</p>
+      <p id="total"><b>Total:</b> S$(HC)2236.2</p>
+    </div>
+
+    <!-- Primary Guest -->
+    <div class="paymentBox">
+      <form>
+        <h1><b>Primary Guest</b></h1>
+        <div class="form-row">
+          <div class="col-2">
+            <label for="inputTitle">Title</label>
+            <select id="inputTitle" class="form-control">
+              <option selected>Choose...</option>
+              <option value="Mr. ">Mr.</option>
+              <option value="Ms. ">Ms.</option>
+              <option value="Mrs. ">Mrs.</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="inputFirstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputFirstName"
+              placeholder="John"
+            />
+          </div>
+          <div class="col">
+            <label for="inputLastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputLastName"
+              placeholder="Doe"
+            />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div class="form-row">
+        <div class="col-3">
+          <label for="inputCountryCode">Country Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputCountryCode"
+            placeholder="+65"
+          />
+        </div>
+        <div class="col">
+          <label for="inputPhoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPhoneNumber"
+            placeholder="12345678"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="inputMessage">Message to Hotel (optional)</label>
+        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Payment Information -->
+    <div class="paymentBox">
+      <form>
+        <h1><b>Payment Information</b></h1>
+        <br />
+        <div class="form-row" style="padding: 10px">
+          <div class="col-5">
+            <label for="inputCardNumber">Card Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputCardNumber"
+              placeholder="12345678"
+            />
+          </div>
+          <div class="col">
+            <label for="inputNameOnCard">Name On Card</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputNameOnCard"
+              placeholder="John Doe"
+            />
+          </div>
+        </div>
+        <br />
+        <div class="form-row">
+          <div class="col-2">
+            <label for="inputMonthExpiryDate">Expiry Month</label>
+            <select id="inputMonthExpiryMonth" class="form-control">
+              <option selected>Month</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <label for="inputYearExpiryDate">Expiry Year</label>
+            <select id="inputYearExpiryYear" class="form-control">
+              <option selected>Year</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+              <option value="2031">2031</option>
+              <option value="2032">2032</option>
+              <option value="2033">2033</option>
+            </select>
+          </div>
+          <div class="col-3" style="margin-left: 87px">
+            <label for="inputCVV">CVV / CVC</label>
+            <input type="text" class="form-control" id="inputCVV" />
+          </div>
+          <div class="col">
+            <img
+              src="{% static 'images/cvv.png' %}"
+              style="height: 80px; width: auto; margin-left: 50px"
+            />
+          </div>
+          <br />
+        </div>
+      </form>
+    </div>
+
+    <div class="paymentCenter">
+      <button  type="button" class = "btn btn-primary" id="submit" onclick="clickMe();">Confirm Booking</button>
+    </div>
+    <script type="text/javascript">
+      function clickMe(){
+        var hotelname = $("#hotelname").text();
+        var room = $("#room").text();
+        var roomkey = $("#roomkey").text();
+        var guest = $("#guest").text();
+        var checkin = $("#checkin").text();
+        var checkout = $("#checkout").text();
+        var roomrate = $("#roomrate").text();
+        var tax = $("#tax").text();
+        var total = $("#total").text();
+        var cardnumber = $("#inputCardNumber").val();
+        var title = $("#inputTitle").val();
+        var firstname = $("#inputFirstName").val();
+        var lastname = $("#inputLastName").val();
+        var countrycode = $("#inputCountryCode").val();
+        var phonenumber = $("#inputPhoneNumber").val();
+        var message = $("#inputMessage").val();
+        var name_on_card = $("#inputNameOnCard").val();
+        var expire_month = $("#inputMonthExpiryMonth").val();
+        var expire_year = $("#inputYearExpiryYear").val();
+        var cvv = $("#inputCVV").val();
+        
+
+        $.ajax({
+          url:'/ajax/',
+          type:"get",
+          data: {
+            HotelName: hotelname,
+            Room: room,
+            RoomKey: roomkey,
+            Guest: guest,
+            CheckIn: checkin,
+            CheckOut: checkout,
+            RoomRate: roomrate,
+            Tax: tax,
+            Total: total,
+            Title: title,
+            FirstName: firstname,
+            LastName: lastname,
+            CountryCode: countrycode,
+            PhoneNumber: phonenumber, 
+            Message: message,
+            CardNumber : cardnumber,
+            NameOnCard: name_on_card,
+            ExpireYear: expire_year,
+            ExpireMonth: expire_month,
+            CVV: cvv
+
+          },
+          success: function(res){
+            if(res == "success"){
+              alert("payment success");
+              window.location.href = "http://127.0.0.1:8000/transaction-complete/";
+            }
+            else if(res == "failure"){{
+                alert("invalid input");
+                window.location.reload(false);
+              }
+
+            }
+          }
+
+        })
+      }
+      
+
+    </script>
+
+    {% include "footer.html" %}
+  </body>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+    :root {
+      --primary-color: #e3f6fd;
+      --secondary-color: #064266;
+      --logo-color: #20285d;
+      --dark-color: #002240;
+      --light-color: #f4f4f4;
+      --grey: #efefef;
+      --orange: #f58216;
+      --error: #ff0000;
+    }
+
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      /* font-family: "Lato", sans-serif; */
+      font-family: "Poppins", sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    h1,
+    h2 {
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 10px 0;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .submit-payment {
+      background-color: var(--orange);
+      margin: 0;
+      width: 400px;
+      height: 40px;
+      position: absolute;
+      left: 50%;
+      padding: 7px;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+      font-weight: 600;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* .showcase::before,
+    .showcase::after {
+    content: "";
+    position: absolute;
+    height: 100px;
+    bottom: -70px;
+    right: 0;
+    left: 0;
+    background: #fff;
+    transform: skewY(-3deg);
+    -webkit-transform: skewY(-3deg);
+    -moz-transform: skewY(-3deg);
+    -ms-transform: skewY(-3deg);
+    } */
+
+    /* Tablets & under */
+    @media (max-width: 768px) {
+      .grid,
+      .showcase .grid,
+      .stats .grid,
+      .cli .grid,
+      .cloud .grid,
+      .features-main .grid,
+      .docs-main .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+      }
+
+      .showcase {
+        height: auto;
+      }
+
+      .showcase-text {
+        text-align: center;
+        margin-top: 40px;
+        animation: slideInFromTop 1s ease-in;
+      }
+
+      .showcase-form {
+        justify-self: center;
+        margin: auto;
+        animation: slideInFromBottom 1s ease-in;
+      }
+
+      .cli .grid > *:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .features-head,
+      .features-sub-head,
+      .docs-head {
+        text-align: center;
+      }
+
+      .features-head img,
+      .features-sub-head img,
+      .docs-head img {
+        justify-self: center;
+      }
+
+      .features-main .grid > *:first-child,
+      .features-main .grid > *:nth-child(2) {
+        grid-column: 1;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 500px) {
+      .navbar {
+        height: 110px;
+      }
+
+      .navbar .flex {
+        flex-direction: column;
+      }
+
+      .navbar ul {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    /* payment portal */
+    .paymentBox {
+      position: relative;
+      top: 50px;
+      height: auto;
+      width: auto;
+      padding: 30px;
+      border-radius: 6px;
+      background-color: #e9ecf2;
+      margin-left: 200px;
+      margin-right: 200px;
+      justify-content: center;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .paymentCenter {
+      justify-content: center;
+      margin: 100px;
+      margin-bottom: 200px;
+      /*border-radius: 10px;*/
+    }
+  </style>
+</html>
