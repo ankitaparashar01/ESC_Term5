@@ -26,7 +26,8 @@
   </head>
 
 
-  <body>
+  <body onload="loadFunction()" style="margin:0;">
+    <div id="loader"></div>
     <div class="container-fluid" style="width:87%;">
       <div class="row no-gutters">
 
@@ -91,6 +92,20 @@
         minDate: "today",
       };
       flatpickr("input[type=datetime-local]", {});
+    </script>
+
+    <script>
+      //for loading screen
+      var myVar;
+      function loadFunction() {
+        myVar = setTimeout(showPage, 2000);
+      }
+
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("pageDiv").style.display = "block";
+      }
+
     </script>
 
     {% include "footer.html" %}
