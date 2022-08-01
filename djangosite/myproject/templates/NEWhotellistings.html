@@ -17,6 +17,7 @@
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
@@ -31,12 +32,10 @@
       <div class="row no-gutters">
 
 
-        
         <!-- mini left search card  -->
         <div class="col-4">
           {% include "myform.html" %}
         </div>
-
 
 
         <!-- Hotel list grid -->
@@ -56,28 +55,10 @@
 
       <br/></br>
       
-      <!-- pagination below: -->
-      <br></br>
 
-      <!-- {% if listings.has_previous %}
-        <a href="?page=1">&laquo First</a>
-        <a href="?page={{ listings.previous_page_number }}">Previous</a>
-      {% endif %}
 
-      Page {{ listings.number }} of {{ listings.paginator.num_pages }}
 
-      {% if listings.has_next %}
-        <a href="?page={{ listings.next_page_number }}">Next</a>
-        <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
-
-      {% endif %}  -->
-    </div>
-    <br/></br>
-
-    
-
-    <script src="js/hotelSuggestions.js"></script>
-    <script src="js/script.js"></script>
+      
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>

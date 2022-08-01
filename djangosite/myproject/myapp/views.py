@@ -18,6 +18,8 @@ from django.conf import settings
 from .checkvalue import *
 from .en_decryption import *
 
+###
+from django.db import models
 
 
 #---------------------FOR LANDING PAGE FORM---------------------
@@ -226,7 +228,7 @@ def featureOne(request):
     return render(request, 'index.html')
 
 #-------------------------------------FOR HOTEL CARDS-------------------------------------
-#hotel search based on chosesn location
+#hotel search based on chosen location
 def hotelCards(request, destId=None):
     
     formSearchInputsDict = {
@@ -264,6 +266,7 @@ def hotelCards(request, destId=None):
     p = Paginator(api1Obj.hotels, 7) #specify number of cards per page here
     page_number = request.GET.get('page')
     page_obj = p.get_page(page_number)
+    # template_name= "partials/hotelcardelement.html"
 
     if request.htmx:
         template_name = "partials/hotelcardelement.html"
@@ -511,4 +514,9 @@ class HotelCard:
         self.lowest_price = lowest_price
         self.hotelName = hotelName
 
+    paginate_by= 1
+################
+
+# class Post(models.Model):
+#     title= 
 
