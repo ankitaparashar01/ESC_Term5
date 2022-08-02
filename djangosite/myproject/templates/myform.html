@@ -40,13 +40,13 @@
               <div class="col">
                 <div class="form-group">
                   <label for="checkin"><b>CHECK IN</b></label>
-                  <input type="date" class="form-control" id="checkin" name="checkin" required>
+                  <input type="text" class="form-control" id="checkin" name="checkin" required>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="checkout"><b>CHECK OUT</b></label>
-                  <input type="date" class="form-control" id="checkout" name="checkout" required>
+                  <input type="text" class="form-control" id="checkout" name="checkout" required>
                 </div>
               </div>
             </div>
@@ -102,7 +102,45 @@
         </form>
         
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" ></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+  <script>
+    $(document).ready(function(){
+      $("#checkin").datepicker({
+        minDate:0,
+        numberOfMonths:1,
+        dateFormat:'DD,d MM,yy',
+        onSelect:function(selectdate){
+          var dt = new Date(selectdate);
+          dt.setDate(dt.getDate()+1)
+          $("#checkout").datepicker("option","minDate",dt);
+    }
+      })
+    });
+  </script>
+
+<script>
+  $(document).ready(function(){
+    $("#checkout").datepicker({
+      minDate:0,
+      numberOfMonths:1,
+      dateFormat:'DD, d MM, yy',
+      onSelect:function(selectdate){
+        var dt = new Date(selectdate);
+        dt.setDate(dt.getDate()-1)
+        $("#checkin").datepicker("option","maxDate",dt);
+      }
+    })
+  });
+</script>
+ 
+
 <script>
   $( function() {
     // var availableTags = [
@@ -125,7 +163,6 @@
     });
   } );
   </script>
-
         </div>
       </div>
     </body>
