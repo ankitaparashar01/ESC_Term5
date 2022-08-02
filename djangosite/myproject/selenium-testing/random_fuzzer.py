@@ -11,7 +11,7 @@ import string
 import random
 
 letter_list= string.ascii_letters
-print(len(letter_list))
+# print(len(letter_list))
 char_list= string.ascii_letters + string.digits + string.punctuation # random string of characters
 
 def testing_input():
@@ -47,6 +47,6 @@ def generate_random_country():
 
 
 # main
-print(generate_random())
-print(generate_random_date1())
-print(generate_random_country())
+# print(generate_random())
+# print(generate_random_date1())
+# print(generate_random_country())

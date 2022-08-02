@@ -23,14 +23,6 @@ def testing_input():
     print('Driver name:',driver.name)
     print('Driver URL:',driver.current_url)
 
-
-# def generate_random():
-#     res= ""
-#     iter= random.randint(3,30)
-#     for x in range(iter):
-#         res+= char_list[random.randint(0, 93)]
-#     return res
-
 def generate_valid_date():
     rand_year= random.randint(2000, 2050)
     rand_month= random.randint(1, 12)
@@ -41,9 +33,16 @@ def generate_valid_date():
 def generate_valid_country():
     return country_list[random.randint(0, 247)]
 
+def generate_valid_rooms():
+    return random.randint(1, 5)
 
+def generate_valid_adults():
+    return random.randint(1, 5)
+
+def generate_valid_children():
+    return random.randint(0, 5)
 
 # main
 # print(generate_random())
-print(generate_valid_date())
-print(generate_valid_country())
+# print(generate_valid_date())
+# print(generate_valid_country())
