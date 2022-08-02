@@ -124,6 +124,23 @@
       })
     });
   </script>
+  <script>
+    $(function(){
+      $('#checkin').keypress(function(event){
+        event.preventDefault();
+        return false;
+      })
+    })
+  </script>
+
+<script>
+  $(function(){
+    $('#checkout').keypress(function(event){
+      event.preventDefault();
+      return false;
+    })
+  })
+</script>
 
 <script>
   $(document).ready(function(){
