@@ -24,7 +24,13 @@
     <title>Ascenda | Room Listings</title>
   </head>
 
-  <body>
+  <body onload="loadFunction()" style = "margin:0;">
+    <div id="loader"></div>
+    <!-- <div id="spinner-box" class="text-center mt-3">
+      <div class="spinner-border text-warning" role="status"></div>
+    </div>
+    <div id="data-box" class="text-center mt-3"></div> -->
+
     <br />
     <div class="box">
       <!-- image of hotel -->
@@ -198,6 +204,18 @@
         .setLngLat([lng, lat])
         .addTo(map);
     </script>
+<script>
+  //for loading screen
+  var myVar;
+  function loadFunction() {
+    myVar = setTimeout(showPage, 2000);
+  }
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+  }
+
+</script>    
 </body>
 
 
@@ -289,6 +307,20 @@
       margin-left: 5px;
       margin-bottom: 5px; 
       width: auto;
+    }
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #f58216;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
     }
     
     .grid {
