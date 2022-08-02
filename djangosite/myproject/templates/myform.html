@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <link
+      rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="card">
+        <div class="card-body">
+          <!-- "/test-api/" for action in other code -->
+          <form method="get" action="{% url 'hotel-cards' %}">
+            
+            <div class="wrapper">
+              <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
+              <div class="search-input" >
+                <input id="tags" type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
+                <div class="autocom-box"></div>
+                <div class="search-icon" style="background-color: #E3E3E3;">
+                  <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="checkin"><b>CHECK IN</b></label>
+                  <input type="text" class="form-control" id="checkin" name="checkin" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="checkout"><b>CHECK OUT</b></label>
+                  <input type="text" class="form-control" id="checkout" name="checkout" required>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>ROOMS</b></label>
+                  <select class="form-control" id="roomsnumber" name="roomsnumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>ADULTS</b></label>
+                  <select class="form-control" id="adultsnumber" name="adultsnumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1"><b>CHILDREN</b></label>
+                  <select class="form-control" id="childrennumber" name="childrennumber" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          <br>
+          <div class = "form-group">
+            
+            <button type="submit" class="btn btn-warning">
+              
+                SEARCH HOTELS
+              
+            </button>
+          </div>
+          <br>
+        </form>
+        
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" ></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+  <script>
+    $(document).ready(function(){
+      $("#checkin").datepicker({
+        minDate:0,
+        numberOfMonths:1,
+        dateFormat:'DD,d MM,yy',
+        onSelect:function(selectdate){
+          var dt = new Date(selectdate);
+          dt.setDate(dt.getDate()+1)
+          $("#checkout").datepicker("option","minDate",dt);
+    }
+      })
+    });
+  </script>
+
+<script>
+  $(document).ready(function(){
+    $("#checkout").datepicker({
+      minDate:0,
+      numberOfMonths:1,
+      dateFormat:'DD, d MM, yy',
+      onSelect:function(selectdate){
+        var dt = new Date(selectdate);
+        dt.setDate(dt.getDate()-1)
+        $("#checkin").datepicker("option","maxDate",dt);
+      }
+    })
+  });
+</script>
+ 
+
+<script>
+  $( function() {
+    // var availableTags = [
+    //   "ActionScript",
+    //   "AppleScript",
+    //   "Asp",
+    //   "C",
+    //   "C++",
+    //   "Clojure",
+    //   "COBOL",
+    //   "PHP",
+    //   "Python",
+    //   "Ruby",
+    //   "Scala",
+    // ];
+
+    $( "#tags" ).autocomplete({
+      source: "{% url 'ascenda' %}",
+      minLength: 2
+    });
+  } );
+  </script>
+        </div>
+      </div>
+    </body>
+</html>
+

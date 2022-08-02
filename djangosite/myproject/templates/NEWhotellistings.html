@@ -1,4 +1,5 @@
 {% load static %} 
+{% load app_tags %}
 {% include "navbar.html" %}
 
 <!DOCTYPE html>
@@ -20,179 +21,43 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <title>Ascenda | Hotel Booking</title>
   </head>
 
 
-  <body>
-    <div class="container-fluid" style="width:87%;">
-      <div class="row no-gutters">
+  <body onload="loadFunction()" style="margin:0;">
+    <div id="loader"></div>
+    <div class="container-fluid" style="width:87%;" id="pageDiv" style="display:none;" class="animate-bottom"></div>>
 
+      <div class="row no-gutters">
+  
         <!-- mini left search card  -->
         <div class="col-4">
-          <div class="card">
-            <div class="card-body">
-              <form>
-                <div class="wrapper">
-                  <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
-                  <div class="search-input" id="searchInput">
-                    <input type="text" name="destinationInput" placeholder="Destination or Hotel" />
-                    <div class="autocom-box"></div>
-                    <div class="search-icon" style="background-color: #e3e3e3">
-                      <img
-                        src="../static/images/search-icon.png"
-                        style="
-                          width: 50px;
-                          justify-content: center;
-                          padding: 12px;
-                        "
-                      />
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="calendarCheckin"><b>CHECK IN</b></label>
-                      <input
-                        name="checkinInput"
-                        type="date"
-                        class="form-control"
-                        id="calendarCheckin"
-                      />
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="calendarCheckout"><b>CHECK OUT</b></label>
-                      <input
-                        name="checkoutInput"
-                        type="date"
-                        class="form-control"
-                        id="calendarCheckout"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div class="row">
-                  <div class="col-4">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1"
-                        ><b>ROOMS</b></label
-                      >
-                      <select
-                        name="roomInput"
-                        class="form-control"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1"
-                        ><b>ADULTS</b></label
-                      >
-                      <select
-                        name="adultInput"
-                        class="form-control"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1"
-                        ><b>CHILDREN</b></label
-                      >
-                      <select
-                        name="childrenInput"
-                        class="form-control"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <a
-                  href="{% url 'list-hotels' %}"
-                  class="btn btn-primary"
-                  name="submitButton"
-                  style="
-                    width: 100%;
-                    background-color: #f58216;
-                    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-                    border-color: #f58216;
-                  "
-                  >SEARCH HOTELS</a
-                >
-                <br />
-              </form>
-            </div>
-          </div>
+          {% include "myform.html" %}
         </div>
 
-        
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
         <div class="col">
-
-          {% for listing in listings %}
-          <div class="hotel-list">
-            <div class="grid">
-              <div>
-                <img src="../static/images/hotel-list-img.png" alt="" />
-              </div>
-              <div class="hotel-right">
-                <h2>{{ listing.name }}</h2>
-                <p>
-                  Singapore <br />
-                  Hotel Website
-                </p>
-                <p>
-                  Cheapest Room: <br />
-                  <span class="price">{{ listing.price }}</span>
-                </p>
-                <div style="position: absolute; bottom: 6px; right: 5px; margin-bottom: 10px; margin-right: 10px; float: right">
-                  <a
-                    name="seeDetailsButton"
-                    href="{% url 'room-list-test-api' destIdVar listing.name listing.id %}" 
-                    class="btn"
-                    style="background-color: #f58216; float: right;"
-                    ><b>SEE DETAILS ></b></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        
           
-        
+          <!-- Uncomment below to check search form inputs!! : -->
+          <!-- <p>destId: {{destId}}</p>
+          <p>guests: {{guests}}</p>
+          <p>checkin: {{checkin}}</p>
+          <p>checkout: {{checkout}}</p>
+          <p>rooms: {{rooms}}</p> -->
 
+          {% include 'partials/hotelcardelement.html' %}
+        </div>
       </div>
 
       <br/></br>
-      {% if listings.has_previous %}
+      
+      <!-- pagination below: -->
+      <br></br>
+
+      <!-- {% if listings.has_previous %}
         <a href="?page=1">&laquo First</a>
         <a href="?page={{ listings.previous_page_number }}">Previous</a>
       {% endif %}
@@ -203,11 +68,11 @@
         <a href="?page={{ listings.next_page_number }}">Next</a>
         <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
 
-    {% endif %} 
+      {% endif %}  -->
+    </div>
     <br/></br>
 
-
-    </div>
+    
 
     <script src="js/hotelSuggestions.js"></script>
     <script src="js/script.js"></script>
@@ -226,6 +91,19 @@
       flatpickr("input[type=datetime-local]", {});
     </script>
 
+    <script>
+      //for loading screen
+      var myVar;
+      function loadFunction() {
+        myVar = setTimeout(showPage, 2000);
+      }
+
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("pageDiv").style.display = "block";
+      }
+
+    </script>
 
     {% include "footer.html" %}
   </body>
@@ -295,6 +173,16 @@
       height: 0;
     }
 
+    /* Hotel Star Ratings */
+    .stars-outer {
+        position: relative;
+        display: inline-block;
+    }
+
+    .fa-solid.fa-star::before {
+      color: orange;
+    }
+
     /* Hotel List Page */
     .hotel-showcase {
       position: relative;
@@ -303,6 +191,53 @@
       height: 680px;
       overflow: hidden;
       color: #fff;
+    }
+
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #f58216;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+    }  
+    
+    @-webkit-keyframes animatebottom {
+      from { bottom:-100px; opacity:0 } 
+      to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom { 
+      from{ bottom:-100px; opacity:0 } 
+      to{ bottom:0; opacity:1 }
+    }
+
+    #pageDiv {
+      display: none;
     }
 
     .hotel-list {

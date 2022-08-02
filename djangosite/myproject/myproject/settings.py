@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Build paths inside the project like this: os.path.join(BASE_DIR,...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp'
+    'myapp',
+    'django_htmx',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -76,28 +80,26 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': "esc_proj",
+#         'HOST': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority",
+#         # 'HOST': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/?retryWrites=true&w=majority",
+#         'USER': "tho",
+#         'PASSWORD': "Sitis5MURF4",
+#         },        
+#     }
 
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': "sample_airbnb",
-        'CLIENT':{
-            'host': "mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority",
-            'username': "tho",
-            'password': "Sitis5MURF4",
-            'authSource':"admin",
-        },        
-    },
+        'NAME': 'esc_proj2',
+        'CLIENT': {
+           'host': 'mongodb+srv://tho:Sitis5MURF4@esc-proj.uo8bx.mongodb.net/test?retryWrites=true&w=majority',
+        }
+    }
 }
-# sample_airbnb is the name of the data base
-# listings and review is a collection under the database
-# all other django files under the sample_airbnb database are django migrations
-# 'python manage.py makemigrations' will detect changes in the database 
-# 'python manage.py migrate' will create all the django files in the database 
 
 
 # Password validation

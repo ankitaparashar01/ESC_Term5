@@ -1,5 +1,4 @@
 from django.db import models
-import email
 from mongoengine import Document, fields
 from django.db import models
 from django.contrib.auth.models import User
@@ -11,6 +10,16 @@ class ListingItem(models.Model):
     price  = models.FloatField(db_column='price')
     summary = models.CharField(db_column='summary',max_length=200)
     
+    
+# class DestinationCat(models.Model):
+#     termalt = models.CharField(db_column='term',max_length=200)
+#     uidalt = models.CharField(db_column='uid',max_length=200)
+#     latalt = models.FloatField(db_column='lat')
+#     lngalt = models.FloatField(db_column='lng')
+#     typealt = models.CharField(db_column='type',max_length=200)
+#     statealt = models.CharField(db_column='state',max_length=200)
+    
+
 class DestinationCat(models.Model):
     term = models.CharField(db_column='term',max_length=200)
     uid = models.CharField(db_column='uid',max_length=200)
@@ -18,3 +27,12 @@ class DestinationCat(models.Model):
     lng = models.FloatField(db_column='lng')
     type = models.CharField(db_column='type',max_length=200)
     state = models.CharField(db_column='state',max_length=200)
+
+class HotelSearch(models.Model):
+    destinationorhotel = models.CharField(max_length=300, blank=True, default="-")
+    uid = models.CharField(max_length=250, blank=True)
+    calendarCheckin = models.DateField(blank=True)
+    calendarCheckout = models.DateField(blank=True)
+    roomsnumber = models.PositiveIntegerField(blank=True)
+    adultsnumber = models.PositiveIntegerField(blank=True)
+    childrennumber = models.PositiveIntegerField(blank=True)

@@ -15,19 +15,20 @@
     <title>Payment Portal</title>
   </head>
   <body>
+    <script src="{% static 'js/jquery.js' %}" ></script>
     <!-- Confirmation-->
     <div class="paymentBox">
       <h1><b>Reservation Confirmation</b></h1>
       <br />
-      <p><b>Hotel Name: </b>Four points by Sheraton Singapore, Riverview</p>
-      <p><b>Room 1:</b> Deluxe Room, 1 King Bed, City View</p>
-      <p><b>Room 2:</b> Superior Room, 1 King Bed, City View</p>
-      <p><b>Guests:</b> 5 Adults, 2 Children</p>
-      <p><b>Checkin:</b> 12/06/2022</p>
-      <p><b>Checkout:</b> 15/06/2022</p>
-      <p><b>Room Rate (3 nights, 2 rooms): </b> S$2129.70</p>
-      <p><b>Tax:</b> S$106.5</p>
-      <p><b>Total:</b> S$2236.2</p>
+      <p id="hotelname"><b>Hotel Name: </b>{{ hotelName }}</p>
+      <p id="room"><b>Room 1:</b> (HC) Deluxe Room, 1 King Bed, City View</p>
+      <p id="roomkey"><b>Room KEY:</b> {{ roomKey }}</p>
+      <p id="guest"><b>Guests:</b> (HC) 5 Adults, 2 Children</p>
+      <p id="checkin"><b>Check In:</b> {{ checkin }}</p>
+      <p id="checkout"><b>Check Out:</b> {{ checkout }}</p>
+      <p id="roomrate"><b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}</p>
+      <p id="tax"><b>Tax:</b> S$(HC)106.5</p>
+      <p id="total"><b>Total:</b> S$(HC)2236.2</p>
     </div>
 
     <!-- Primary Guest -->
@@ -37,7 +38,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputTitle">Title</label>
-            <select name="titleInput" id="inputTitle" class="form-control">
+            <select id="inputTitle" class="form-control">
               <option selected>Choose...</option>
               <option value="Mr. ">Mr.</option>
               <option value="Ms. ">Ms.</option>
@@ -47,7 +48,6 @@
           <div class="col">
             <label for="inputFirstName">First Name</label>
             <input
-              name= "firstNameInput"
               type="text"
               class="form-control"
               id="inputFirstName"
@@ -57,7 +57,6 @@
           <div class="col">
             <label for="inputLastName">Last Name</label>
             <input
-              name="lastNameInput"
               type="text"
               class="form-control"
               id="inputLastName"
@@ -71,7 +70,6 @@
         <div class="col-3">
           <label for="inputCountryCode">Country Code</label>
           <input
-            name="countryCodeInput"
             type="text"
             class="form-control"
             id="inputCountryCode"
@@ -81,7 +79,6 @@
         <div class="col">
           <label for="inputPhoneNumber">Phone Number</label>
           <input
-            name="phoneNumberInput"
             type="text"
             class="form-control"
             id="inputPhoneNumber"
@@ -92,7 +89,7 @@
       <br />
       <div class="form-group">
         <label for="inputMessage">Message to Hotel (optional)</label>
-        <textarea name="messageInput" class="form-control" id="inputMessage" rows="3"></textarea>
+        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
       </div>
     </div>
 
@@ -105,7 +102,6 @@
           <div class="col-5">
             <label for="inputCardNumber">Card Number</label>
             <input
-              name="cardNumberInput"
               type="text"
               class="form-control"
               id="inputCardNumber"
@@ -115,7 +111,6 @@
           <div class="col">
             <label for="inputNameOnCard">Name On Card</label>
             <input
-              name="nameCardInput"
               type="text"
               class="form-control"
               id="inputNameOnCard"
@@ -127,7 +122,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputMonthExpiryDate">Expiry Month</label>
-            <select name="expiryMonthInput" id="inputMonthExpiryDate" class="form-control">
+            <select id="inputMonthExpiryMonth" class="form-control">
               <option selected>Month</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -145,7 +140,7 @@
           </div>
           <div class="col-2">
             <label for="inputYearExpiryDate">Expiry Year</label>
-            <select name="expiryYearInput" id="inputYearExpiryDate" class="form-control">
+            <select id="inputYearExpiryYear" class="form-control">
               <option selected>Year</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
@@ -162,11 +157,11 @@
           </div>
           <div class="col-3" style="margin-left: 87px">
             <label for="inputCVV">CVV / CVC</label>
-            <input name="CVVInput" type="text" class="form-control" id="inputCVV" />
+            <input type="text" class="form-control" id="inputCVV" />
           </div>
           <div class="col">
             <img
-              src="../static/images/cvv.png"
+              src="{% static 'images/cvv.png' %}"
               style="height: 80px; width: auto; margin-left: 50px"
             />
           </div>
@@ -176,14 +171,76 @@
     </div>
 
     <div class="paymentCenter">
-      <a
-        name="submitButton"
-        href="{% url 'transaction-complete' %}"
-        class="submit-payment"
-        style="color: white"
-        ><b>Confirm Booking</b></a
-      >
+      <button  type="button" class = "btn btn-primary" id="submit" onclick="clickMe();">Confirm Booking</button>
     </div>
+    <script type="text/javascript">
+      function clickMe(){
+        var hotelname = $("#hotelname").text();
+        var room = $("#room").text();
+        var roomkey = $("#roomkey").text();
+        var guest = $("#guest").text();
+        var checkin = $("#checkin").text();
+        var checkout = $("#checkout").text();
+        var roomrate = $("#roomrate").text();
+        var tax = $("#tax").text();
+        var total = $("#total").text();
+        var cardnumber = $("#inputCardNumber").val();
+        var title = $("#inputTitle").val();
+        var firstname = $("#inputFirstName").val();
+        var lastname = $("#inputLastName").val();
+        var countrycode = $("#inputCountryCode").val();
+        var phonenumber = $("#inputPhoneNumber").val();
+        var message = $("#inputMessage").val();
+        var name_on_card = $("#inputNameOnCard").val();
+        var expire_month = $("#inputMonthExpiryMonth").val();
+        var expire_year = $("#inputYearExpiryYear").val();
+        var cvv = $("#inputCVV").val();
+        
+
+        $.ajax({
+          url:'/ajax/',
+          type:"get",
+          data: {
+            HotelName: hotelname,
+            Room: room,
+            RoomKey: roomkey,
+            Guest: guest,
+            CheckIn: checkin,
+            CheckOut: checkout,
+            RoomRate: roomrate,
+            Tax: tax,
+            Total: total,
+            Title: title,
+            FirstName: firstname,
+            LastName: lastname,
+            CountryCode: countrycode,
+            PhoneNumber: phonenumber, 
+            Message: message,
+            CardNumber : cardnumber,
+            NameOnCard: name_on_card,
+            ExpireYear: expire_year,
+            ExpireMonth: expire_month,
+            CVV: cvv
+
+          },
+          success: function(res){
+            if(res == "success"){
+              alert("payment success");
+              window.location.href = "http://127.0.0.1:8000/transaction-complete/";
+            }
+            else if(res == "failure"){{
+                alert("invalid input");
+                window.location.reload(false);
+              }
+
+            }
+          }
+
+        })
+      }
+      
+
+    </script>
 
     {% include "footer.html" %}
   </body>
