@@ -30,7 +30,7 @@ def generate_random():
         res+= char_list[random.randint(0, 93)]
     return res
 
-def generate_random_date1():
+def generate_random_date():
     rand_year= random.randint(0, 9999)
     rand_month= random.randint(0, 99)
     rand_day= random.randint(0, 99)
@@ -44,9 +44,12 @@ def generate_random_country():
         res+= letter_list[random.randint(0, 51)]
     return res
 
+def generate_random_int():
+    return random.randint(-10000,10000)
+
 
 
 # main
 # print(generate_random())
-# print(generate_random_date1())
+# print(generate_random_date())
 # print(generate_random_country())

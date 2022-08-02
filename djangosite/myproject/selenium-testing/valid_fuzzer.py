@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import string
 import random
+import names
 
 letter_list= string.ascii_letters
 char_list= string.ascii_letters + string.digits + string.punctuation # random string of characters
@@ -65,9 +66,23 @@ def generate_valid_adults():
 def generate_valid_children():
     return random.randint(0, 5)
 
+
+############# for use in confirmation page ################
+
+def generate_valid_title():
+    title_list= ["Mr.", "Ms.", "Mrs."]
+    return title_list[random.randint(0,2)]
+
+def generate_valid_firstname():
+    g= random.choice(["female", "male"])
+    names.get_first_name(gender=g)
+    
+
 # main
 # print(generate_random())
 # print(generate_valid_date())
 # print(generate_valid_country())
 for x in range(20):
     print(generate_very_valid_date())
+
+print(generate_valid_firstname)

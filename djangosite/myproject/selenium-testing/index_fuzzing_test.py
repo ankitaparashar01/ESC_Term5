@@ -3,7 +3,6 @@ from distutils.log import error
 from email import message
 from unicodedata import name
 from bitarray import test
-# from pyrsistent import T
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -145,8 +144,62 @@ def test1_front_page():
 ######################################################################################################################################
 # Test 2 - testing with very invalid and random fuzzed inputs
 ######################################################################################################################################
+def test2_front_page():
+    try:
+        driver.get("http://127.0.0.1:8000/")
+        print('Driver Title:',driver.title)
+        print('Driver name:',driver.name)
+        print('Driver URL:',driver.current_url)
+        # driver.implicitly_wait(5)
 
+        # get elements of index page
+        time.sleep(2)
+        search_hotel_btn= driver.find_element(By.NAME, "submitButton")
+        search_hotel_box= driver.find_element(By.NAME, "destinationorhotel")
+        checkin_box= driver.find_element(By.NAME, "checkin")
+        checkout_box= driver.find_element(By.NAME, "checkout")
+        room_box= driver.find_element(By.NAME, "roomsnumber")
+        adult_box= driver.find_element(By.NAME, "adultsnumber")
+        children_box= driver.find_element(By.NAME, "childrennumber")
 
+        # generate random data
+        country= random_fuzzer.generate_random() #totally random string
+        checkin_date= random_fuzzer.generate_random_date()
+        checkout_date= random_fuzzer.generate_random_date()
+        rooms= random_fuzzer.generate_random_int()
+        adults= random_fuzzer.generate_random_int()
+        children= random_fuzzer.generate_random_int()
+        
+        # input in website
+        search_hotel_box.send_keys(country)
+        time.sleep(2)
+        search_hotel_box.send_keys(Keys.DOWN)
+        # time.sleep(1)
+        search_hotel_box.send_keys(Keys.ENTER)
+
+        # time.sleep(2)
+        checkin_box.send_keys(checkin_date)
+        # time.sleep(2)
+        checkout_box.send_keys(checkout_date)
+        # time.sleep(2)
+        room_box.send_keys(rooms)
+        # time.sleep(2)
+        adult_box.send_keys(adults)
+        # time.sleep(2)
+        children_box.send_keys(children)
+        # time.sleep(2)
+        search_hotel_btn.click()
+        time.sleep(1)
+
+        #try to find a page element to make sure it's still on the page. If fail, that means it's not on the page.
+        search_hotel_btn_check= driver.find_element(By.NAME, "submitButton")
+        pass_list.append([country, checkin_date, checkout_date, rooms, adults, children])
+        print("Passed.\n")
+    except:
+        print("Error occurred.\n")
+        error_list.append([country, checkin_date, checkout_date, rooms, adults, children])
+        # driver.refresh()
+        # driver.quit()
 
 
 ######################################################################################################################################
@@ -184,6 +237,12 @@ def iterate_test1(iter):
     write_errors("logs/error_log_test1.txt")
     write_pass("logs/passed_log_test1.txt")
 
+def iterate_test2(iter):
+    for x in range(iter):
+        test2_front_page()
+    # driver.close()
+    write_errors("logs/error_log_test2.txt")
+    write_pass("logs/passed_log_test2.txt")
 
 # main test
 # invalid_fuzz_front_page() #generates invalid and random input
@@ -196,10 +255,13 @@ def main_function():
     print("============ starting test 0 ============")
     iterate_test0(5)
     setup_driver()
+
     print("============ starting test 1 ============")
     iterate_test1(5)
-    driver.quit()
+    setup_driver()
     
-
+    print("============ starting test 1 ============")
+    iterate_test2(5)
+    driver.quit()
 
 main_function()
