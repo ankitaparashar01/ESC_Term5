@@ -96,8 +96,11 @@ def generate_valid_phonenumber():
 def generate_longmessage():
     res= ""
     r= RandomWords().get_random_words()
-    for x in r:
-        res+= x + " "
+    if(r!=None):
+        for x in r:
+            res+= x + " "
+    else:
+        res=""
     return res
 
 def generate_valid_cardnumber():

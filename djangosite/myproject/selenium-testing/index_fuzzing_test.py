@@ -227,22 +227,22 @@ def iterate_test0(iter):
     for x in range(iter):
         test0_front_page()
     # driver.close()
-    write_errors("logs/error_log_test0.txt")
-    write_pass("logs/passed_log_test0.txt")
+    write_errors("logs/index_error_log_test0.txt")
+    write_pass("logs/index_passed_log_test0.txt")
 
 def iterate_test1(iter):
     for x in range(iter):
         test1_front_page()
     # driver.close()
-    write_errors("logs/error_log_test1.txt")
+    write_errors("logs/index_error_log_test1.txt")
     write_pass("logs/passed_log_test1.txt")
 
 def iterate_test2(iter):
     for x in range(iter):
         test2_front_page()
     # driver.close()
-    write_errors("logs/error_log_test2.txt")
-    write_pass("logs/passed_log_test2.txt")
+    write_errors("logs/index_error_log_test2.txt")
+    write_pass("logs/index_passed_log_test2.txt")
 
 # main test
 # invalid_fuzz_front_page() #generates invalid and random input
