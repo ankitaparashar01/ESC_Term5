@@ -23,12 +23,35 @@ def testing_input():
     print('Driver name:',driver.name)
     print('Driver URL:',driver.current_url)
 
+#generates valid dates but they may be wayy off
 def generate_valid_date():
     rand_year= random.randint(2000, 2050)
     rand_month= random.randint(1, 12)
     rand_day= random.randint(1, 31)
     res= str(rand_year) + "-" + str(rand_month) + "-" + str(rand_day)
     return res
+
+#generates a pair of dates that only differ by a bit
+def generate_very_valid_date():
+    rand_year= 2022
+    rand_month1= random.randint(9, 12)
+    
+    rand_day1= random.randint(1, 31) # for checkin
+    if(rand_day1>=30 and rand_month1==12):
+        rand_day2= random.randint(1,31)
+        rand_month2= 1
+        rand_year= 2023
+
+    elif(rand_day1>=30):
+        rand_day2= random.randint(1,31)
+        rand_month2= rand_month1 + 1
+    else:
+        rand_day2= random.randint(rand_day1+1, 31)
+        rand_month2= random.randint(rand_month1, 12)
+
+    checkin= str(rand_year) + "-" + str(rand_month1) + "-" + str(rand_day1)
+    checkout= str(rand_year) + "-" + str(rand_month2) + "-" + str(rand_day2)
+    return checkin, checkout
 
 def generate_valid_country():
     return country_list[random.randint(0, 247)]
@@ -46,3 +69,5 @@ def generate_valid_children():
 # print(generate_random())
 # print(generate_valid_date())
 # print(generate_valid_country())
+for x in range(20):
+    print(generate_very_valid_date())
