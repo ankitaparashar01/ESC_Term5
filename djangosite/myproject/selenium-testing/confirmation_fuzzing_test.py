@@ -1,8 +1,10 @@
+# note- file must be ran in selenium-testing directory
+
 from cmath import exp
 from distutils.log import error
 from email import message
 from unicodedata import name
-from bitarray import test
+# from bitarray import test
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -52,15 +54,40 @@ def test0_confirmation_page():
         cvv_box= driver.find_element(By.NAME, "CVVInput")
         submit_btn= driver.find_element(By.NAME, "submitButton")
 
-        title= ""
+        title= valid_fuzzer.generate_valid_title()
+        first_name= valid_fuzzer.generate_valid_firstname()
+        last_name= valid_fuzzer.generate_valid_lastname()
+        country_code= valid_fuzzer.generate_valid_countrycode()
+        phone_number= valid_fuzzer.generate_valid_phonenumber()
+        message= valid_fuzzer.generate_longmessage()
+        card_number= valid_fuzzer.generate_valid_cardnumber()
+        name_card= valid_fuzzer.generate_valid_cardnumber()
+        expiry_month= valid_fuzzer.generate_valid_month()
+        expiry_year= valid_fuzzer.generate_valid_year()
+        cvv= valid_fuzzer.generate_valid_CVV()
 
+        title_box.send_keys(title)
+        first_name_box.send_keys(first_name)
+        last_name_box.send_keys(last_name)
+        country_code_box.send_keys(country_code)
+        phone_no_box.send_keys(phone_number)
+        message_box.send_keys(message)
+        card_no_box.send_keys(card_number)
+        name_card_box.send_keys(name_card)
+        expiry_month_box.send_keys(expiry_month)
+        expiry_year_box.send_keys(expiry_year)
+        cvv_box.send_keys(cvv)
+        submit_btn.click()
+        time.sleep(3)
 
-
-
-
+        # find page element
+        submit_btn_check= driver.find_element(By.NAME, "submitButton")
+        print("Passed.\n")
+        pass_list.append([title, first_name, last_name, country_code, phone_number, message, card_number, name_card, expiry_month, expiry_year, cvv])
 
     except:
-        pass
+        print("Error occurred.\n")
+        error_list.append([title, first_name, last_name, country_code, phone_number, message, card_number, name_card, expiry_month, expiry_year, cvv])
 
 
 ######################################################################################################################################
@@ -86,10 +113,10 @@ def write_pass(filein):
 
 def iterate_test0(iter):
     for x in range(iter):
-        test0_front_page()
+        test0_confirmation_page()
     # driver.close()
-    write_errors("logs/error_log_test0.txt")
-    write_pass("logs/passed_log_test0.txt")
+    write_errors("logs/confirmation_error_log_test0.txt")
+    write_pass("logs/confirmation_passed_log_test0.txt")
 
 def iterate_test1(iter):
     for x in range(iter):
@@ -115,14 +142,14 @@ def iterate_test2(iter):
 def main_function(): 
     print("============ starting test 0 ============")
     iterate_test0(5)
-    setup_driver()
+    # setup_driver()
 
-    print("============ starting test 1 ============")
-    iterate_test1(5)
-    setup_driver()
+    # print("============ starting test 1 ============")
+    # iterate_test1(5)
+    # setup_driver()
     
-    print("============ starting test 1 ============")
-    iterate_test2(5)
-    driver.quit()
+    # print("============ starting test 1 ============")
+    # iterate_test2(5)
+    # driver.quit()
 
 main_function()

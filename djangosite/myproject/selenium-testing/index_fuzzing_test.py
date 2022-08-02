@@ -2,7 +2,7 @@ from cmath import exp
 from distutils.log import error
 from email import message
 from unicodedata import name
-from bitarray import test
+# from bitarray import test
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By

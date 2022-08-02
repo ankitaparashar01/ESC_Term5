@@ -1,7 +1,7 @@
 from cmath import exp
 from email import message
 from unicodedata import name
-from bitarray import test
+# from bitarray import test
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -10,6 +10,7 @@ import time
 import string
 import random
 import names
+from random_word import RandomWords
 
 letter_list= string.ascii_letters
 char_list= string.ascii_letters + string.digits + string.punctuation # random string of characters
@@ -75,14 +76,49 @@ def generate_valid_title():
 
 def generate_valid_firstname():
     g= random.choice(["female", "male"])
-    names.get_first_name(gender=g)
-    
+    res= names.get_first_name(gender=g)
+    return res
 
+def generate_valid_lastname():
+    return names.get_last_name()
+
+def generate_valid_fullname():
+    return names.get_full_name()
+
+def generate_valid_countrycode():
+    res= "+"
+    res+= str(random.randint(0,99))
+    return res
+
+def generate_valid_phonenumber():
+    return random.randint(10000000, 9999999999)
+
+def generate_longmessage():
+    res= ""
+    r= RandomWords().get_random_words()
+    for x in r:
+        res+= x + " "
+    return res
+
+def generate_valid_cardnumber():
+    return random.randint(100000000, 999999999)
+
+def generate_valid_month():
+    return random.randint(1, 12)
+
+def generate_valid_year():
+    return random.randint(2023, 2030)
+
+def generate_valid_CVV():
+    return random.randint(100, 999)
+    
 # main
 # print(generate_random())
 # print(generate_valid_date())
 # print(generate_valid_country())
-for x in range(20):
-    print(generate_very_valid_date())
+# for x in range(20):
+#     print(generate_very_valid_date())
 
-print(generate_valid_firstname)
+# print(generate_valid_firstname())
+# print(generate_valid_lastname())
+# print(generate_longmessage())
