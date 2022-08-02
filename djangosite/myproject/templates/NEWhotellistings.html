@@ -27,10 +27,12 @@
   </head>
 
 
-  <body>
-    <div class="container-fluid" style="width:87%;">
+  <body onload="loadFunction()" style="margin:0;">
+    <div id="loader"></div>
+    <p>{{ api1Obj.completed }}</p> 
+    <div class="container-fluid" style="width:87%; display:none;" id="pageDiv" class="animate-bottom">
       <div class="row no-gutters">
-
+        
 
         <!-- mini left search card  -->
         <div class="col-4">
@@ -56,7 +58,25 @@
       <br/></br>
       
 
-
+      <script>
+        //for loading screen
+        var myVar;
+        var apiCompleted= "{{ api1Obj.completed }}"
+        // alert(typeof(apiCompleted)+apiCompleted+"adfasd")
+        function loadFunction() {
+          if(!apiCompleted.localeCompare("True")){
+            // alert("yay")
+            myVar = window.setTimeout(showPage, 100);
+          }
+          
+        }
+    
+        function showPage() {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("pageDiv").style.display = "block";
+        }
+    
+      </script>
 
       
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -225,5 +245,56 @@
       align-items: center;
       height: 100%;
     }
+
+    /* for spinner */
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 21%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #f58216;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+    }  
+    
+    @-webkit-keyframes animatebottom {
+      from { bottom:-100px; opacity:0 } 
+      to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom { 
+      from{ bottom:-100px; opacity:0 } 
+      to{ bottom:0; opacity:1 }
+    }
+
+    #pageDiv {
+      display: none;
+    }
+
   </style>
+
+
 </html>
