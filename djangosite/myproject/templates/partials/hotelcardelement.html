@@ -1,6 +1,4 @@
-{% load app_tags %} 
-{% for hotelCard in page_obj %} 
-{% if forloop.last %}
+{% load app_tags %} {% for hotelCard in page_obj %} {% if forloop.last %}
 <div
   hx-get="{% url 'hotel-cards' %}?page={{ page_obj.number|add:1 }}"
   hx-trigger="revealed"
@@ -23,13 +21,13 @@
           Hotel Website
         </p>
         <div class="stars-outer">
-          <!-- <div class="stars-inner"></div> -->
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
         </div>
+
         <div
           style="
             position: absolute;
