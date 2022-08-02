@@ -2,6 +2,8 @@ from django.db import models
 from mongoengine import Document, fields
 from django.db import models
 from django.contrib.auth.models import User
+from jsonfield import JSONField
+
 
 
 class ListingItem(models.Model):
@@ -36,3 +38,23 @@ class HotelSearch(models.Model):
     roomsnumber = models.PositiveIntegerField(blank=True)
     adultsnumber = models.PositiveIntegerField(blank=True)
     childrennumber = models.PositiveIntegerField(blank=True)
+
+# This is to add destId inputted from user at the landing into the database 
+class DestIdChecker(models.Model):
+    destIdFromIndex = models.CharField(max_length=200)
+
+# this is different from the class added at the bottom of views.py -> this has a few elements removed
+# This class is made only for use to generate the hotelcards
+class Api3UseHotelId(models.Model):
+    name = models.CharField(max_length=200)
+    rating = models.PositiveIntegerField()
+    image_details = JSONField()
+
+# class ImageDetailsApi3 (models.Model):
+#     # suffix": ".jpg",
+#     #     "count": 56,
+#     #     "prefix": "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/"
+#     suffix = models.CharField(max_length=200)
+#     count = models.PositiveIntegerField()
+#     prefix = models.CharField(max_length=200)
+

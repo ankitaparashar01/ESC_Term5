@@ -12,14 +12,11 @@ def render_name_api3(hotelId):
 
     strAPI3 = getHotelCardWHotelID(hotelId)
     # reference = "https://hotelapi.loyalty.dev/api/hotels/diH7
-    api3Response = requests.get(strAPI3)
-    api3Response.raise_for_status()  # raises exception when not a 2xx response
-    if api3Response.status_code != 204:
-        api3Response = api3Response.json()       
-        hotelName = api3Response["name"]
-
+    api3Response = requests.get(strAPI3).json()       
+    hotelName = api3Response["name"]
     # need to obtain: name, address, address1, rating, 
     return "{}".format(hotelName)
+    
 register.filter('render_name_api3', render_name_api3)
 
 def breakfast_avail_bool(breakfastStr):
@@ -69,15 +66,12 @@ def first_image_details_api3(hotelId):
     #image url ref: https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg
     # ../static/images/hotel-list-img.png
 
-    api3Response = requests.get(strAPI3)
-    api3Response.raise_for_status()  # raises exception when not a 2xx response
-    if api3Response.status_code != 204:
-        api3Response = api3Response.json()    
-        image_detailsJSON = api3Response["image_details"]
-        imageStr = image_detailsJSON["prefix"] + "0" + image_detailsJSON["suffix"]
-        imageStr = str(imageStr)
-        # imageStr = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
-        return imageStr
+    api3Response = requests.get(strAPI3).json()
+    image_detailsJSON = api3Response["image_details"]
+    imageStr = image_detailsJSON["prefix"] + "0" + image_detailsJSON["suffix"]
+    imageStr = str(imageStr)
+    # imageStr = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
+    return "{}".format(imageStr)
 
 register.filter('first_image_details_api3', first_image_details_api3)
 

@@ -268,8 +268,30 @@ def hotelCards(request, destId=None):
     api1Response = json.dumps(api1Response)
     api1Obj = Api1.from_json(api1Response) # create hotel cards from api1Obj.hotels
     
+
     
-    
+    # # if destId input not in database, then:
+    # if DestIdChecker.objects.filter(destIdFromIndex = destId).exists():
+    #     # if destId has been searched before, do nothing
+    #     a = 2
+    # else:
+    #     # If it has not beed searched before, Store Api 3 locally:
+    #     for hotelIDvar in api1Obj.hotels:
+    #         # Using API 3 to generate info about the hotel:
+    #         strAPI3 = getHotelCardWHotelID(hotelIDvar["id"]) # strAPI3 = "https://hotelapi.loyalty.dev/api/hotels/diH7"
+    #         api3Response = requests.get(strAPI3).json()
+    #         name = api3Response["name"]
+    #         rating = api3Response["rating"]
+    #         image_details = api3Response["image_details"]
+    #         Api3dbObj = Api3UseHotelId.objects.create(name=name, rating=rating, image_details=image_details)
+    #         Api3dbObj.save()
+    #     # Finally, add destId into database only after adding api3 into database.
+    #     newDestIdreceived = str(destId)
+    #     destIdFromIndexObj = DestIdChecker.objects.create(destIdFromIndex = newDestIdreceived)
+    #     destIdFromIndexObj.save()
+
+
+
     # set up pagination below:
     p = Paginator(api1Obj.hotels, 7) #specify number of cards per page here
     page_number = request.GET.get('page')
