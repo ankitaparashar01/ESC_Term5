@@ -129,7 +129,7 @@ def ajax(request):
         if check_not_empty(i[1]) == False:
             empty_check = False
     phonenumber = to_check['CountryCode'] + to_check['PhoneNumber']
-    print(to_check)
+
     #check validity
     if (check_title(to_check['Title']) 
         and check_cvv(to_check["CVV"]) 
@@ -177,18 +177,19 @@ def check(request):
 
 def display(request):
     #fetch the data
+    global ref
     key = bytes(ref,'utf-8')
 
     my_client = pymongo.MongoClient("mongodb+srv://test0:test0123456@cluster0.7ypufdn.mongodb.net/?retryWrites=true&w=majority")
     dbname = my_client['ESC']
     collection_name = dbname[ref]
+    ref = None
     order_details = list(collection_name.find({}))
     doc = order_details[0]
     doc.pop("_id")
     for k,v in doc.items():
         if k != 'CardNumber':
             doc[k] = decryption(v,key)
-
 
     #decrypt
     #for k, v in doc.items():
