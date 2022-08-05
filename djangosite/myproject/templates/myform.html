@@ -80,6 +80,7 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1"><b>CHILDREN</b></label>
                   <select class="form-control" id="childrennumber" name="childrennumber" required>
+                    <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -90,14 +91,19 @@
               </div>
             </div>
           <br>
-          <div class = "form-group">
+          <br>
+          <div class="center">
+            <div class = "form-group">
             
-            <button type="submit" class="btn btn-warning">
-              
-                SEARCH HOTELS
-              
-            </button>
+              <button type="submit" class="btn btn-warning" style="display: inline-block; background-color: #f58216; width: stretch;">
+                
+                  SEARCH HOTELS
+                
+              </button>
+              </div>
+        
           </div>
+      
           <br>
         </form>
         
@@ -183,5 +189,17 @@ $(function(){
         </div>
       </div>
     </body>
+
+  <style>
+    .center{
+      position: absolute;
+      left: 50%;
+      /* top: 50%; */
+      transform: translate(-50%, -50%);
+      padding: 10px;
+      overflow: auto;
+    }
+  </style>
 </html>
+
 
