@@ -22,6 +22,9 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <title>Ascenda | Hotel Booking</title>
   </head>
 
@@ -71,6 +74,32 @@
     </div>
     <br/></br>
 
+    <!-- Refresh is here -->
+    <!-- <script>
+      
+      $(document).ready(function() {
+        
+        setInterval(function(){
+          $.ajax({
+            type:'GET',
+            url: "{% url 'hotel-cards' %}",
+            success: function(response){
+              console.log(response);
+
+
+              // if completed == true, break the loop
+
+            },
+            error: function(response){
+              // alert("An Error Occured")
+              // console.log("error!");
+            }
+          });
+        }, 1000);
+                  })
+
+      </script> -->
+
     
 
     <script src="js/hotelSuggestions.js"></script>
@@ -91,6 +120,7 @@
     </script>
 
     <script>
+      
       //for loading screen
       var myVar;
       function loadFunction() {

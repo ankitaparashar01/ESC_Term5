@@ -13,10 +13,10 @@
       <!-- individual hotel cards: -->
       <div class="grid">
         <div>
-          <img src="../static/images/hotel-list-img.png" alt="" />
+          <img id="hotelimg" src="" alt="../static/images/hotel-list-img.png" />
         </div>
         <div class="hotel-right">
-          <h2>{{hotelCard.id|render_name_api3}}</h2>
+          <h2 id="hotelname">{{hotelCard.id}}</h2>
           <p>
             <!-- Singapore {{ dest_list_models.term }} <br /> -->
             Hotel Website
@@ -62,3 +62,48 @@
       <!-- {% if forloop.last %}
       {% else %} --> 
 {% endcomment %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+        const sendHttpRequest = (method, url) => {
+          const promise = new Promise((resolve, reject) => {
+            var request = new XMLHttpRequest()
+            request.open(method, url);
+            request.responseType = 'json';
+            request.onload = () => {
+              resolve(request.response);
+            };
+            request.send();
+          });
+          return promise;
+        };
+
+        var hotelname = $("#hotelname").text();
+        var api3StrBase = 'https://hotelapi.loyalty.dev/api/hotels/'
+        var api3Str = api3StrBase.concat(hotelname)
+        console.log('hello')
+        console.log(api3Str)
+
+        const getData = () => {
+          sendHttpRequest('GET', api3Str)
+          .then(responseData => {
+            console.log(responseData);
+
+            $.ajax({
+              url: "{% url 'hotel-cards' %}"
+            }).success(function(response) {
+              
+              // from response need to get hotelName
+              $('hotelname').html('NEW HOTE NAME')
+
+              // from response need to get hotel_index_images
+              $('hotelimg').attr('src', 'NEW IMG URL');
+
+            })
+            
+
+          });
+        };
+
+      </script>

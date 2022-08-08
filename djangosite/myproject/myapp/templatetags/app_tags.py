@@ -54,6 +54,7 @@ register.filter('list_image_details_api3', list_image_details_api3)
 
 # --------------------------- Return fist image from image_details of Api 3 ---------------------------
 def first_image_details_api3(hotelId):
+    hotelId = str(hotelId)
     strAPI3 = getHotelCardWHotelID(hotelId)
     # reference = "https://hotelapi.loyalty.dev/api/hotels/diH7
 
@@ -65,7 +66,6 @@ def first_image_details_api3(hotelId):
     api3Response = requests.get(strAPI3).json()
     image_detailsJSON = api3Response["image_details"]
     imageStr = image_detailsJSON["prefix"] + "0" + image_detailsJSON["suffix"]
-    imageStr = str(imageStr)
-    return imageStr
-
+    imageStr = str(imageStr) 
+    return "{}".format(imageStr)
 register.filter('first_image_details_api3', first_image_details_api3)
