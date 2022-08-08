@@ -1,56 +1,64 @@
-{% load app_tags %} {% for hotelCard in page_obj %} {% if forloop.last %}
-<div
-  hx-get="{% url 'hotel-cards' %}?page={{ page_obj.number|add:1 }}"
-  hx-trigger="revealed"
-  hx-swap="afterend"
-  hx-target="this"
->
-  {% else %}
-  <div class="hotel-list">
-    {% endif %}
+{% load app_tags %} 
 
-    <!-- individual hotel cards: -->
-    <div class="grid">
-      <div>
-        <img src="../static/images/hotel-list-img.png" alt="" />
-      </div>
-      <div class="hotel-right">
-        <h2>{{hotelCard.id|render_name_api3}}</h2>
-        <p>
-          <!-- Singapore {{ dest_list_models.term }} <br /> -->
-          Hotel Website
-        </p>
-        <div class="stars-outer">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+  <div
+    hx-get="{% url 'hotel-cards' %}?page={{ page_obj.number|add:1 }}"
+    hx-trigger="revealed"
+    hx-swap="afterend"
+    hx-target="this"
+    class="col"
+  >
+  {% for hotelCard in page_obj %} 
+
+    <div class="hotel-list">
+      <!-- individual hotel cards: -->
+      <div class="grid">
+        <div>
+          <img src="../static/images/hotel-list-img.png" alt="" />
         </div>
-
-        <div
-          style="
-            position: absolute;
-            top: 0;
-            right: 5px;
-            margin-top: 50px;
-            margin-right: 10px;
-            float: right;
-          "
-        >
+        <div class="hotel-right">
+          <h2>{{hotelCard.id|render_name_api3}}</h2>
           <p>
-            Cheapest Room: <br />
-            <span class="price">${{hotelCard.lowest_price}} </span>
+            <!-- Singapore {{ dest_list_models.term }} <br /> -->
+            Hotel Website
           </p>
-          <a
-            href="{% url 'room-list-test-api' destId hotelCard.id|render_name_api3 hotelCard.id checkin checkout guests %}"
-            class="btn"
-            style="background-color: #f58216; float: right"
-            ><b>SEE DETAILS ></b></a
+          <div class="stars-outer">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+
+          <div
+            style="
+              position: absolute;
+              top: 0;
+              right: 5px;
+              margin-top: 50px;
+              margin-right: 10px;
+              float: right;
+            "
           >
+            <p>
+              Cheapest Room: <br />
+              <span class="price">${{hotelCard.lowest_price}} </span>
+            </p>
+            <a
+              href="{% url 'room-list-test-api' destId hotelCard.id|render_name_api3 hotelCard.id checkin checkout guests %}"
+              class="btn"
+              style="background-color: #f58216; float: right"
+              ><b>SEE DETAILS ></b></a
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  {% endfor %}
+    {% endfor %}
+    
 </div>
+
+{% comment %}
+ <!-- I don't know what these are for so i deleted them -->
+      <!-- {% if forloop.last %}
+      {% else %} --> 
+{% endcomment %}

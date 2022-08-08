@@ -29,14 +29,14 @@ urlpatterns = [
     path('transaction-complete/', views.transactionComplete, name="transaction-complete"),
 
     #ajax helper 
-    path('ajax/', views.ajax),
-    path('ajax2/', views.ajax2),
+    path('ajax/', views.ajax, name="ajax"),
+    path('ajax2/', views.ajax2, name="ajax2"),
 
     #check order
     path('check-order/', views.check, name="check"),
 
     #display order
-    path('display-order/', views.display),
+    path('display-order/', views.display, name="display"),
     
     # Hotel cards
     path('hotellistings/', views.hotelCards, name="hotel-cards"),

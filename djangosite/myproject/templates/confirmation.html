@@ -15,7 +15,7 @@
     <title>Payment Portal</title>
   </head>
   <body>
-    <script src="{% static 'js/jquery.js' %}" ></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
     <!-- Confirmation-->
     <div class="paymentBox">
       <h1><b>Reservation Confirmation</b></h1>
@@ -26,7 +26,9 @@
       <p id="guest"><b>Guests:</b> (HC) 5 Adults, 2 Children</p>
       <p id="checkin"><b>Check In:</b> {{ checkin }}</p>
       <p id="checkout"><b>Check Out:</b> {{ checkout }}</p>
-      <p id="roomrate"><b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}</p>
+      <p id="roomrate">
+        <b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}
+      </p>
       <p id="tax"><b>Tax:</b> S$(HC)106.5</p>
       <p id="total"><b>Total:</b> S$(HC)2236.2</p>
     </div>
@@ -38,18 +40,16 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputTitle">Title</label>
-            <select id="inputTitle" class="form-control" name="titleInput">
+            <select id="inputTitle" class="form-control">
               <option selected>Choose...</option>
               <option value="Mr. ">Mr.</option>
               <option value="Ms. ">Ms.</option>
               <option value="Mrs. ">Mrs.</option>
-              
             </select>
           </div>
           <div class="col">
             <label for="inputFirstName">First Name</label>
             <input
-              name="firstNameInput"
               type="text"
               class="form-control"
               id="inputFirstName"
@@ -58,8 +58,7 @@
           </div>
           <div class="col">
             <label for="inputLastName">Last Name</label>
-            <input 
-              name="lastNameInput"
+            <input
               type="text"
               class="form-control"
               id="inputLastName"
@@ -73,7 +72,6 @@
         <div class="col-3">
           <label for="inputCountryCode">Country Code</label>
           <input
-            name="countryCodeInput"
             type="text"
             class="form-control"
             id="inputCountryCode"
@@ -83,7 +81,6 @@
         <div class="col">
           <label for="inputPhoneNumber">Phone Number</label>
           <input
-            name="phoneNumberInput"
             type="text"
             class="form-control"
             id="inputPhoneNumber"
@@ -93,8 +90,8 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="inputMessage">Message to Hotel (optional)</label>
-        <textarea name="messageInput" class="form-control" id="inputMessage" rows="3"></textarea>
+        <label for="inputMessage">Message to Hotel</label>
+        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
       </div>
     </div>
 
@@ -107,7 +104,6 @@
           <div class="col-5">
             <label for="inputCardNumber">Card Number</label>
             <input
-              name="cardNumberInput"
               type="text"
               class="form-control"
               id="inputCardNumber"
@@ -117,7 +113,6 @@
           <div class="col">
             <label for="inputNameOnCard">Name On Card</label>
             <input
-              name="nameCardInput"
               type="text"
               class="form-control"
               id="inputNameOnCard"
@@ -129,7 +124,7 @@
         <div class="form-row">
           <div class="col-2">
             <label for="inputMonthExpiryDate">Expiry Month</label>
-            <select name="expiryMonthInput" id="inputMonthExpiryMonth" class="form-control">
+            <select id="inputMonthExpiryMonth" class="form-control">
               <option selected>Month</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -147,7 +142,7 @@
           </div>
           <div class="col-2">
             <label for="inputYearExpiryDate">Expiry Year</label>
-            <select name="expiryYearInput" id="inputYearExpiryYear" class="form-control">
+            <select id="inputYearExpiryYear" class="form-control">
               <option selected>Year</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
@@ -164,7 +159,7 @@
           </div>
           <div class="col-3" style="margin-left: 87px">
             <label for="inputCVV">CVV / CVC</label>
-            <input name="CVVInput" type="text" class="form-control" id="inputCVV" />
+            <input type="text" class="form-control" id="inputCVV" />
           </div>
           <div class="col">
             <img
@@ -178,10 +173,18 @@
     </div>
 
     <div class="paymentCenter">
-      <button name="submitButton" type="button" class = "btn btn-primary" id="submit" onclick="clickMe()">Confirm Booking</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="submit"
+        onclick="clickMe();"
+        style="background-color:#f58216"
+      >
+        Confirm Booking
+      </button>
     </div>
     <script type="text/javascript">
-      function clickMe(){
+      function clickMe() {
         var hotelname = $("#hotelname").text();
         var room = $("#room").text();
         var roomkey = $("#roomkey").text();
@@ -202,11 +205,10 @@
         var expire_month = $("#inputMonthExpiryMonth").val();
         var expire_year = $("#inputYearExpiryYear").val();
         var cvv = $("#inputCVV").val();
-        
 
         $.ajax({
-          url:'/ajax/',
-          type:"get",
+          url: "/ajax/",
+          type: "get",
           data: {
             HotelName: hotelname,
             Room: room,
@@ -221,32 +223,28 @@
             FirstName: firstname,
             LastName: lastname,
             CountryCode: countrycode,
-            PhoneNumber: phonenumber, 
+            PhoneNumber: phonenumber,
             Message: message,
-            CardNumber : cardnumber,
+            CardNumber: cardnumber,
             NameOnCard: name_on_card,
             ExpireYear: expire_year,
             ExpireMonth: expire_month,
-            CVV: cvv
-
+            CVV: cvv,
           },
-          success: function(res){
-            if(res == "success"){
+          success: function (res) {
+            if (res == "success") {
               alert("payment success");
-              window.location.href = "http://127.0.0.1:8000/transaction-complete/";
-            }
-            else if(res == "failure"){{
+              window.location.href =
+                "http://127.0.0.1:8000/transaction-complete/";
+            } else if (res == "failure") {
+              {
                 alert("invalid input");
                 window.location.reload(false);
               }
-
             }
-          }
-
-        })
+          },
+        });
       }
-      
-
     </script>
 
     {% include "footer.html" %}

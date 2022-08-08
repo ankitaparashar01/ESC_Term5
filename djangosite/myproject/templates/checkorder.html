@@ -17,13 +17,16 @@
   <body>
     <!-- Confirmation-->
     <div class="paymentBox">
-      <h1><b>Please type in your Reference ID  </b></h1>
-      <br />
-
-      <input type="text" id="referenceID" placeholder="Reference" size="30">
+      <h1 style="text-align:center; padding:5px; margin-bottom:20px;"><b>Please type in your Reference ID </b></h1>
+      <br>
+      <div class="center"> 
+        <input type="text" id="referenceID" placeholder="Reference" size="30" required style="padding:7px;">
+        <button  type="button" class = "btn btn-primary" id="submit" onclick="clickthis();">Submit</button>
+      </div>
+      <br>
       
       
-      <button  type="button" class = "btn btn-primary" id="submit" onclick="clickthis();">Submit</button>
+      
       <script src="{% static 'js/jquery.js' %}" ></script>
       <script type = "text/javascript">
           function clickthis(){
@@ -230,6 +233,15 @@
       margin: 100px;
       margin-bottom: 200px;
       /*border-radius: 10px;*/
+    }
+
+    .center{
+      position: absolute;
+      left: 50%;
+      /* top: 50%; */
+      transform: translate(-50%, -50%);
+      padding: 10px;
+      overflow: auto;
     }
   </style>
 </html>

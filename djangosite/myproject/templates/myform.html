@@ -27,7 +27,7 @@
             
             <div class="wrapper">
               <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
-              <div class="search-input" name="destinationInput">
+              <div class="search-input" >
                 <input id="tags" type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
                 <div class="autocom-box"></div>
                 <div class="search-icon" style="background-color: #E3E3E3;">
@@ -91,14 +91,19 @@
               </div>
             </div>
           <br>
-          <div class = "form-group">
+          <br>
+          <div class="center">
+            <div class = "form-group">
             
-            <button type="submit" name="submitButton" class="btn btn-warning">
-              
-                SEARCH HOTELS
-              
-            </button>
+              <button type="submit" class="btn btn-warning" style="display: inline-block; background-color: #f58216; width: stretch;">
+                
+                  SEARCH HOTELS
+                
+              </button>
+              </div>
+        
           </div>
+      
           <br>
         </form>
         
@@ -140,6 +145,23 @@
     })
   });
 </script>
+<script>
+  $(function(){
+    $('#checkin').keypress(function(event){
+      event.preventDefault();
+      return false;
+    })
+  })
+</script>
+
+<script>
+$(function(){
+  $('#checkout').keypress(function(event){
+    event.preventDefault();
+    return false;
+  })
+})
+</script>
  
 
 <script>
@@ -167,5 +189,17 @@
         </div>
       </div>
     </body>
+
+  <style>
+    .center{
+      position: absolute;
+      left: 50%;
+      /* top: 50%; */
+      transform: translate(-50%, -50%);
+      padding: 10px;
+      overflow: auto;
+    }
+  </style>
 </html>
+
 
