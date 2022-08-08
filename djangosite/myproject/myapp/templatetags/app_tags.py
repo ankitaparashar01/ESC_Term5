@@ -56,13 +56,16 @@ register.filter('list_image_details_api3', list_image_details_api3)
 def first_image_details_api3(hotelId):
     hotelId = str(hotelId)
     strAPI3 = getHotelCardWHotelID(hotelId)
-    # reference = "https://hotelapi.loyalty.dev/api/hotels/diH7
+    # reference = "https://hotelapi.loyalty.dev/api/hotels/diH7"
 
 #     "image_details": {
 #     "suffix": ".jpg",
 #     "count": 56,
 #     "prefix": "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/"
 #   },
+
+# reference img = https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg
+
     api3Response = requests.get(strAPI3).json()
     image_detailsJSON = api3Response["image_details"]
     imageStr = image_detailsJSON["prefix"] + "0" + image_detailsJSON["suffix"]

@@ -43,7 +43,7 @@
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide" style="height: 500px; width: auto; object-fit: cover;">
+              <img class="d-block w-100" src="{{ hotelId|first_image_details_api3 }}" alt="First slide" style="height: 500px; width: auto; object-fit: cover;">
             </div>
             {% for imageURL in api3Obj.id|list_image_details_api3 %}
             <div class="carousel-item">

@@ -13,7 +13,7 @@
       <!-- individual hotel cards: -->
       <div class="grid">
         <div>
-          <img id="hotelimg" src="" alt="../static/images/hotel-list-img.png" />
+          <img id="hotelimg" src="../static/images/hotel-list-img.png" alt="../static/images/hotel-list-img.png" />
         </div>
         <div class="hotel-right">
           <h2 id="hotelname">{{hotelCard.id}}</h2>
@@ -66,44 +66,50 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-        const sendHttpRequest = (method, url) => {
-          const promise = new Promise((resolve, reject) => {
-            var request = new XMLHttpRequest()
-            request.open(method, url);
-            request.responseType = 'json';
-            request.onload = () => {
-              resolve(request.response);
-            };
-            request.send();
-          });
-          return promise;
-        };
+        // This will run once document loads
+        $( document ).ready(function() {
+              console.log( "~ Document ready!" );
 
-        var hotelname = $("#hotelname").text();
-        var api3StrBase = 'https://hotelapi.loyalty.dev/api/hotels/'
-        var api3Str = api3StrBase.concat(hotelname)
-        console.log('hello')
-        console.log(api3Str)
+              // first, set up api url here:s
+              var hotelname = $("#hotelname").text();
+              var api3StrBase = 'https://hotelapi.loyalty.dev/api/hotels/'
+              var api3Str = api3StrBase.concat(hotelname);
+              console.log('~api str:',api3Str);
 
-        const getData = () => {
-          sendHttpRequest('GET', api3Str)
-          .then(responseData => {
-            console.log(responseData);
-
-            $.ajax({
-              url: "{% url 'hotel-cards' %}"
-            }).success(function(response) {
+              //then, calling sendHTTPRequest function to get api response
+              console.log("~this is from getData function");
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET', api3Str, true);
+              xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+              // xhr.setRequestHeader('Content-type', 'application/json')
+              // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+              xhr.responseType = 'json';
+              xhr.onload = () => {
+                const data = xhr.response;
+                console.log(data);
+              };
+              xhr.send();
               
-              // from response need to get hotelName
-              $('hotelname').html('NEW HOTE NAME')
 
-              // from response need to get hotel_index_images
-              $('hotelimg').attr('src', 'NEW IMG URL');
+              // This function changes the Hotel Name and Hotel Img.
+              $(function() {
+                // Replace hotelName
+                var hotelId =  $("#hotelname").text();
+                console.log("~hotel ID:", hotelId);
 
-            })
-            
+                var origHotelName = $("#hotelname");
+                console.log("~original hotel name:",origHotelName);
+                
+                var newHotelName = $("<h2>").html("New hotel name");
+                origHotelName.replaceWith(newHotelName);
+                
+                console.log("~new hotel name:",origHotelName);
+                console.log("~hotel ID:", hotelId);
+
+                // Replace hotelImage
+                var url = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
+                $("#hotelimg").attr("src", url );
+              });
 
           });
-        };
-
       </script>
