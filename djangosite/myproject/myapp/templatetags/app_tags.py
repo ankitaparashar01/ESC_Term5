@@ -72,3 +72,12 @@ def first_image_details_api3(hotelId):
     imageStr = str(imageStr) 
     return "{}".format(imageStr)
 register.filter('first_image_details_api3', first_image_details_api3)
+
+@register.simple_tag
+def url_replace(request, field, value):
+
+    dict_ = request.GET.copy()
+
+    dict_[field] = value
+
+    return dict_.urlencode()

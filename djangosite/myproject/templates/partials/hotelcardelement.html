@@ -1,10 +1,8 @@
+{% load static %}
 {% load app_tags %} 
 
   <div
-    hx-get="{% url 'hotel-cards' %}?page={{ page_obj.number|add:1 }}"
-    hx-trigger="revealed"
-    hx-swap="afterend"
-    hx-target="this"
+    
     class="col"
   >
   {% for hotelCard in page_obj %} 
@@ -57,7 +55,6 @@
     {% endfor %}
     
 </div>
-
 
 
 

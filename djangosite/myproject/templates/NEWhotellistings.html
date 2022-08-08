@@ -58,47 +58,24 @@
       <br/></br>
       
       <!-- pagination below: -->
+      <div>
+        <span>
+          {% if page_obj.has_previous %}
+            <a href="?{% url_replace request 'page' page_obj.previous_page_number %}">Previous</a>
+          {% endif %}
+          <span>
+            Page {{ page_obj.number }}
+          </span>
+          {% if page_obj.has_next %}
+            <a href= "?{% url_replace request 'page' page_obj.next_page_number %}">Next</a>
+           
+          {% endif %}
+        </span>
+      </div>      
 
-      <!-- {% if listings.has_previous %}
-        <a href="?page=1">&laquo First</a>
-        <a href="?page={{ listings.previous_page_number }}">Previous</a>
-      {% endif %}
 
-      Page {{ listings.number }} of {{ listings.paginator.num_pages }}
-
-      {% if listings.has_next %}
-        <a href="?page={{ listings.next_page_number }}">Next</a>
-        <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
-
-      {% endif %}  -->
     </div>
     <br/></br>
-
-    <!-- Refresh is here -->
-    <!-- <script>
-      
-      $(document).ready(function() {
-        
-        setInterval(function(){
-          $.ajax({
-            type:'GET',
-            url: "{% url 'hotel-cards' %}",
-            success: function(response){
-              console.log(response);
-
-
-              // if completed == true, break the loop
-
-            },
-            error: function(response){
-              // alert("An Error Occured")
-              // console.log("error!");
-            }
-          });
-        }, 1000);
-                  })
-
-      </script> -->
 
     
 
