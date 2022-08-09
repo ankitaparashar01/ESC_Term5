@@ -28,7 +28,7 @@
             <div class="wrapper">
               <label for="searchInput"><b>DESTINATION OR HOTEL</b></label>
               <div class="search-input" >
-                <input id="tags" type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
+                <input id="tags" autocomplete="off" type="text" placeholder="Destination or Hotel" id="destinationorhotel" name="destinationorhotel" required/>
                 <div class="autocom-box"></div>
                 <div class="search-icon" style="background-color: #E3E3E3;">
                   <img src="../static/images/search-icon.png" style="width: 50px; justify-content: center; padding: 12px;">
@@ -162,24 +162,12 @@ $(function(){
   })
 })
 </script>
- 
+<!-- <script>
+  alert('{{ message }}');
+</script> -->
 
 <script>
   $( function() {
-    // var availableTags = [
-    //   "ActionScript",
-    //   "AppleScript",
-    //   "Asp",
-    //   "C",
-    //   "C++",
-    //   "Clojure",
-    //   "COBOL",
-    //   "PHP",
-    //   "Python",
-    //   "Ruby",
-    //   "Scala",
-    // ];
-
     $( "#tags" ).autocomplete({
       source: "{% url 'ascenda' %}",
       minLength: 2
