@@ -1,4 +1,6 @@
+from email import message
 from multiprocessing import context
+from ssl import ALERT_DESCRIPTION_UNEXPECTED_MESSAGE
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse, response
 from typing import List
@@ -17,6 +19,7 @@ import pymongo
 from django.conf import settings
 from .checkvalue import *
 from .en_decryption import *
+# from django.shortcuts import render_to_response
 
 
 
@@ -38,19 +41,23 @@ def ascenda(request):
     #     form.instance.user = user
 
     #     return super().form_valid(form)
+    # try:
+        if 'term' in request.GET:
+            qs = DestinationCat.objects.filter(term__istartswith=request.GET.get('term'))
+            destinationOrHotel = list()
+            for product in qs:
+                destinationOrHotel.append(product.term)
+            # titles = [product.title for product in qs]
+            return JsonResponse(destinationOrHotel, safe=False)
+    # except:
+    # return render_to_response('index.html', message='Invalid Input')
+        # alert_message = "Invalid Input"
+        # return render(request,'index.html', alert_message)
 
-    if 'term' in request.GET:
-        qs = DestinationCat.objects.filter(term__istartswith=request.GET.get('term'))
-        destinationOrHotel = list()
-        for product in qs:
-            destinationOrHotel.append(product.term)
-        # titles = [product.title for product in qs]
-        return JsonResponse(destinationOrHotel, safe=False)
+        context = {
+        }
 
-    context = {
-    }
-
-    return render(request, 'index.html', context)
+        return render(request, 'index.html', context)
 
 #---------------------FOR FORM SUBMISSION RESULTS---------------------
 def submitmyform(request):
