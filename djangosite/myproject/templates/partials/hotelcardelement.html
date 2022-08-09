@@ -1,10 +1,8 @@
+{% load static %}
 {% load app_tags %} 
 
   <div
-    hx-get="{% url 'hotel-cards' %}?page={{ page_obj.number|add:1 }}"
-    hx-trigger="revealed"
-    hx-swap="afterend"
-    hx-target="this"
+    
     class="col"
   >
   {% for hotelCard in page_obj %} 
@@ -13,10 +11,11 @@
       <!-- individual hotel cards: -->
       <div class="grid">
         <div>
-          <img src="../static/images/hotel-list-img.png" alt="" />
+          <img style= "height: 200px; width: 260px; object-fit: cover;" id="hotelimg-{{ hotelCard.id }}" src="../static/images/hotel-list-img.png" alt="Image not found."/>
         </div>
         <div class="hotel-right">
-          <h2>{{hotelCard.id|render_name_api3}}</h2>
+          <h2 id="hotelname-{{ hotelCard.id }}">{{hotelCard.id}}</h2>
+          <p class="hotelIdJQ" >{{hotelCard.id}}</p>
           <p>
             <!-- Singapore {{ dest_list_models.term }} <br /> -->
             Hotel Website
@@ -57,8 +56,139 @@
     
 </div>
 
-{% comment %}
- <!-- I don't know what these are for so i deleted them -->
-      <!-- {% if forloop.last %}
-      {% else %} --> 
-{% endcomment %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+        // This will run once document loads
+        $( document ).ready(function() {
+              console.log( "~ Document ready!" );
+              
+
+              // first, set up api url here:s
+              
+              var hotelIdArray = $(".hotelIdJQ").map(function(){
+                return $(this).text()
+              }).get();
+              console.log("HOTEL IDs EHRE:", hotelIdArray)
+              hotelIdArray.forEach(function (hotelId) {
+
+                console.log("individual hotelid in for loop",hotelId)
+                var api3StrBase = 'https://hotelapi.loyalty.dev/api/hotels/'
+                var api3Str = api3StrBase.concat(hotelId);
+                console.log('~api str:',api3Str);
+
+                //then, calling sendHTTPRequest function to get api response
+                console.log("~this is from getData function");
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', api3Str, true);
+                xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                // xhr.setRequestHeader('Content-type', 'application/json')
+                // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+                xhr.responseType = 'json';
+                xhr.onload = () => {
+                  const data = xhr.response;
+                  console.log("~ data below!");
+                  console.log(data);
+                  
+                  var newHotelNameFromApi = data["name"]
+                  console.log("~newHotelNameFromApi:", newHotelNameFromApi);
+                  
+                  var prefix = data["image_details"]["prefix"]
+                  var suffix = data["image_details"]["suffix"]
+                  var newHotelImgFromApi = prefix.concat("0", suffix)
+                  console.log("~ newHotelImgFromApi:", newHotelImgFromApi);
+
+
+                  
+
+                  var origHotelName = $("#hotelname-"+hotelId);
+                  console.log("~original hotel name:",origHotelName);
+                  
+                  var newHotelName = $("<h2>").html(newHotelNameFromApi);
+                  origHotelName.replaceWith(newHotelName);
+                  
+                  console.log("~new hotel name:",origHotelName);
+
+                  // Replace hotelImage
+                  // var url = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
+                  $("#hotelimg-"+hotelId).attr("src", newHotelImgFromApi );
+
+                };
+                xhr.send();
+        
+              });
+
+
+          });
+
+
+      </script>
+
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+        // This will run once document loads
+        $( document ).ready(function() {
+              console.log( "~ Document ready!" );
+              
+
+              // first, set up api url here:s
+              
+              var hotelId = $(".hotelIdJQ").map(function(){
+                return $(this).text()
+              }).get();
+              console.log("HOTEL ID EHRE:", hotelId)
+              hotelId.forEach(function (item) {
+                
+              });
+
+              var api3StrBase = 'https://hotelapi.loyalty.dev/api/hotels/'
+              var api3Str = api3StrBase.concat(hotelId);
+              console.log('~api str:',api3Str);
+
+              //then, calling sendHTTPRequest function to get api response
+              console.log("~this is from getData function");
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET', api3Str, true);
+              xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+              // xhr.setRequestHeader('Content-type', 'application/json')
+              // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+              xhr.responseType = 'json';
+              xhr.onload = () => {
+                const data = xhr.response;
+                console.log("~ data below!");
+                console.log(data);
+                
+                var newHotelNameFromApi = data["name"]
+                console.log("~newHotelNameFromApi:", newHotelNameFromApi);
+                
+                var prefix = data["image_details"]["prefix"]
+                var suffix = data["image_details"]["suffix"]
+                var newHotelImgFromApi = prefix.concat("0", suffix)
+                console.log("~ newHotelImgFromApi:", newHotelImgFromApi);
+
+
+                
+
+                var origHotelName = $("#hotelname-"+hotelId);
+                console.log("~original hotel name:",origHotelName);
+                
+                var newHotelName = $("<h2>").html(newHotelNameFromApi);
+                origHotelName.replaceWith(newHotelName);
+                
+                console.log("~new hotel name:",origHotelName);
+
+                // Replace hotelImage
+                // var url = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
+                $("#hotelimg-"+hotelId).attr("src", newHotelImgFromApi );
+
+              };
+              xhr.send();
+          });
+
+
+      </script> -->

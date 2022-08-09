@@ -28,6 +28,15 @@ SECRET_KEY = 'django-insecure-@8dzdektn0tdud3tnrir+p^ydt+76g933+j&(pi=&pa+=s4mnc
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+
+# ALLOWED_HOSTS=['http://localhost:5000',
+# '127.0.0.1']
+# CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_WHITELIST = (
+#        'http://localhost:5000',
+# )
+# # http://127.0.0.1:8000/
 
 
 # Application definition
@@ -42,17 +51,20 @@ INSTALLED_APPS = [
     'myapp',
     'django_htmx',
     'fontawesomefree',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'myproject.urls'

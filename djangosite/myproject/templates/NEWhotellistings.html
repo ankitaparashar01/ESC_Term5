@@ -22,6 +22,9 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <title>Ascenda | Hotel Booking</title>
   </head>
 
@@ -30,16 +33,16 @@
     <div id="loader"></div>
     <div class="container-fluid" style="width:87%;" id="pageDiv" style="display:none;" class="animate-bottom"></div>
 
-      <div class="row no-gutters">
+      <div class="row">
   
         <!-- mini left search card  -->
-        <div class="col-4">
+        <div class="col" style="margin-left:40px; margin-top: 20px;">
           {% include "myform.html" %}
         </div>
 
         <!-- Hotel list grid -->
         <!-- <div style="width:600px; position:absolute; left: 1000px; top:100px;"></div> -->
-        <div class="col">
+        <div class="col" style="margin-right: 40px; margin-top: 20px;">
           
           <!-- Uncomment below to check search form inputs!! : -->
           <!-- <p>destId: {{destId}}</p>
@@ -55,19 +58,30 @@
       <br/></br>
       
       <!-- pagination below: -->
+      <div style="float: right; margin-right: 60px;">
+        <span>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                {% if page_obj.has_previous %}
+                  <a class= "page-link" href="?{% url_replace request 'page' page_obj.previous_page_number %}">Previous</a>
+                {% endif %}
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">{{ page_obj.number }}</a>
+              </li>
+              <li class="page-item">
+                {% if page_obj.has_next %}
+                  <a class="page-link" href= "?{% url_replace request 'page' page_obj.next_page_number %}">Next</a>
+                {% endif %}
+              </li> 
+              
+            </ul>
+          
+        </span>
+      </div>      
 
-      <!-- {% if listings.has_previous %}
-        <a href="?page=1">&laquo First</a>
-        <a href="?page={{ listings.previous_page_number }}">Previous</a>
-      {% endif %}
 
-      Page {{ listings.number }} of {{ listings.paginator.num_pages }}
-
-      {% if listings.has_next %}
-        <a href="?page={{ listings.next_page_number }}">Next</a>
-        <a href="?page={{ listings.paginator.num_pages }}">Last &raquo</a>
-
-      {% endif %}  -->
     </div>
     <br/></br>
 
@@ -91,10 +105,11 @@
     </script>
 
     <script>
+      
       //for loading screen
       var myVar;
       function loadFunction() {
-        myVar = setTimeout(showPage, 2000);
+        myVar = setTimeout(showPage, 500);
       }
 
       function showPage() {
@@ -245,17 +260,18 @@
       /* overflow: hidden; */
       padding: 10px;
       color: black;
-      width: 800px;
+      width: 900px;
       border-radius: 5px;
       margin: 10px;
       position: relative;
       float:right;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
     }
 
     .hotel-list .grid {
       overflow: visible;
       grid-template-columns: 35% 60%;
-      gap: 10px;
+      gap: 0px;
     }
 
     .hotel-list img {
@@ -297,7 +313,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       /* grid-template-columns: 55% 45%; */
-      gap: 10px;
+      gap: 0px;
       justify-content: center;
       align-items: center;
       height: 100%;

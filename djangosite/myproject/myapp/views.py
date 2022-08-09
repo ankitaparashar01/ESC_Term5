@@ -257,10 +257,6 @@ def hotelCards(request, destId=None):
     rooms = formSearchInputsDict["roomsnumber"]
 
     
-    # temporarily hardcoded:
-    # checkin = "2022-08-20"
-    # checkout = "2022-08-22"
-    # guests = "2"
 
     #generate hotel cards using API 1: 
     strAPI1 = getAllHotelsPricesWDest(destId, checkin, checkout, guests)
