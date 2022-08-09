@@ -85,7 +85,7 @@ def submitmyform(request):
         
 
 #-------------------------------------FOR CONFIRMATION AND PAYMENT-------------------------------------
-def confirmation(request, destId, hotelName, hotelId, roomKey, roomType, checkin, checkout, guests):
+def confirmation(request, destId, hotelName, hotelId, roomKey, roomType, checkin, checkout, guests, price):
     # # hardcoded values:
     # checkin = "2022-08-20"
     # checkout = "2022-08-22"
@@ -111,7 +111,9 @@ def confirmation(request, destId, hotelName, hotelId, roomKey, roomType, checkin
     'checkin':checkin,
     'checkout':checkout,
     'guests':guests,
+    'roomType':roomType,
     'chosenRoomObj':chosenRoomObj,
+    'price':price,
     } 
     return render(request, 'confirmation.html', context)
 
