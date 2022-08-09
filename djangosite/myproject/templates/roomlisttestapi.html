@@ -96,9 +96,13 @@
           </div>
           <div style="position: absolute; width: 400px; top: 0; right: 0; margin: 20px; height: 50%; padding: 10px; border: 1px solid; border-color: lightgrey;">
             <h3 style="font-weight: 700;">Amenities</h1>
-            <p>
-              {{ api3Obj.amenities }}
-            </p>
+            {% if api3Obj.amenities %}
+              <p>
+                {{ api3Obj.amenities }}
+              </p>
+            {% else %}
+              <p>(Amenities not listed) </p>
+            {% endif %}
           </div>
 
         </div>
@@ -214,7 +218,7 @@
             {% endfor %}
           </div>
         </div>
-        {% endif %}
+      {% endif %}
         
     
       </div>
