@@ -139,53 +139,28 @@
     <!-- Room Option Name -->
     <div style="padding:10px;">
       <div class="room-text">
-        <h3 style="font-weight: 700; margin-top: 10px;">Room Options</h3>
+        <h3 style="font-weight: 800; margin-top: 30px;">Room Options</h3>
       </div>
       {% for roomName in roomNamesList %}
       <div class="roomBox">
         <h2 style="margin-left:20px; align-items:center; padding:11px;">{{roomName}}</h2>
       </div>
     </div>
+
     
-        <!-- Room Card -->
+      {% if api2Obj.rooms|length < 3 %}
         <div class="col">
           {% for roomListing in api2Obj.rooms %}
             {% if roomListing.roomNormalizedDescription == roomName %}
-          <div class="room-list">
+          <div class="room-list2">
             <div class="row">
-              <div class="col-4">
-                
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <!-- <img class="d-block w-100" src="{{roomListing.images.0.values}}" alt="First slide" style="width: auto; height: 100%; object-fit: contain;"> -->
-                      <img class="d-block w-100" src="https://photos.hotelbeds.com/giata/bigger/07/074316/074316a_hb_ro_148.jpg" alt="First slide" style="width: auto; height: 100%; object-fit: cover;">
-                    </div>
-                    {% for image in roomListing.images %}
-                    <div class="carousel-item">
-                      <!-- <img class="d-block w-100" src="{roomListing.images[1]}" alt="Second slide" style="width: auto; height: 50%; object-fit: contain;"> -->
-                      <img class="d-block w-100" src="{{image}}" alt="Second slide" style="width: auto; height: 50%; object-fit: cover;">
-                    </div>
-                    {% endfor %}
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-        
-              </div>
+              <!-- deleted the carousell images that was previously here -->
 
               <div class="col">
-                <div class="room-right">
+                <div class="room-right2">
                   <!-- <h2>{{roomListing.roomAdditionalInfo.breakfastInfo|breakfast_avail_bool}}</h2> -->
-                  <br>
-                  <p><b>Room Type:</b> {{roomListing.roomNormalizedDescription}}</p>
-                  <p><b>Description:</b> {{roomListing.description}}</p></p>
+                  <p style="margin-left: 20px;"><b>Room Type:</b> {{roomListing.roomNormalizedDescription}}</p>
+                  <p style="margin-left: 20px;"><b>Description:</b> {{roomListing.description}}</p></p>
                   <!-- <p><b>ROOM SIZE PLACEHOLDER:</b> Room Size: 22 m^2(hardcoded)</p> -->
                   <!-- <p>No breakfast served (hardcoded)</p> -->
                   <p style="position: absolute; right:250px; top: 30px; text-align: right;"><b style="font-size: 20px;">S$${{roomListing.price}}</b> <br/>per night</p>
@@ -193,7 +168,7 @@
                     <a
                       href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type checkin checkout guests %}"
                       class="btn"
-                      style="background-color: #f58216; float: right; color: white; font-size: larger;"
+                      style="background-color: #f58216; float: right; color: white; font-size: larger; margin-bottom: 15px;"
                     ><b>Book Now</b></a
                     >
                   </div>
@@ -204,6 +179,43 @@
             {% endif %}
           {% endfor %}
         </div>
+
+      {% else %}
+        <!-- Room Card -->
+        <div class="scrollBox">
+          <div class="col">
+            {% for roomListing in api2Obj.rooms %}
+              {% if roomListing.roomNormalizedDescription == roomName %}
+            <div class="room-list">
+              <div class="row">
+                <!-- deleted the carousell images that was previously here -->
+  
+                <div class="col">
+                  <div class="room-right">
+                    <!-- <h2>{{roomListing.roomAdditionalInfo.breakfastInfo|breakfast_avail_bool}}</h2> -->
+                    <p style="margin-left: 20px;"><b>Room Type:</b> {{roomListing.roomNormalizedDescription}}</p>
+                    <p style="margin-left: 20px;"><b>Description:</b> {{roomListing.description}}</p></p>
+                    <!-- <p><b>ROOM SIZE PLACEHOLDER:</b> Room Size: 22 m^2(hardcoded)</p> -->
+                    <!-- <p>No breakfast served (hardcoded)</p> -->
+                    <p style="position: absolute; right:250px; top: 30px; text-align: right;"><b style="font-size: 20px;">S$${{roomListing.price}}</b> <br/>per night</p>
+                    <div style="position: absolute; right:30px; bottom: 0px; float: right">
+                      <a
+                        href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type checkin checkout guests %}"
+                        class="btn"
+                        style="background-color: #f58216; float: right; color: white; font-size: larger; margin-bottom: 15px;"
+                      ><b>Book Now</b></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        
     
       </div>
       {% endfor %}
@@ -341,6 +353,22 @@
       /* overflow: hidden; */
       padding: 5px;
       color: black;
+      width: 1155px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .room-list2 {
+      background:white;
+      /* overflow: hidden; */
+      padding: 5px;
+      color: black;
       width: 1200px;
       height: auto;
       display: block;
@@ -352,6 +380,7 @@
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
     }
 
+
     .room-list .grid {
       overflow: visible;
       grid-template-columns: 40% 60%;
@@ -360,7 +389,23 @@
 
     .room-right {
       position: relative;
+      width: 1155px;
+      padding: 15px;
+    }
 
+    .room-right2 {
+      position: relative;
+      width: 1200px;
+      padding: 15px;
+    }
+
+    .scrollBox{
+      height: 350px;
+      width: 1200px;
+      border: 1px solid #ccc;
+      overflow: auto;
+      margin-left: auto;
+      margin-right: auto;
     }
     
 
