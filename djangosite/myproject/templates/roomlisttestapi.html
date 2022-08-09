@@ -60,12 +60,34 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <div style="display: flex; flex-direction: column; padding: 25px;">
-          <div style="padding-bottom: 200px;">
-            <h3 style="font-weight: 700;">{{ api3Obj.name }}</h3>
+        <div style="display: flex; flex-direction: column; padding: 20px;">
+          <div style="padding-bottom: 20px;">
+            <h3 style="font-weight: 800;">{{ api3Obj.name }}</h3>
             <p>{{ api3Obj.address1 }}</p>
           </div>
-          <div style="margin-bottom: 100px;">
+          <div class="stars-outer">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="scrollAmenitiesBox">
+            <!-- <div style="position: absolute; width: 500px; bottom: 0; right: 0; margin: 10px; height: 50%; padding: 10px;"> -->
+              <h3 style="font-weight: 600;">Amenities</h1>
+              {% if api3Obj.amenities %}
+                <p>
+                  {% for amenities in api3Obj.amenities %}
+                  <li>{{ amenities }}</li>
+                  {% endfor %}
+                </p>
+              {% else %}
+                <p>(Amenities not listed) </p>
+              {% endif %}
+            </div>
+          </div>
+          
+          <!-- <div style="margin-bottom: 100px;">
             <div style="display: flex; justify-content: space-between;">
               <h5>Select a room starting from: </h5>
               <h5 style="font-weight: 600;">S$ {{ api3Obj.price }}</h5>
@@ -74,36 +96,20 @@
               <h5>Earn at least:</h5>
               <h5 style="font-weight: 600;">{{ api3Obj.points }} points</h5>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div class="stars-outer">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
+        
 
       <!-- TOP OF THE PAGE: HOTEL INFORMATION   -->
-      <div style="display: flex; justify-content: center; position: relative; background-color: white; ">
-        <div class="room-description grid">
-          <div style="padding: 10px; width: 700px;">
+      <div style="display: flex; justify-content: center; position: relative; background-color: white; padding:20px;">
+        <!-- <div class="room-description grid"> -->
+          <div style="padding: 10px; width: auto;">
             <h3 style="font-weight: 700;">Room overview</h3>
             <p>
               {{ api3Obj.description|safe }}
             </p>
-          </div>
-          <div style="position: absolute; width: 400px; top: 0; right: 0; margin: 20px; height: 50%; padding: 10px; border: 1px solid; border-color: lightgrey;">
-            <h3 style="font-weight: 700;">Amenities</h1>
-            {% if api3Obj.amenities %}
-              <p>
-                {{ api3Obj.amenities }}
-              </p>
-            {% else %}
-              <p>(Amenities not listed) </p>
-            {% endif %}
-          </div>
+          <!-- </div> -->
+          
 
         </div>
       </div>
@@ -410,6 +416,17 @@
       overflow: auto;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .scrollAmenitiesBox{
+      height: 300px;
+      width: 600px;
+      border: 1px solid #ccc;
+      overflow: auto;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+      /* position: absolute; */
     }
     
 

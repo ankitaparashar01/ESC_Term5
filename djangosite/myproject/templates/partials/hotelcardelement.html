@@ -11,11 +11,12 @@
       <!-- individual hotel cards: -->
       <div class="grid">
         <div>
-          <img style= "height: 200px; width: 260px; object-fit: cover;" id="hotelimg-{{ hotelCard.id }}" src="../static/images/hotel-list-img.png" alt="Image not found."/>
+          <img style= "height: 200px; width: 260px; object-fit: cover;" id="hotelimg-{{ hotelCard.id }}" src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="Image not found."/>
+        <!-- ../static/images/hotel-list-img.png -->
         </div>
         <div class="hotel-right">
           <h2 id="hotelname-{{ hotelCard.id }}">{{hotelCard.id}}</h2>
-          <p class="hotelIdJQ" >{{hotelCard.id}}</p>
+          <p class="hotelIdJQ" style="visibility: hidden;">{{hotelCard.id}}</p>
           <p>
             <!-- Singapore {{ dest_list_models.term }} <br /> -->
             Hotel Website
@@ -113,8 +114,11 @@
                   console.log("~new hotel name:",origHotelName);
 
                   // Replace hotelImage
-                  // var url = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg"
-                  $("#hotelimg-"+hotelId).attr("src", newHotelImgFromApi );
+                  var url = "https://d2ey9sqrvkqdfs.cloudfront.net/diH7/0.jpg";
+                  $( "#hotelimg-"+hotelId ).attr({
+                    "src": newHotelImgFromApi,
+                    "alt": url
+                  });
 
                 };
                 xhr.send();
