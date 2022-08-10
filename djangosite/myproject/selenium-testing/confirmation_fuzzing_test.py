@@ -35,7 +35,8 @@ pass_list= [] # stores list of inputs that pass
 def test0_confirmation_page():
     try:
         # load a confirmation page
-        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Youroom%20Abruzzi/hotelId=n188/roomKey=er-0FE9F1BA419E0A00AA1C7719AAE7B711-881C0B1B97B12C52E21872766D6BBCDF/roomType=221161494/checkin=Wednesday,10%20August,2022/checkout=Friday,%2012%20August,%202022/guests=2")
+        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-DAEB9E3E8202DE74540D10F84F7E1807-06A8876F717988A07E66D1AB63E8E3EB/roomType=200462188/checkin=Sunday,14%20August,2022/checkout=Monday,%2015%20August,%202022/guests=1")
+        print('Driver Title:',driver.title)
         print('Driver Title:',driver.title)
         print('Driver name:',driver.name)
         print('Driver URL:',driver.current_url)
@@ -61,7 +62,7 @@ def test0_confirmation_page():
         phone_number= valid_fuzzer.generate_valid_phonenumber()
         message= valid_fuzzer.generate_longmessage()
         card_number= valid_fuzzer.generate_valid_cardnumber()
-        name_card= valid_fuzzer.generate_valid_cardnumber()
+        name_card= valid_fuzzer.generate_valid_fullname()
         expiry_month= valid_fuzzer.generate_valid_month()
         expiry_year= valid_fuzzer.generate_valid_year()
         cvv= valid_fuzzer.generate_valid_CVV()
@@ -78,7 +79,7 @@ def test0_confirmation_page():
         expiry_year_box.send_keys(expiry_year)
         cvv_box.send_keys(cvv)
         submit_btn.click()
-        time.sleep(1)
+        time.sleep(2)
 
         driver.switch_to.alert.accept()
         time.sleep(1)
@@ -101,7 +102,7 @@ def test0_confirmation_page():
 def test1_confirmation_page():
     try:
         # load a confirmation page
-        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Youroom%20Abruzzi/hotelId=n188/roomKey=er-0FE9F1BA419E0A00AA1C7719AAE7B711-881C0B1B97B12C52E21872766D6BBCDF/roomType=221161494/checkin=Wednesday,10%20August,2022/checkout=Friday,%2012%20August,%202022/guests=2")
+        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-DAEB9E3E8202DE74540D10F84F7E1807-06A8876F717988A07E66D1AB63E8E3EB/roomType=200462188/checkin=Sunday,14%20August,2022/checkout=Monday,%2015%20August,%202022/guests=1")
         print('Driver Title:',driver.title)
         print('Driver name:',driver.name)
         print('Driver URL:',driver.current_url)
@@ -216,7 +217,7 @@ def main_function():
     iterate_test1(5)
     setup_driver()
     
-    # print("============ starting test 1 ============")
+    # print("============ starting test 2 ============")
     # iterate_test2(5)
     driver.quit()
 

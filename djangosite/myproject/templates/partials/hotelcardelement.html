@@ -44,6 +44,7 @@
               <span class="price">${{hotelCard.lowest_price}} </span>
             </p>
             <a
+              name="seeDetailsButton"
               href="{% url 'room-list-test-api' destId hotelCard.id|render_name_api3 hotelCard.id checkin checkout guests %}"
               class="btn"
               style="background-color: #f58216; float: right"

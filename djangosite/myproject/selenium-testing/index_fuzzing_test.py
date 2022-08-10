@@ -173,9 +173,9 @@ def test2_front_page():
         # input in website
         search_hotel_box.send_keys(country)
         time.sleep(2)
-        search_hotel_box.send_keys(Keys.DOWN)
+        search_hotel_box.send_keys(checkin_date)
         # time.sleep(1)
-        search_hotel_box.send_keys(Keys.ENTER)
+        search_hotel_box.send_keys(checkout_date)
 
         # time.sleep(2)
         checkin_box.send_keys(checkin_date)
@@ -235,7 +235,7 @@ def iterate_test1(iter):
         test1_front_page()
     # driver.close()
     write_errors("logs/index_error_log_test1.txt")
-    write_pass("logs/passed_log_test1.txt")
+    write_pass("logs/index_passed_log_test1.txt")
 
 def iterate_test2(iter):
     for x in range(iter):
@@ -260,7 +260,7 @@ def main_function():
     iterate_test1(5)
     setup_driver()
     
-    print("============ starting test 1 ============")
+    print("============ starting test 2 ============")
     iterate_test2(5)
     driver.quit()
 
