@@ -170,9 +170,7 @@
                 <div class="room-right2">
                   <!-- <h2>{{roomListing.roomAdditionalInfo.breakfastInfo|breakfast_avail_bool}}</h2> -->
                   <p style="margin-left: 20px;"><b>Room Type:</b> {{roomListing.roomNormalizedDescription}}</p>
-                  <p style="margin-left: 20px;"><b>Description:</b> {{roomListing.description}}</p></p>
-                  <!-- <p><b>ROOM SIZE PLACEHOLDER:</b> Room Size: 22 m^2(hardcoded)</p> -->
-                  <!-- <p>No breakfast served (hardcoded)</p> -->
+                  <p style="margin-left: 20px;"><b>Points:</b> {{roomListing.points}}</p></p>
                   <p style="position: absolute; right:250px; top: 30px; text-align: right;"><b style="font-size: 20px;">S$${{roomListing.price}}</b> <br/>per night</p>
                   <div style="position: absolute; right:30px; bottom: 0px; float: right">
                     <a
@@ -204,13 +202,13 @@
                   <div class="room-right">
                     <!-- <h2>{{roomListing.roomAdditionalInfo.breakfastInfo|breakfast_avail_bool}}</h2> -->
                     <p style="margin-left: 20px;"><b>Room Type:</b> {{roomListing.roomNormalizedDescription}}</p>
-                    <p style="margin-left: 20px;"><b>Description:</b> {{roomListing.description}}</p></p>
+                    <p style="margin-left: 20px;"><b>Points:</b> {{roomListing.points}}</p></p>
                     <!-- <p><b>ROOM SIZE PLACEHOLDER:</b> Room Size: 22 m^2(hardcoded)</p> -->
                     <!-- <p>No breakfast served (hardcoded)</p> -->
                     <p style="position: absolute; right:250px; top: 30px; text-align: right;"><b style="font-size: 20px;">S$${{roomListing.price}}</b> <br/>per night</p>
                     <div style="position: absolute; right:30px; bottom: 0px; float: right">
                       <a
-                        href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type checkin checkout guests %}"
+                        href="{% url 'confirmation' destId api3Obj.name hotelId roomListing.key roomListing.type checkin checkout guests roomListing.price %}"
                         class="btn"
                         style="background-color: #f58216; float: right; color: white; font-size: larger; margin-bottom: 15px;"
                       ><b>Book Now</b></a

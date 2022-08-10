@@ -17,10 +17,8 @@
         <div class="hotel-right">
           <h2 id="hotelname-{{ hotelCard.id }}">{{hotelCard.id}}</h2>
           <p class="hotelIdJQ" style="visibility: hidden;">{{hotelCard.id}}</p>
-          <p>
-            <!-- Singapore {{ dest_list_models.term }} <br /> -->
-            Hotel Website
-          </p>
+          <p id="hotelLocation-{{ hotelCard.id }}"><b>Hotel Location</b></p>
+
           <div class="stars-outer">
             <i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star"></i>
@@ -95,22 +93,29 @@
                   console.log("~ data below!");
                   console.log(data);
                   
+                  // get hotel name:
                   var newHotelNameFromApi = data["name"]
                   console.log("~newHotelNameFromApi:", newHotelNameFromApi);
                   
+                  // get hotel img url
                   var prefix = data["image_details"]["prefix"]
                   var suffix = data["image_details"]["suffix"]
                   var newHotelImgFromApi = prefix.concat("0", suffix)
                   console.log("~ newHotelImgFromApi:", newHotelImgFromApi);
 
+                  // get hotel location
+                  var addressFromApi = data["address"]
 
-                  
 
                   var origHotelName = $("#hotelname-"+hotelId);
                   console.log("~original hotel name:",origHotelName);
                   
                   var newHotelName = $("<h2>").html(newHotelNameFromApi);
                   origHotelName.replaceWith(newHotelName);
+
+                  var origHotelAddress = $("#hotelLocation-"+hotelId);
+                  var newHotelAddress = $("<p>").html(addressFromApi);
+                  origHotelAddress.replaceWith(newHotelAddress);
                   
                   console.log("~new hotel name:",origHotelName);
 

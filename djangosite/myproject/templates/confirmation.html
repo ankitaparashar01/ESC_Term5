@@ -21,16 +21,15 @@
       <h1><b>Reservation Confirmation</b></h1>
       <br />
       <p id="hotelname"><b>Hotel Name: </b>{{ hotelName }}</p>
-      <p id="room"><b>Room 1:</b> (HC) Deluxe Room, 1 King Bed, City View</p>
+      <p id="room"><b>Room TYPE:</b> {{roomType}}</p>
       <p id="roomkey"><b>Room KEY:</b> {{ roomKey }}</p>
-      <p id="guest"><b>Guests:</b> (HC) 5 Adults, 2 Children</p>
+      <p id="guest"><b>Guests:</b> {{guests}}</p>
       <p id="checkin"><b>Check In:</b> {{ checkin }}</p>
       <p id="checkout"><b>Check Out:</b> {{ checkout }}</p>
       <p id="roomrate">
-        <b>Room Rate HC(3 nights, 2 rooms): </b> S${{ api2Obj.price }}
-      </p>
-      <p id="tax"><b>Tax:</b> S$(HC)106.5</p>
-      <p id="total"><b>Total:</b> S$(HC)2236.2</p>
+        <b>Room Rate: </b> S${{ price }}</p>
+      <p id="tax"><b>Tax:</b> S$ 0</p>
+      <p id="total"><b>Total:</b> S${{ price }}</p>
     </div>
 
     <!-- Primary Guest -->

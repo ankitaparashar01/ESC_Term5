@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.ascenda, name="ascenda"),
     
     # Confirmation page
-    path('confirmation/dest_id=<str:destId>/hotelName=<str:hotelName>/hotelId=<str:hotelId>/roomKey=<str:roomKey>/roomType=<str:roomType>/checkin=<str:checkin>/checkout=<str:checkout>/guests=<str:guests>', views.confirmation, name="confirmation"),
+    path('confirmation/dest_id=<str:destId>/hotelName=<str:hotelName>/hotelId=<str:hotelId>/roomKey=<str:roomKey>/roomType=<str:roomType>/checkin=<str:checkin>/checkout=<str:checkout>/guests=<str:guests>/price=<str:price>', views.confirmation, name="confirmation"),
     
     # Transaction complete
     path('transaction-complete/', views.transactionComplete, name="transaction-complete"),
