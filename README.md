@@ -1,6 +1,6 @@
 # ESC_Term5
 
-# How to run project
+<b>How to run project:</b>
 <hr>
 <ul>
 <li>Create virtual environment</li>
@@ -10,7 +10,7 @@
 <li>Go to djangosite/myproject</li>
 <li>Run Command "python manage.py runserver"</li>
 </ul>
-# To run frontend testing:
+<b>To run frontend testing:</b>
 <ul>
 <li>Navigate to `djangosite/myproject/selenium-testing`</li>
 <li>Install necessary tools by `pip install -r requirements.txt`</li>
