@@ -35,7 +35,7 @@ pass_list= [] # stores list of inputs that pass
 def test0_confirmation_page():
     try:
         # load a confirmation page
-        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-DAEB9E3E8202DE74540D10F84F7E1807-06A8876F717988A07E66D1AB63E8E3EB/roomType=200462188/checkin=Sunday,14%20August,2022/checkout=Monday,%2015%20August,%202022/guests=1")
+        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-62AA84B7D5438C9F876DA1425B3D13C8-2EBF69C32423F4280F3FFB35267C8C32/roomType=200462189/checkin=Thursday,25%20August,2022/checkout=Monday,%2029%20August,%202022/guests=1/price=1067.82")
         print('Driver Title:',driver.title)
         print('Driver Title:',driver.title)
         print('Driver name:',driver.name)
@@ -102,7 +102,7 @@ def test0_confirmation_page():
 def test1_confirmation_page():
     try:
         # load a confirmation page
-        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-DAEB9E3E8202DE74540D10F84F7E1807-06A8876F717988A07E66D1AB63E8E3EB/roomType=200462188/checkin=Sunday,14%20August,2022/checkout=Monday,%2015%20August,%202022/guests=1")
+        driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-62AA84B7D5438C9F876DA1425B3D13C8-2EBF69C32423F4280F3FFB35267C8C32/roomType=200462189/checkin=Thursday,25%20August,2022/checkout=Monday,%2029%20August,%202022/guests=1/price=1067.82")
         print('Driver Title:',driver.title)
         print('Driver name:',driver.name)
         print('Driver URL:',driver.current_url)

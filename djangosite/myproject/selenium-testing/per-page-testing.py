@@ -48,7 +48,7 @@ def test_hotellist_card():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.maximize_window()
     # driver.get("http://127.0.0.1:8000/hotellistings/dest_id=A6Dz")
-    driver.get("http://127.0.0.1:8000/hotellistings/?destinationorhotel=Rome%2C+Italy&checkin=Thursday%2C11+August%2C2022&checkout=Monday%2C+22+August%2C+2022&roomsnumber=1&adultsnumber=1&childrennumber=0&submitButton=")
+    driver.get("http://127.0.0.1:8000/hotellistings/?destinationorhotel=Rome%2C+Italy&checkin=Thursday%2C25+August%2C2022&checkout=Monday%2C+29+August%2C+2022&roomsnumber=1&adultsnumber=1&childrennumber=0&submitButton=")
     print('driver Title:',driver.title)
     print('Driver name:',driver.name)
     print('Driver URL:',driver.current_url)
@@ -75,7 +75,7 @@ def test_hotellist_card():
 def test_hotellist_select():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.maximize_window()
-    driver.get("http://127.0.0.1:8000/hotellistings/?destinationorhotel=Rome%2C+Italy&checkin=Thursday%2C11+August%2C2022&checkout=Monday%2C+22+August%2C+2022&roomsnumber=1&adultsnumber=1&childrennumber=0&submitButton=")
+    driver.get("http://127.0.0.1:8000/hotellistings/?destinationorhotel=Rome%2C+Italy&checkin=Thursday%2C25+August%2C2022&checkout=Monday%2C+29+August%2C+2022&roomsnumber=1&adultsnumber=1&childrennumber=0&submitButton=")
     print('driver Title:',driver.title)
     print('Driver name:',driver.name)
     print('Driver URL:',driver.current_url)
@@ -92,7 +92,7 @@ def test_hotellist_select():
 def test_confirmation_page():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.maximize_window()
-    driver.get("http://127.0.0.1:8000/confirmation/dest_id=RsBU/hotelName=InterContinental%20Singapore/hotelId=WaXd/roomKey=er-A2132B48FB03833459AC472BBFDC2860-604F58160D713E50D637020AF940DEDB/roomType=217853431/checkin=Tuesday,9%20August,2022/checkout=Monday,%2022%20August,%202022/guests=1")
+    driver.get("http://127.0.0.1:8000/confirmation/dest_id=A6Dz/hotelName=Hotel%20Flavio%20Rome/hotelId=SPpa/roomKey=er-62AA84B7D5438C9F876DA1425B3D13C8-2EBF69C32423F4280F3FFB35267C8C32/roomType=200462189/checkin=Thursday,25%20August,2022/checkout=Monday,%2029%20August,%202022/guests=1/price=1067.82")
     print('driver Title:',driver.title)
     print('Driver name:',driver.name)
     print('Driver URL:',driver.current_url)
@@ -161,7 +161,7 @@ def test_front_page2():
         search_hotel_box.send_keys(Keys.ENTER)
 
         time.sleep(2)
-        checkin_box.send_keys("2022-0807")
+        checkin_box.send_keys("2022-08-07")
         time.sleep(2)
         checkout_box.send_keys("2022-08-10")
         time.sleep(2)
