@@ -1,6 +1,6 @@
 # ESC_Term5
 
-<b>How to run project</b>
+#How to run project
 <hr>
 <ul>
 <li>Create virtual environment</li>
@@ -10,3 +10,10 @@
 <li>Go to djangosite/myproject</li>
 <li>Run Command "python manage.py runserver"</li>
 </ul>
+#To run frontend testing:
+<ul>
+<li>Navigate to `djangosite/myproject/selenium-testing`</li>
+<li>Install necessary tools by `pip install -r requirements.txt`</li>
+<li>Run any python testing file (except `random_fuzzer.py` and `valid_fuzzer.py`- they are helper files.)</li>
+<ul>
+
